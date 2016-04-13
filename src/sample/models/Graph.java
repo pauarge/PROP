@@ -5,4 +5,6 @@ package sample.models;
  */
 public class Graph {
 
+
+
 }
