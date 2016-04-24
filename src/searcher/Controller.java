@@ -1,4 +1,4 @@
-package sample;
+package searcher;
 
 public class Controller {
 }
