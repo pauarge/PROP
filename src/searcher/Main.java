@@ -1,25 +1,28 @@
 package searcher;
 
-//import javafx.application.Application;
-//import javafx.fxml.FXMLLoader;
-//import javafx.scene.Parent;
-//import javafx.scene.Scene;
-//import javafx.stage.Stage;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
-public class Main /*extends Application*/ {
-
-//    @Override
-//    public void start(Stage primaryStage) throws Exception{
-//        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-//        primaryStage.setTitle("Hello World");
-//        primaryStage.setScene(new Scene(root, 300, 275));
-//        primaryStage.show();
-//
-//    }
+public class Main {
 
     public static void main(String[] args) {
+        Controller controller = new Controller();
 
-//        launch(args);
+        InputStreamReader inputStreamReader = new InputStreamReader(System.in);
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
+        String readLine;
+        String outputLine;
+        try {
+            while ((readLine = bufferedReader.readLine()) != null) {
+                outputLine = controller.executeLine(readLine);
+                if (outputLine != null) {
+                    System.out.println(outputLine);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 }
