@@ -15,6 +15,7 @@ public class Main {
         String outputLine;
         try {
             while ((readLine = bufferedReader.readLine()) != null) {
+                readLine = readLine.toLowerCase();
                 outputLine = controller.executeLine(readLine);
                 if (outputLine != null) {
                     System.out.println(outputLine);
