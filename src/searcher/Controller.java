@@ -4,20 +4,25 @@ import common.domain.Container;
 import common.domain.Graph;
 import common.domain.Node;
 import common.domain.NodeType;
+import common.persistence.PersistenceController;
 
 public class Controller {
 
-    private static final String GLOBAL_HELP = "add\nprint\nquit";
-    private static final String ADD_HELP = "add node nodeType [nodeId] nodeName";
+    private static final String GLOBAL_HELP = "add\nprint\nimport\nexport\nquit";
+    private static final String ADD_HELP = "add node node_type [node_id] node_name";
     private static final String PRINT_HELP = "print node";
     private static final String PRINT_NODE_HELP = "print node all\nprint node type1 [type2 ...]";
+    private static final String IMPORT_HELP = "import nodes node_type file_path\nimport edges node_type1 node_type2 file_path";
+    private static final String EXPORT_HELP = "export file_path";
 
     private Graph graph;
+    private PersistenceController persistenceController;
 
     private boolean readyToQuit = false;
 
     private NodeType getType(String type) {
         if (type == null) return null;
+        type = removePlural(type);
         switch (type) {
             case "author":
                 return NodeType.AUTHOR;
@@ -34,11 +39,19 @@ public class Controller {
         }
     }
 
+    private String removePlural(String word) {
+        if (word.matches(".+s")) {
+            word = word.substring(0, word.length()-1);
+        }
+        return word;
+    }
+
     private String getFirstWord(String line) {
         if (line == null) {
             return "";
         } else {
-            return line.split("\\s+", 2)[0].toLowerCase();
+            String ret = line.split("\\s+", 2)[0].toLowerCase();
+            return removePlural(ret);
         }
     }
 
@@ -57,6 +70,7 @@ public class Controller {
 
     Controller() {
         graph = new Graph();
+        persistenceController = new PersistenceController(graph);
     }
 
     boolean isReadyToQuit() {
@@ -72,6 +86,10 @@ public class Controller {
                 return executeAdd(parameters);
             case "print":
                 return executePrint(parameters);
+            case "import":
+                return executeImport(parameters);
+            case "export":
+                return executeExport(parameters);
             case "":
                 return null;
             case "help":
@@ -131,6 +149,8 @@ public class Controller {
         switch (command) {
             case "node":
                 return printNode(parameters);
+            case "edge":
+                return printEdge(parameters);
             default:
                 return PRINT_HELP;
         }
@@ -146,7 +166,9 @@ public class Controller {
         for (String arg : args) {
             NodeType nt = getType(arg);
             if (nt != null) {
-                sb.append('\n' + arg + ":\n");
+                sb.append('\n');
+                sb.append(arg);
+                sb.append(":\n");
                 sb.append(printAllNodeType(nt));
                 didSomething = true;
             }
@@ -158,14 +180,83 @@ public class Controller {
         }
     }
 
+    private String printEdge(String parameters) {
+        String type1 = getFirstWord(parameters);
+        String type2 = getRestOfWords(parameters);
+        type2 = getFirstWord(type2);
+
+        return null;
+    }
+
     private String printAllNodeType(NodeType nodeType) {
         StringBuilder sb = new StringBuilder();
         Container.ContainerIterator it = graph.getNodeIterator(nodeType);
         while (it.hasNext()) {
             Node node = (Node) it.next();
-            sb.append(node.getId() + "    " + node.getValue() + '\n');
+            sb.append(node.getId());
+            sb.append("    ");
+            sb.append(node.getValue());
+            sb.append('\n');
         }
         return sb.toString();
+    }
+
+    private String executeImport(String params) {
+        String command = getFirstWord(params);
+        String args = getRestOfWords(params);
+
+        switch (command) {
+            case "node":
+                return importNode(args);
+            case "edge":
+                return importEdge(args);
+            default:
+                return IMPORT_HELP;
+        }
+    }
+
+    private String importNode(String params) {
+        String type = getFirstWord(params);
+        String path = getRestOfWords(params);
+
+        if (path.equals("")) {
+            return IMPORT_HELP;
+        }
+
+        persistenceController.importNodes(path, getType(type));
+        return "Fitxer importat amb exit.";
+    }
+
+    private String importEdge(String params) {
+        String type1 = getFirstWord(params);
+        String type2 = getRestOfWords(params);
+        String path = getRestOfWords(type2);
+        type2 = getFirstWord(type2);
+
+        if (path.equals("")) {
+            return IMPORT_HELP;
+        }
+
+        persistenceController.importEdges(path, getType(type1), getType(type2));
+        return "Fitxer importat amb exit.";
+
+
+    }
+
+    private String executeExport(String path) {
+        //TODO:Arreglar aixo
+        return "LA FUNCIO exportGraph FA COSES LLETGES";
+  /*      if (path.equals("")) {
+            return EXPORT_HELP;
+        } else {
+            try {
+                persistenceController.exportGraph(path);
+                return "Session exported successfully";
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "EXCEPTION RAISED!";
+            }
+        }*/
     }
 
     private void close() {
