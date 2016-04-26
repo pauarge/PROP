@@ -22,16 +22,7 @@ public class DomainController {
 
     public void importDB(String path) {
         graph = new Graph();
-        persistenceController.importNodes(path + "author.txt", NodeType.AUTHOR);
-        persistenceController.importNodes(path + "conf.txt", NodeType.CONF);
-        persistenceController.importNodes(path + "paper.txt", NodeType.PAPER);
-        persistenceController.importNodes(path + "term.txt", NodeType.TERM);
-        persistenceController.importEdges(path + "author_label.txt", NodeType.AUTHOR, NodeType.LABEL);
-        persistenceController.importEdges(path + "conf_label.txt", NodeType.CONF, NodeType.LABEL);
-        persistenceController.importEdges(path + "paper_author.txt", NodeType.PAPER, NodeType.AUTHOR);
-        persistenceController.importEdges(path + "paper_conf.txt", NodeType.PAPER, NodeType.CONF);
-        persistenceController.importEdges(path + "paper_label.txt", NodeType.PAPER, NodeType.LABEL);
-        persistenceController.importEdges(path + "paper_term.txt", NodeType.PAPER, NodeType.TERM);
+        persistenceController.importGraph(path);
     }
 
     public void exportDB(String path) {
@@ -78,6 +69,15 @@ public class DomainController {
             graph.removeEdge(relationID, typeA, nodeA, typeB, nodeB);
         } catch (GraphException e) {
             e.printStackTrace();
+        }
+    }
+
+    public ArrayList<Node> getEdges(int relationID, Node node) {
+        try {
+            return graph.getEdges(relationID, node);
+        } catch (GraphException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
