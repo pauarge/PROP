@@ -16,6 +16,7 @@ public class Controller {
     private static final String IMPORT_HELP = "import nodes node_type file_path\nimport edges node_type1 node_type2 file_path\nimport all folder_path";
     private static final String EXPORT_HELP = "export file_path";
     private static final String ADD_RELATION_HELP = "add relation name node_type1 [node_type2 ...] node_typen";
+    private static final String RELEVANCE_HELP = "";
 
     private Graph graph;
     private PersistenceController persistenceController;
@@ -23,7 +24,7 @@ public class Controller {
 
     private boolean readyToQuit = false;
 
-    private NodeType getType(String type) {
+    static private NodeType getType(String type) {
         if (type == null) return null;
         type = removePlural(type);
         switch (type) {
@@ -42,14 +43,14 @@ public class Controller {
         }
     }
 
-    private String removePlural(String word) {
+    static private String removePlural(String word) {
         if (word.matches(".+s")) {
             word = word.substring(0, word.length() - 1);
         }
         return word;
     }
 
-    private String getFirstWord(String line) {
+    static private String getFirstWord(String line) {
         if (line == null) {
             return "";
         } else {
@@ -58,7 +59,7 @@ public class Controller {
         }
     }
 
-    private String getRestOfWords(String line) {
+    static private String getRestOfWords(String line) {
         if (line == null) {
             return "";
         } else {
@@ -139,11 +140,10 @@ public class Controller {
         while (!(nextType = getFirstWord(structure)).isEmpty()) {
             structure = getRestOfWords(structure);
 
-
-            System.err.println("Afegint component: " + currentType + '-' + nextType);
             NodeType nta = getType(currentType);
             NodeType ntb = getType(nextType);
             Relation r = new Relation(nta, ntb, "");
+            graph.addRelation(r);
             alr.add(r);
 
             currentType = nextType;
@@ -151,9 +151,7 @@ public class Controller {
 
         try {
             RelationStructure rs = new RelationStructure(firstType, alr, getType(currentType));
-            System.err.println("rs created");
             semanticPaths.put(name, rs);
-            System.err.println("rs added to map");
             return "Cami semantic afegit correctament";
         } catch (Exception e) {
             e.printStackTrace();
@@ -359,8 +357,36 @@ public class Controller {
     }
 
     private String executeRelevance(String parameters) {
+        String relation = getFirstWord(parameters);
+        String targets = getRestOfWords(parameters);
+        if (relation.isEmpty()) return RELEVANCE_HELP;
 
-        return "RELEVANCE FALTA IMPLEMENTAR";
+        String origin = getFirstWord(targets);
+        String dest = getFirstWord(getRestOfWords(targets));
+
+        RelationStructure rs = semanticPaths.get(relation);
+        System.err.println("Retrived path called: " + relation + " status: " + rs.toString());
+        GraphSearch graphSearch;
+
+        //if (origin.isEmpty() || origin.equals("free")) {
+            graphSearch = new FreeSearch(graph, rs);
+        /*} else {
+
+        }*/
+
+        graphSearch.search();
+        StringBuilder sb = new StringBuilder();
+        for (GraphSearch.Result r: graphSearch.getResults()) {
+            sb.append("From: ");
+            sb.append(r.from.getValue());
+            sb.append("\t\tTo: ");
+            sb.append(r.to.getValue());
+            sb.append("\tRelevance: ");
+            sb.append(r.hetesim);
+            sb.append('\n');
+        }
+
+        return sb.toString();
     }
 
     private void close() {
