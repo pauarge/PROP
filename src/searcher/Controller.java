@@ -3,17 +3,23 @@ package searcher;
 import common.domain.*;
 import common.persistence.PersistenceController;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Controller {
 
     private static final String GLOBAL_HELP = "add\nprint\nsearch\nimport\nexport\nrelevance\nquit";
-    private static final String ADD_HELP = "add node node_type [node_id] node_name";
+    private static final String ADD_HELP = "add node node_type [node_id] node_name\nadd relation name node_type1 [node_type2 ...] node_typen";
     private static final String PRINT_HELP = "print node";
     private static final String PRINT_NODE_HELP = "print node all\nprint node type1 [type2 ...]";
     private static final String IMPORT_HELP = "import nodes node_type file_path\nimport edges node_type1 node_type2 file_path\nimport all folder_path";
     private static final String EXPORT_HELP = "export file_path";
+    private static final String ADD_RELATION_HELP = "add relation name node_type1 [node_type2 ...] node_typen";
 
     private Graph graph;
     private PersistenceController persistenceController;
+    private HashMap<String, RelationStructure> semanticPaths;
 
     private boolean readyToQuit = false;
 
@@ -68,6 +74,7 @@ public class Controller {
     Controller() {
         graph = new Graph();
         persistenceController = new PersistenceController(graph);
+        semanticPaths = new HashMap<>();
     }
 
     boolean isReadyToQuit() {
@@ -110,8 +117,47 @@ public class Controller {
         switch (command) {
             case "node":
                 return addNode(parameters);
+            case "relation":
+            case "relationship":
+                return addRelationship(parameters);
             default:
                 return ADD_HELP;
+        }
+    }
+
+    private String addRelationship(String line) {
+        String name = getFirstWord(line);
+        String structure = getRestOfWords(line);
+
+        if (name.isEmpty()) return ADD_RELATION_HELP;
+
+        String currentType = getFirstWord(structure);
+        structure = getRestOfWords(structure);
+        NodeType firstType = getType(currentType);
+        String nextType;
+        ArrayList<Relation> alr = new ArrayList<>();
+        while (!(nextType = getFirstWord(structure)).isEmpty()) {
+            structure = getRestOfWords(structure);
+
+
+            System.err.println("Afegint component: " + currentType + '-' + nextType);
+            NodeType nta = getType(currentType);
+            NodeType ntb = getType(nextType);
+            Relation r = new Relation(nta, ntb, "");
+            alr.add(r);
+
+            currentType = nextType;
+        }
+
+        try {
+            RelationStructure rs = new RelationStructure(firstType, alr, getType(currentType));
+            System.err.println("rs created");
+            semanticPaths.put(name, rs);
+            System.err.println("rs added to map");
+            return "Cami semantic afegit correctament";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "EXCEPTION!";
         }
     }
 
@@ -178,12 +224,13 @@ public class Controller {
                 return printNode(parameters);
             case "edge":
                 return printEdge(parameters);
+            case "relation":
+            case "relationship":
+                return printPaths();
             default:
                 return PRINT_HELP;
         }
     }
-
-
 
     private String printNode(String parameter) {
         boolean didSomething = false;
@@ -209,6 +256,7 @@ public class Controller {
         }
     }
 
+
     private String printEdge(String parameters) {
         String type1 = getFirstWord(parameters);
         String type2 = getRestOfWords(parameters);
@@ -225,6 +273,21 @@ public class Controller {
             sb.append(node.getId());
             sb.append("    ");
             sb.append(node.getValue());
+            sb.append('\n');
+        }
+        return sb.toString();
+    }
+
+    private String printPaths() {
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<String,RelationStructure> e : semanticPaths.entrySet()) {
+            sb.append(e.getKey());
+            sb.append(":   ");
+
+            for (Relation r : e.getValue()) {
+                sb.append(r.toString());
+                sb.append("  ");
+            }
             sb.append('\n');
         }
         return sb.toString();
@@ -277,8 +340,6 @@ public class Controller {
 
         persistenceController.importEdges(path, getType(type1), getType(type2));
         return "Fitxer importat amb exit.";
-
-
     }
 
     private String executeExport(String path) {
@@ -298,6 +359,7 @@ public class Controller {
     }
 
     private String executeRelevance(String parameters) {
+
         return "RELEVANCE FALTA IMPLEMENTAR";
     }
 
