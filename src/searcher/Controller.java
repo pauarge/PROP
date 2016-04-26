@@ -1,10 +1,9 @@
 package searcher;
 
-import common.domain.Container;
-import common.domain.Graph;
-import common.domain.Node;
-import common.domain.NodeType;
+import common.domain.*;
 import common.persistence.PersistenceController;
+
+import java.util.ArrayList;
 
 public class Controller {
 
@@ -41,7 +40,7 @@ public class Controller {
 
     private String removePlural(String word) {
         if (word.matches(".+s")) {
-            word = word.substring(0, word.length()-1);
+            word = word.substring(0, word.length() - 1);
         }
         return word;
     }
@@ -159,6 +158,20 @@ public class Controller {
     }
 
     private String executeSearch(String line) {
+        // S'ha de deixar escollir entre els tipus de cerca. Poso aquesta a mode d'exemple.
+        ArrayList<Relation> aux = new ArrayList<Relation>();
+        RelationStructure rs = null;
+        try {
+            rs = new RelationStructure(NodeType.AUTHOR, aux, NodeType.AUTHOR);
+        } catch (RelationStructureException e) {
+            e.printStackTrace();
+        }
+        GraphSearch s = new FreeSearch(graph, rs);
+        s.search();
+        ArrayList<GraphSearch.Result> results = s.getResults();
+        for (int i = 0; i < results.size(); ++i) {
+            results.get(i).print();
+        }
         return "";
     }
 
@@ -166,7 +179,7 @@ public class Controller {
         boolean didSomething = false;
         String[] args = parameter.split("\\s+");
         if (args[0].equals("all")) {
-            args = new String[] {"author", "conference", "paper", "label", "term"};
+            args = new String[]{"author", "conference", "paper", "label", "term"};
         }
         StringBuilder sb = new StringBuilder();
         for (String arg : args) {
