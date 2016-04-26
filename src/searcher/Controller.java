@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class Controller {
 
-    private static final String GLOBAL_HELP = "add\nprint\nsearch\nimport\nexport\nrelevance\nquit";
+    private static final String GLOBAL_HELP = "add\nprint\nsearch\nimport\nrelevance\nquit";
     private static final String ADD_HELP = "add node node_type [node_id] node_name\nadd relation name node_type1 [node_type2 ...] node_typen";
     private static final String PRINT_HELP = "print node";
     private static final String PRINT_NODE_HELP = "print node all\nprint node type1 [type2 ...]";
@@ -132,7 +132,7 @@ public class Controller {
                 this.close();
                 return null;
             default:
-                return "Comanda no reconeguda. Escriu 'help' per obtenir un llistat de comandes valides";
+                return "Comanda no reconeguda. Escriu 'help' per obtenir un llistat de comandes valides.";
         }
     }
 
@@ -177,7 +177,7 @@ public class Controller {
             RelationStructure rs = new RelationStructure(firstType, alr, getType(currentType));
             semanticPaths.put(name, rs);
             semanticExtremes.put(name, new Pair<>(firstType, getType(currentType)));
-            return "Cami semantic afegit correctament";
+            return "Cami semantic afegit correctament.";
         } catch (Exception e) {
             e.printStackTrace();
             return "EXCEPTION!";
