@@ -2,6 +2,7 @@ package searcher;
 
 import common.domain.*;
 import common.persistence.PersistenceController;
+import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,11 +17,12 @@ public class Controller {
     private static final String IMPORT_HELP = "import nodes node_type file_path\nimport edges node_type1 node_type2 file_path\nimport all folder_path";
     private static final String EXPORT_HELP = "export file_path";
     private static final String ADD_RELATION_HELP = "add relation name node_type1 [node_type2 ...] node_typen";
-    private static final String RELEVANCE_HELP = "";
+    private static final String RELEVANCE_HELP = "relevance relation_name [free]\nrelevance relation_name node_origin_id [node_dest_id]";
 
     private Graph graph;
     private PersistenceController persistenceController;
     private HashMap<String, RelationStructure> semanticPaths;
+    private HashMap<String, Pair<NodeType,NodeType>> semanticExtremes;
 
     private boolean readyToQuit = false;
 
@@ -97,6 +99,7 @@ public class Controller {
         graph = new Graph();
         persistenceController = new PersistenceController(graph);
         semanticPaths = new HashMap<>();
+        semanticExtremes = new HashMap<>();
     }
 
     boolean isReadyToQuit() {
@@ -172,6 +175,7 @@ public class Controller {
         try {
             RelationStructure rs = new RelationStructure(firstType, alr, getType(currentType));
             semanticPaths.put(name, rs);
+            semanticExtremes.put(name, new Pair<>(firstType, getType(currentType)));
             return "Cami semantic afegit correctament";
         } catch (Exception e) {
             e.printStackTrace();
@@ -276,10 +280,7 @@ public class Controller {
 
 
     private String printEdge(String parameters) {
-        String type1 = getFirstWord(parameters);
-        String type2 = getRestOfWords(parameters);
-        type2 = getFirstWord(type2);
-
+//        TODO:Implenetar
         return null;
     }
 
@@ -387,13 +388,27 @@ public class Controller {
         RelationStructure rs = semanticPaths.get(semanticPath);
         if (rs == null) return "Relacio " + semanticPath + " no trobada.";
 
-        GraphSearch graphSearch;
+        GraphSearch graphSearch = null;
 
-        //if (origin.isEmpty() || origin.equals("free")) {
-            graphSearch = new FreeSearch(graph, rs);
-        /*} else {
-
-        }*/
+        try {
+            if (origin.isEmpty() || origin.equals("free")) {
+                graphSearch = new FreeSearch(graph, rs);
+            } else {
+                int originId = Integer.parseInt(origin);
+                NodeType originType = semanticExtremes.get(semanticPath).getKey();
+                Node originNode = graph.getNode(originType, originId);
+                if (dest.isEmpty()) {
+                    graphSearch = new OriginSearch(graph, rs, originNode);
+                } else {
+                    int destId = Integer.parseInt(dest);
+                    NodeType destType = semanticExtremes.get(semanticPath).getKey();
+                    Node destNode = graph.getNode(destType, destId);
+                    graphSearch = new OriginDestinationSearch(graph, rs, originNode, destNode);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         graphSearch.search();
         StringBuilder sb = new StringBuilder();
