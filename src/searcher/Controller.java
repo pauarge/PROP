@@ -3,15 +3,13 @@ package searcher;
 import common.domain.*;
 import common.persistence.PersistenceController;
 
-import java.util.ArrayList;
-
 public class Controller {
 
-    private static final String GLOBAL_HELP = "add\nprint\nsearch\nimport\nexport\nquit";
+    private static final String GLOBAL_HELP = "add\nprint\nsearch\nimport\nexport\nrelevance\nquit";
     private static final String ADD_HELP = "add node node_type [node_id] node_name";
     private static final String PRINT_HELP = "print node";
     private static final String PRINT_NODE_HELP = "print node all\nprint node type1 [type2 ...]";
-    private static final String IMPORT_HELP = "import nodes node_type file_path\nimport edges node_type1 node_type2 file_path";
+    private static final String IMPORT_HELP = "import nodes node_type file_path\nimport edges node_type1 node_type2 file_path\nimport all folder_path";
     private static final String EXPORT_HELP = "export file_path";
 
     private Graph graph;
@@ -91,6 +89,8 @@ public class Controller {
                 return executeImport(parameters);
             case "export":
                 return executeExport(parameters);
+            case "relevance":
+                return executeRelevance(parameters);
             case "":
                 return null;
             case "help":
@@ -125,7 +125,7 @@ public class Controller {
             return type + " no es un tipus valid de node!";
         }
 
-        if (value == null || value.equals("")) {
+        if (value.isEmpty()) {
             return "El node ha de tenir un nom!";
         }
 
@@ -136,11 +136,37 @@ public class Controller {
         Node node = graph.createNode(nodeType, value);
         try {
             graph.addNode(node);
-            return "Node added successfully.";
+            return "Node afegit correctament.";
         } catch (Exception e) {
             e.printStackTrace();
             return "EXCEPTION RAISED!";
         }
+    }
+
+    private String executeSearch(String line) {
+        String type = getFirstWord(line);
+        String value = getRestOfWords(line);
+
+        NodeType nodeType = getType(type);
+
+        if (nodeType == null) {
+            return type + " no es un tipus valid de node!";
+        }
+
+        if (value.isEmpty()) {
+            return "El node ha de tenir un nom!";
+        }
+
+        SimpleSearch ss = new SimpleSearch(graph, nodeType, value);
+        ss.search();
+        StringBuilder sb = new StringBuilder();
+        for (GraphSearch.Result r : ss.getResults()) {
+            sb.append(r.from.getId());
+            sb.append("    ");
+            sb.append(r.from.getValue());
+            sb.append('\n');
+        }
+        return sb.toString();
     }
 
     private String executePrint(String line) {
@@ -157,28 +183,7 @@ public class Controller {
         }
     }
 
-    private String executeSearch(String line) {
-        // S'ha de deixar escollir entre els tipus de cerca. Poso aquesta a mode d'exemple.
-        try {
-            ArrayList<Relation> aux = new ArrayList<Relation>();
-            aux.add(graph.getRelation(0));
-            aux.add(graph.getRelation(0));
-            //aux.add(AP);
-            //aux.add(AP);
-            RelationStructure rs = new RelationStructure(NodeType.AUTHOR, aux, NodeType.AUTHOR);
-            GraphSearch s = new FreeSearch(graph, rs);
-            s.search();
-            ArrayList<GraphSearch.Result> results = s.getResults();
-            for(int i = 0; i < results.size(); ++i) {
-                results.get(i).print();
-            }
-        } catch (RelationStructureException e) {
-            e.printStackTrace();
-        } catch (GraphException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
+
 
     private String printNode(String parameter) {
         boolean didSomething = false;
@@ -225,36 +230,34 @@ public class Controller {
         return sb.toString();
     }
 
-    private String executeImport(String params) {
-        String command = getFirstWord(params);
-        String args = getRestOfWords(params);
+    private String executeImport(String line) {
+        String command = getFirstWord(line);
+        String args = getRestOfWords(line);
 
-        /*
         switch (command) {
             case "node":
                 return importNode(args);
             case "edge":
                 return importEdge(args);
+            case "all":
+                return importAll(args);
             default:
                 return IMPORT_HELP;
         }
-        */
 
-        if(args != null){
-            System.out.println("Importing graph...");
-            persistenceController.importGraph(params);
-            return "Graph successfully imported.";
-        } else {
-            return IMPORT_HELP;
-        }
+    }
 
+    private String importAll(String path) {
+        if (path.isEmpty()) return IMPORT_HELP;
+        persistenceController.importGraph(path);
+        return "Graf importat amb exit.";
     }
 
     private String importNode(String params) {
         String type = getFirstWord(params);
         String path = getRestOfWords(params);
 
-        if (path.equals("")) {
+        if (path.isEmpty()) {
             return IMPORT_HELP;
         }
 
@@ -268,7 +271,7 @@ public class Controller {
         String path = getRestOfWords(type2);
         type2 = getFirstWord(type2);
 
-        if (path.equals("")) {
+        if (path.isEmpty()) {
             return IMPORT_HELP;
         }
 
@@ -281,7 +284,7 @@ public class Controller {
     private String executeExport(String path) {
         //TODO:Arreglar aixo
         return "LA FUNCIO exportGraph FA COSES LLETGES";
-  /*      if (path.equals("")) {
+  /*      if (path.isEmpty()) {
             return EXPORT_HELP;
         } else {
             try {
@@ -292,6 +295,10 @@ public class Controller {
                 return "EXCEPTION RAISED!";
             }
         }*/
+    }
+
+    private String executeRelevance(String parameters) {
+        return "RELEVANCE FALTA IMPLEMENTAR";
     }
 
     private void close() {
