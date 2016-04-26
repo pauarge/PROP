@@ -8,7 +8,7 @@ import common.persistence.PersistenceController;
 
 public class Controller {
 
-    private static final String GLOBAL_HELP = "add\nprint\nimport\nexport\nquit";
+    private static final String GLOBAL_HELP = "add\nprint\nsearch\nimport\nexport\nquit";
     private static final String ADD_HELP = "add node node_type [node_id] node_name";
     private static final String PRINT_HELP = "print node";
     private static final String PRINT_NODE_HELP = "print node all\nprint node type1 [type2 ...]";
@@ -77,7 +77,7 @@ public class Controller {
         return readyToQuit;
     }
 
-    String executeLine(String line) {
+    public String executeLine(String line) {
         String command = getFirstWord(line);
         String parameters = getRestOfWords(line);
 
@@ -86,6 +86,8 @@ public class Controller {
                 return executeAdd(parameters);
             case "print":
                 return executePrint(parameters);
+            case "search":
+                return executeSearch(parameters);
             case "import":
                 return executeImport(parameters);
             case "export":
@@ -154,6 +156,10 @@ public class Controller {
             default:
                 return PRINT_HELP;
         }
+    }
+
+    private String executeSearch(String line) {
+        return "";
     }
 
     private String printNode(String parameter) {
