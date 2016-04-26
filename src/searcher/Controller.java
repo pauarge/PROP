@@ -159,18 +159,23 @@ public class Controller {
 
     private String executeSearch(String line) {
         // S'ha de deixar escollir entre els tipus de cerca. Poso aquesta a mode d'exemple.
-        ArrayList<Relation> aux = new ArrayList<Relation>();
-        RelationStructure rs = null;
         try {
-            rs = new RelationStructure(NodeType.AUTHOR, aux, NodeType.AUTHOR);
+            ArrayList<Relation> aux = new ArrayList<Relation>();
+            aux.add(graph.getRelation(0));
+            aux.add(graph.getRelation(0));
+            //aux.add(AP);
+            //aux.add(AP);
+            RelationStructure rs = new RelationStructure(NodeType.AUTHOR, aux, NodeType.AUTHOR);
+            GraphSearch s = new FreeSearch(graph, rs);
+            s.search();
+            ArrayList<GraphSearch.Result> results = s.getResults();
+            for(int i = 0; i < results.size(); ++i) {
+                results.get(i).print();
+            }
         } catch (RelationStructureException e) {
             e.printStackTrace();
-        }
-        GraphSearch s = new FreeSearch(graph, rs);
-        s.search();
-        ArrayList<GraphSearch.Result> results = s.getResults();
-        for (int i = 0; i < results.size(); ++i) {
-            results.get(i).print();
+        } catch (GraphException e) {
+            e.printStackTrace();
         }
         return "";
     }
@@ -224,6 +229,7 @@ public class Controller {
         String command = getFirstWord(params);
         String args = getRestOfWords(params);
 
+        /*
         switch (command) {
             case "node":
                 return importNode(args);
@@ -232,6 +238,16 @@ public class Controller {
             default:
                 return IMPORT_HELP;
         }
+        */
+
+        if(args != null){
+            System.out.println("Importing graph...");
+            persistenceController.importGraph(params);
+            return "Graph successfully imported.";
+        } else {
+            return IMPORT_HELP;
+        }
+
     }
 
     private String importNode(String params) {
