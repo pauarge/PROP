@@ -219,11 +219,11 @@ public class Controller {
         NodeType nodeType = getType(type);
 
         if (nodeType == null) {
-            return type + " no es un tipus valid de node!";
+            return type + "search node_type search_term";
         }
 
         if (value.isEmpty()) {
-            return "El node ha de tenir un nom!";
+            return "search node_type search_term";
         }
 
         SimpleSearch ss = new SimpleSearch(graph, nodeType, value);
