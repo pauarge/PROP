@@ -72,6 +72,27 @@ public class Controller {
         }
     }
 
+    static private Relation getDefaultRelation(NodeType a, NodeType b) {
+        if (a.name().compareTo(b.name()) > 0) {
+            NodeType tmp = a;
+            a = b;
+            b = tmp;
+        }
+
+        if (a == NodeType.AUTHOR) {
+            if (b == NodeType.LABEL) return new Relation(a,b,"AuthorLabel",3);
+            if (b == NodeType.PAPER) return new Relation(a,b,"AuthorPaper",0);
+        } else if (a == NodeType.CONF) {
+            if (b == NodeType.LABEL) return new Relation(a,b,"ConferenceLabel",5);
+            if (b == NodeType.PAPER) return new Relation(a,b,"ConferencePaper",1);
+        } else if (a == NodeType.LABEL) {
+            if (b == NodeType.PAPER) return new Relation(b,a,"PaperLabel",4);
+        } else if (a == NodeType.PAPER) {
+            if (b == NodeType.TERM) return new Relation(b,a,"TermPaper",2);
+        }
+        return null;
+    }
+
     Controller() {
         graph = new Graph();
         persistenceController = new PersistenceController(graph);
@@ -142,8 +163,7 @@ public class Controller {
 
             NodeType nta = getType(currentType);
             NodeType ntb = getType(nextType);
-            Relation r = new Relation(nta, ntb, "");
-            graph.addRelation(r);
+            Relation r = getDefaultRelation(nta,ntb);
             alr.add(r);
 
             currentType = nextType;
@@ -357,15 +377,16 @@ public class Controller {
     }
 
     private String executeRelevance(String parameters) {
-        String relation = getFirstWord(parameters);
+        String semanticPath = getFirstWord(parameters);
         String targets = getRestOfWords(parameters);
-        if (relation.isEmpty()) return RELEVANCE_HELP;
+        if (semanticPath.isEmpty()) return RELEVANCE_HELP;
 
         String origin = getFirstWord(targets);
         String dest = getFirstWord(getRestOfWords(targets));
 
-        RelationStructure rs = semanticPaths.get(relation);
-        System.err.println("Retrived path called: " + relation + " status: " + rs.toString());
+        RelationStructure rs = semanticPaths.get(semanticPath);
+        if (rs == null) return "Relacio " + semanticPath + " no trobada.";
+
         GraphSearch graphSearch;
 
         //if (origin.isEmpty() || origin.equals("free")) {
@@ -379,9 +400,9 @@ public class Controller {
         for (GraphSearch.Result r: graphSearch.getResults()) {
             sb.append("From: ");
             sb.append(r.from.getValue());
-            sb.append("\t\tTo: ");
+            sb.append("\t\t\tTo: ");
             sb.append(r.to.getValue());
-            sb.append("\tRelevance: ");
+            sb.append("\t\t\tRelevance: ");
             sb.append(r.hetesim);
             sb.append('\n');
         }
