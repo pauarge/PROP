@@ -34,6 +34,7 @@ public class Controller {
                 return NodeType.AUTHOR;
             case "paper":
                 return NodeType.PAPER;
+            case "conf":
             case "conference":
                 return NodeType.CONF;
             case "term":
