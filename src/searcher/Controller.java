@@ -363,9 +363,7 @@ public class Controller {
     }
 
     private String executeExport(String path) {
-        //TODO:Arreglar aixo
-        return "LA FUNCIO exportGraph FA COSES LLETGES";
-  /*      if (path.isEmpty()) {
+        if (path.isEmpty()) {
             return EXPORT_HELP;
         } else {
             try {
@@ -375,7 +373,7 @@ public class Controller {
                 e.printStackTrace();
                 return "EXCEPTION RAISED!";
             }
-        }*/
+        }
     }
 
     private String executeRelevance(String parameters) {
