@@ -26,76 +26,6 @@ public class Controller {
 
     private boolean readyToQuit = false;
 
-    static private NodeType getType(String type) {
-        if (type == null) return null;
-        type = removePlural(type);
-        switch (type) {
-            case "author":
-                return NodeType.AUTHOR;
-            case "paper":
-                return NodeType.PAPER;
-            case "conf":
-            case "conference":
-                return NodeType.CONF;
-            case "term":
-                return NodeType.TERM;
-            case "label":
-                return NodeType.LABEL;
-            default:
-                return null;
-        }
-    }
-
-    static private String removePlural(String word) {
-        if (word.matches(".+s")) {
-            word = word.substring(0, word.length() - 1);
-        }
-        return word;
-    }
-
-    static private String getFirstWord(String line) {
-        if (line == null) {
-            return "";
-        } else {
-            String ret = line.split("\\s+", 2)[0].toLowerCase();
-            return removePlural(ret);
-        }
-    }
-
-    static private String getRestOfWords(String line) {
-        if (line == null) {
-            return "";
-        } else {
-            String[] words = line.split("\\s+", 2);
-            if (words.length == 1) {
-                return "";
-            } else {
-                return words[1];
-            }
-        }
-    }
-
-    static private Relation getDefaultRelation(NodeType a, NodeType b) {
-        if (a.name().compareTo(b.name()) > 0) {
-            NodeType tmp = a;
-            a = b;
-            b = tmp;
-        }
-
-        if (a == NodeType.AUTHOR) {
-            if (b == NodeType.LABEL) return new Relation(a,b,"AuthorLabel",3);
-            if (b == NodeType.PAPER) return new Relation(a,b,"AuthorPaper",0);
-        } else if (a == NodeType.CONF) {
-            if (b == NodeType.LABEL) return new Relation(a,b,"ConferenceLabel",5);
-            if (b == NodeType.PAPER) return new Relation(a,b,"ConferencePaper",1);
-        } else if (a == NodeType.LABEL) {
-            if (b == NodeType.PAPER) return new Relation(b,a,"PaperLabel",4);
-        } else if (a == NodeType.PAPER) {
-            if (b == NodeType.TERM) return new Relation(b,a,"TermPaper",2);
-        }
-        return null;
-    }
-
     Controller() {
         graph = new Graph();
         persistenceController = new PersistenceController(graph);
@@ -108,8 +38,8 @@ public class Controller {
     }
 
     public String executeLine(String line) {
-        String command = getFirstWord(line);
-        String parameters = getRestOfWords(line);
+        String command = Utils.getFirstWord(line);
+        String parameters = Utils.getRestOfWords(line);
 
         switch (command) {
             case "add":
@@ -137,8 +67,8 @@ public class Controller {
     }
 
     private String executeAdd(String line) {
-        String command = getFirstWord(line);
-        String parameters = getRestOfWords(line);
+        String command = Utils.getFirstWord(line);
+        String parameters = Utils.getRestOfWords(line);
 
         switch (command) {
             case "node":
@@ -152,31 +82,31 @@ public class Controller {
     }
 
     private String addRelationship(String line) {
-        String name = getFirstWord(line);
-        String structure = getRestOfWords(line);
+        String name = Utils.getFirstWord(line);
+        String structure = Utils.getRestOfWords(line);
 
         if (name.isEmpty()) return ADD_RELATION_HELP;
 
-        String currentType = getFirstWord(structure);
-        structure = getRestOfWords(structure);
-        NodeType firstType = getType(currentType);
+        String currentType = Utils.getFirstWord(structure);
+        structure = Utils.getRestOfWords(structure);
+        NodeType firstType = Utils.getType(currentType);
         String nextType;
         ArrayList<Relation> alr = new ArrayList<>();
-        while (!(nextType = getFirstWord(structure)).isEmpty()) {
-            structure = getRestOfWords(structure);
+        while (!(nextType = Utils.getFirstWord(structure)).isEmpty()) {
+            structure = Utils.getRestOfWords(structure);
 
-            NodeType nta = getType(currentType);
-            NodeType ntb = getType(nextType);
-            Relation r = getDefaultRelation(nta,ntb);
+            NodeType nta = Utils.getType(currentType);
+            NodeType ntb = Utils.getType(nextType);
+            Relation r = Utils.getDefaultRelation(nta,ntb);
             alr.add(r);
 
             currentType = nextType;
         }
 
         try {
-            RelationStructure rs = new RelationStructure(firstType, alr, getType(currentType));
+            RelationStructure rs = new RelationStructure(firstType, alr, Utils.getType(currentType));
             semanticPaths.put(name, rs);
-            semanticExtremes.put(name, new Pair<>(firstType, getType(currentType)));
+            semanticExtremes.put(name, new Pair<>(firstType, Utils.getType(currentType)));
             return "Cami semantic afegit correctament.";
         } catch (Exception e) {
             e.printStackTrace();
@@ -185,10 +115,10 @@ public class Controller {
     }
 
     private String addNode(String line) {
-        String type = getFirstWord(line);
-        String value = getRestOfWords(line);
+        String type = Utils.getFirstWord(line);
+        String value = Utils.getRestOfWords(line);
 
-        NodeType nodeType = getType(type);
+        NodeType nodeType = Utils.getType(type);
 
         if (nodeType == null) {
             return type + " no es un tipus valid de node!";
@@ -213,10 +143,10 @@ public class Controller {
     }
 
     private String executeSearch(String line) {
-        String type = getFirstWord(line);
-        String value = getRestOfWords(line);
+        String type = Utils.getFirstWord(line);
+        String value = Utils.getRestOfWords(line);
 
-        NodeType nodeType = getType(type);
+        NodeType nodeType = Utils.getType(type);
 
         if (nodeType == null) {
             return type + "search node_type search_term";
@@ -239,8 +169,8 @@ public class Controller {
     }
 
     private String executePrint(String line) {
-        String command = getFirstWord(line);
-        String parameters = getRestOfWords(line);
+        String command = Utils.getFirstWord(line);
+        String parameters = Utils.getRestOfWords(line);
 
         switch (command) {
             case "node":
@@ -263,7 +193,7 @@ public class Controller {
         }
         StringBuilder sb = new StringBuilder();
         for (String arg : args) {
-            NodeType nt = getType(arg);
+            NodeType nt = Utils.getType(arg);
             if (nt != null) {
                 sb.append('\n');
                 sb.append(arg);
@@ -314,8 +244,8 @@ public class Controller {
     }
 
     private String executeImport(String line) {
-        String command = getFirstWord(line);
-        String args = getRestOfWords(line);
+        String command = Utils.getFirstWord(line);
+        String args = Utils.getRestOfWords(line);
 
         switch (command) {
             case "node":
@@ -337,28 +267,28 @@ public class Controller {
     }
 
     private String importNode(String params) {
-        String type = getFirstWord(params);
-        String path = getRestOfWords(params);
+        String type = Utils.getFirstWord(params);
+        String path = Utils.getRestOfWords(params);
 
         if (path.isEmpty()) {
             return IMPORT_HELP;
         }
 
-        persistenceController.importNodes(path, getType(type));
+        persistenceController.importNodes(path, Utils.getType(type));
         return "Fitxer importat amb exit.";
     }
 
     private String importEdge(String params) {
-        String type1 = getFirstWord(params);
-        String type2 = getRestOfWords(params);
-        String path = getRestOfWords(type2);
-        type2 = getFirstWord(type2);
+        String type1 = Utils.getFirstWord(params);
+        String type2 = Utils.getRestOfWords(params);
+        String path = Utils.getRestOfWords(type2);
+        type2 = Utils.getFirstWord(type2);
 
         if (path.isEmpty()) {
             return IMPORT_HELP;
         }
 
-        persistenceController.importEdges(path, getType(type1), getType(type2));
+        persistenceController.importEdges(path, Utils.getType(type1), Utils.getType(type2));
         return "Fitxer importat amb exit.";
     }
 
@@ -377,12 +307,12 @@ public class Controller {
     }
 
     private String executeRelevance(String parameters) {
-        String semanticPath = getFirstWord(parameters);
-        String targets = getRestOfWords(parameters);
+        String semanticPath = Utils.getFirstWord(parameters);
+        String targets = Utils.getRestOfWords(parameters);
         if (semanticPath.isEmpty()) return RELEVANCE_HELP;
 
-        String origin = getFirstWord(targets);
-        String dest = getFirstWord(getRestOfWords(targets));
+        String origin = Utils.getFirstWord(targets);
+        String dest = Utils.getFirstWord(Utils.getRestOfWords(targets));
 
         RelationStructure rs = semanticPaths.get(semanticPath);
         if (rs == null) return "Relacio " + semanticPath + " no trobada.";
