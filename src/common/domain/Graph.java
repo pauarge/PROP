@@ -12,11 +12,6 @@ public class Graph {
 
     //Constructors
     public Graph() {
-        this("-1");
-    }
-
-    public Graph(String name) {
-        this.name = name;
         nodeContainers = new HashMap<NodeType, Container<Node>>();
         nodeContainers.put(NodeType.AUTHOR, new Container<Node>());
         nodeContainers.put(NodeType.PAPER, new Container<Node>());
@@ -135,6 +130,10 @@ public class Graph {
 
     public Container<Node>.ContainerIterator getNodeIterator(NodeType type) {
         return getNodeContainer(type).getIterator();
+    }
+
+    public Container<Relation>.ContainerIterator getRelationIterator() {
+        return relations.getIterator();
     }
 
     private void i_addRelation(Relation relation, NodeType type) {

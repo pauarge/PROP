@@ -14,16 +14,16 @@ public class Main {
         Graph g = new Graph();
 
         PersistenceController pc = new PersistenceController(g);
-        pc.importGraph("data/");
+        pc.importGraph("out/");
+
+        Relation AP = new Relation(NodeType.PAPER, NodeType.AUTHOR, "AP");
+        g.addRelation(AP);
 
         System.out.println("Exporting graph...");
         pc.exportGraph("out/");
 
-
+        /*
         System.out.println("Starts search");
-
-        Relation AP = new Relation(NodeType.PAPER, NodeType.AUTHOR, "AP");
-        g.addRelation(AP);
 
         Author a1 = (Author) g.createNode(NodeType.AUTHOR, "a1");
         Author a2 = (Author) g.createNode(NodeType.AUTHOR, "a2");
@@ -58,7 +58,7 @@ public class Main {
             //aux.add(AP);
             //aux.add(AP);
             RelationStructure rs = new RelationStructure(NodeType.AUTHOR, aux, NodeType.AUTHOR);
-            GraphSearch s = new FreeSearch(g, rs);
+            GraphSearch s = new OriginDestinationSearch(g, rs, g.getNode(NodeType.AUTHOR, 15971), g.getNode(NodeType.AUTHOR, 1399));
             s.search();
             ArrayList<GraphSearch.Result> results = s.getResults();
             for(int i = 0; i < results.size(); ++i) {
@@ -67,5 +67,8 @@ public class Main {
         } catch (RelationStructureException e) {
             e.printStackTrace();
         }
+
+        */
+
     }
 }
