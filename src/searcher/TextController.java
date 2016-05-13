@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Controller {
+public class TextController {
 
     private static final String GLOBAL_HELP = "add\nprint\nsearch\nimport\nrelevance\nquit";
     private static final String ADD_HELP = "add node node_type [node_id] node_name\nadd relation name node_type1 [node_type2 ...] node_typen";
@@ -26,7 +26,7 @@ public class Controller {
 
     private boolean readyToQuit = false;
 
-    Controller() {
+    TextController() {
         graph = new Graph();
         persistenceController = new PersistenceController(graph);
         semanticPaths = new HashMap<>();

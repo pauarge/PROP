@@ -2860,7 +2860,7 @@
 3237	living
 3238	kinematics
 3239	innovative
-3242	controller
+3242	textController
 3243	director
 3244	quickxplain
 3245	relaxations

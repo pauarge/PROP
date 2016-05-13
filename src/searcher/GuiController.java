@@ -1,9 +1,11 @@
 package searcher;
 
-import javafx.event.ActionEvent;
+import common.domain.Node;
+import javafx.collections.ObservableList;
 
 public class GuiController {
-    public void botoSortir(ActionEvent actionEvent) {
-        System.exit(0);
-    }
+
+    private ObservableList<Node> nodeList;
+
+    public GuiController() {}
 }

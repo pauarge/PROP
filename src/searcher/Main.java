@@ -13,15 +13,15 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("startup.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("root_layout.fxml"));
         primaryStage.setTitle("Cercador Relacional");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
     }
 
     public static void main(String[] args) {
         if (args.length > 0 && args[0].equals("-tui")) {
-            Controller controller = new Controller();
+            TextController textController = new TextController();
 
             InputStreamReader inputStreamReader = new InputStreamReader(System.in);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -32,11 +32,11 @@ public class Main extends Application {
             try {
                 System.out.print(">");
                 while ((readLine = bufferedReader.readLine()) != null) {
-                    outputLine = controller.executeLine(readLine);
+                    outputLine = textController.executeLine(readLine);
                     if (outputLine != null) {
                         System.out.println(outputLine);
                     }
-                    if (controller.isReadyToQuit()) {
+                    if (textController.isReadyToQuit()) {
                         System.exit(0);
                     }
                     System.out.print(">");
