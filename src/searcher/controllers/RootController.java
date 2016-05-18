@@ -39,7 +39,7 @@ public class RootController {
         Parent root = FXMLLoader.load(getClass().getResource("../layouts/main.fxml"));
         Stage stage = (Stage) createGraph.getScene().getWindow();
         stage.setTitle("FXML Welcome");
-        stage.setScene(new Scene(root, 300, 275));
+        stage.setScene(new Scene(root));
         stage.show();
     }
 

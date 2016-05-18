@@ -10,7 +10,16 @@
     <padding>
         <Insets top="25" right="25" bottom="10" left="25"/>
     </padding>
-    <HBox GridPane.columnIndex="3" GridPane.rowIndex="4">
+    <HBox GridPane.columnIndex="0" GridPane.rowIndex="2">
+        <Button text="Afegir Node"></Button>
+    </HBox>
+    <HBox GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <Button text="Cercar Node"></Button>
+    </HBox>
+    <HBox GridPane.columnIndex="2" GridPane.rowIndex="2">
+        <Button text="Cerca per Rellevància"></Button>
+    </HBox>
+    <HBox GridPane.columnIndex="1" GridPane.rowIndex="3">
         <Button fx:id="returnRoot"
                 text="Tornar"
                 onAction="#returnRootAction"/>
