@@ -41,7 +41,6 @@ public class Main extends Application {
                     if (textController.isReadyToQuit()) {
                         System.exit(0);
                     }
-                    System.out.print(">");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
