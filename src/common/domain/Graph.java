@@ -3,6 +3,7 @@ package common.domain;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class Graph {
     //Attributes
@@ -19,9 +20,9 @@ public class Graph {
         nodeContainers.put(NodeType.CONF, new Container<Node>());
         nodeContainers.put(NodeType.TERM, new Container<Node>());
         relations = new Container<Relation>();
-        addRelation(new AuthorPaper());
-        addRelation(new ConferencePaper());
-        addRelation(new TermPaper());
+        addRelation(new PaperAuthor());
+        addRelation(new PaperConference());
+        addRelation(new PaperTerm());
         addRelation(new AuthorLabel());
         addRelation(new PaperLabel());
         addRelation(new ConferenceLabel());
@@ -175,6 +176,31 @@ public class Graph {
 
     public Relation getRelation(int relationID) throws GraphException {
         return relations.getElement(relationID);
+    }
+
+    public Relation getOrCreateRelation(NodeType typeA, NodeType typeB, String name){
+        Iterator it = relations.getIterator();
+        while(it.hasNext()){
+            Relation r = (Relation) it.next();
+            if(r.getNodeTypeA().equals(typeA) && r.getNodeTypeB().equals(typeB) && r.getName().equals(name)){
+                return r;
+            }
+        }
+        Relation r = new Relation(typeA, typeB, name);
+        addRelation(r);
+        return r;
+    }
+
+    public ArrayList<Relation> getRelationsForType(NodeType type){
+        ArrayList<Relation> toReturn = new ArrayList<>();
+        Iterator it = relations.getIterator();
+        while (it.hasNext()) {
+            Relation r = (Relation) it.next();
+            if(r.getNodeTypeA() == type){
+                toReturn.add(r);
+            }
+        }
+        return toReturn;
     }
 
     private NodeType getNodeType(Node node) {

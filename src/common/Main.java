@@ -10,20 +10,14 @@ public class Main {
 
     public static void main(String[] args) throws GraphException {
 
-        System.out.println("Starts initialization");
+        System.out.println("Starts initialization...");
         Graph g = new Graph();
 
         PersistenceController pc = new PersistenceController(g);
-        pc.importGraph("out/");
+        pc.importGraph("data/");
 
         Relation AP = new Relation(NodeType.PAPER, NodeType.AUTHOR, "AP");
         g.addRelation(AP);
-
-        System.out.println("Exporting graph...");
-        pc.exportGraph("out/");
-
-        /*
-        System.out.println("Starts search");
 
         Author a1 = (Author) g.createNode(NodeType.AUTHOR, "a1");
         Author a2 = (Author) g.createNode(NodeType.AUTHOR, "a2");
@@ -49,7 +43,7 @@ public class Main {
         g.addEdge(AP.getId(), a2, p4);
         g.addEdge(AP.getId(), a3, p4);
 
-        pc.exportGraph("out/");
+        System.out.println("Starts search...");
 
         try {
             ArrayList<Relation> aux = new ArrayList<Relation>();
@@ -68,7 +62,8 @@ public class Main {
             e.printStackTrace();
         }
 
-        */
+        System.out.println("Exporting graph...");
+        pc.exportGraph("out/");
 
     }
 }

@@ -34,7 +34,7 @@ public class Relation extends Element {
         return isDefault;
     }
 
-    protected NodeType getNodeTypeA() {
+    public NodeType getNodeTypeA() {
         return A;
     }
 
@@ -42,11 +42,17 @@ public class Relation extends Element {
         this.A = A;
     }
 
-    protected NodeType getNodeTypeB() {
+    public NodeType getNodeTypeB() {
         return B;
     }
 
     protected void setNodeTypeB(NodeType B) {
         this.B = B;
     }
+
+    // Helpers
+    public boolean containsLabel(){
+        return A == NodeType.LABEL || B == NodeType.LABEL;
+    }
+
 }
