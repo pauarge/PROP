@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane fx:controller="searcher.GuiController"
+<GridPane fx:controller="searcher.controllers.RootController" minHeight="480" minWidth="480"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="11" vgap="10">
     <padding>
         <Insets top="25" right="25" bottom="10" left="25"/>
@@ -19,7 +19,8 @@
     />
     <HBox GridPane.columnIndex="3" GridPane.rowIndex="4">
         <Button fx:id="createGraph"
-                text="Nova sessió" />
+                text="Nova sessió"
+                onAction="#openMain"/>
     </HBox>
 
     <HBox GridPane.columnIndex="7" GridPane.rowIndex="4">

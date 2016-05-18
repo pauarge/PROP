@@ -267,6 +267,7 @@ public class TextController {
     }
 
     private String importNode(String params) {
+        /*
         String type = Utils.getFirstWord(params);
         String path = Utils.getRestOfWords(params);
 
@@ -276,9 +277,13 @@ public class TextController {
 
         persistenceController.importNodes(path, Utils.getType(type));
         return "Fitxer importat amb exit.";
+        */
+        // TODO: Nova funcio a persistencia
+        return "No implementat";
     }
 
     private String importEdge(String params) {
+        /*
         String type1 = Utils.getFirstWord(params);
         String type2 = Utils.getRestOfWords(params);
         String path = Utils.getRestOfWords(type2);
@@ -290,6 +295,9 @@ public class TextController {
 
         persistenceController.importEdges(path, Utils.getType(type1), Utils.getType(type2));
         return "Fitxer importat amb exit.";
+        */
+        // TODO: Nova funcio a persistencia
+        return "No implementat";
     }
 
     private String executeExport(String path) {

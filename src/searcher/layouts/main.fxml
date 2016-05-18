@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.layout.*?>
+
+
+<?import javafx.scene.control.Button?>
+<GridPane fx:controller="searcher.controllers.MainController"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="11" vgap="10">
+    <padding>
+        <Insets top="25" right="25" bottom="10" left="25"/>
+    </padding>
+    <HBox GridPane.columnIndex="3" GridPane.rowIndex="4">
+        <Button fx:id="returnRoot"
+                text="Tornar"
+                onAction="#returnRootAction"/>
+    </HBox>
+</GridPane>
