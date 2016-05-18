@@ -12,6 +12,7 @@ public class GuiController {
 
     @FXML private Button closeButton;
     @FXML private Button importGraph;
+    @FXML private Button CreateGraph;
 
     @FXML
     private void closeButtonAction(){
