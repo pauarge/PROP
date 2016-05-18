@@ -11,11 +11,13 @@ import java.io.InputStreamReader;
 
 public class Main extends Application {
 
+    private String APP_TITLE = "Cercador Relacional";
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("root_layout.fxml"));
-        primaryStage.setTitle("Cercador Relacional");
-        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.setTitle(APP_TITLE);
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 
