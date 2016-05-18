@@ -2,11 +2,13 @@ package searcher;
 
 import common.domain.*;
 import common.persistence.PersistenceController;
+
 import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 
 public class TextController {
 

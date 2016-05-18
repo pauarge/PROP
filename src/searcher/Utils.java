@@ -3,6 +3,7 @@ package searcher;
 import common.domain.NodeType;
 import common.domain.Relation;
 
+
 public class Utils {
 
     static NodeType getType(String type) {
