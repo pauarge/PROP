@@ -18,98 +18,19 @@
 
     />
     <HBox GridPane.columnIndex="3" GridPane.rowIndex="4">
-        <Button id="CreateGraph"
-                text="   Nova sessió   " />
+        <Button fx:id="createGraph"
+                text="Nova sessió" />
     </HBox>
 
     <HBox GridPane.columnIndex="7" GridPane.rowIndex="4">
-          <Button id="ImportGraph"
-                  text="Carregar sessió" />
+          <Button fx:id="importGraph"
+                  text="Carregar sessió"
+                  onAction="#openDirSelector"/>
     </HBox>
 
     <HBox GridPane.columnIndex="5" GridPane.rowIndex="7" >
-        <Button id="closeButton"
-                text=" Sortir " />
+        <Button fx:id="closeButton"
+                text="Sortir"
+                onAction="#closeButtonAction"/>
     </HBox>
 </GridPane>
-
-<!--<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-            prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="searcher.GuiController">
-    <top>
-        <VBox BorderPane.alignment="CENTER">
-            <children>
-                <MenuBar>
-                    <menus>
-                        <Menu mnemonicParsing="false" text="File">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="Close"/>
-                            </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="Edit">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="Delete"/>
-                            </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="Help">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="About"/>
-                            </items>
-                        </Menu>
-                    </menus>
-                </MenuBar>
-                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="59.0" prefWidth="601.0"
-                       text="Títol del programa" textAlignment="CENTER" textFill="#000000ba">
-                    <font>
-                        <Font size="30.0"/>
-                    </font>
-                    <padding>
-                        <Insets top="30.0"/>
-                    </padding>
-                </Label>
-            </children>
-        </VBox>
-    </top>
-    <bottom>
-        <HBox prefHeight="25.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-            <children>
-                <Label prefHeight="25.0" prefWidth="144.0" text="El meu programa">
-                    <padding>
-                        <Insets left="5.0"/>
-                    </padding>
-                </Label>
-            </children>
-        </HBox>
-    </bottom>
-    <center>
-        <VBox prefHeight="173.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-            <children>
-                <HBox>
-                    <children>
-                        <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="102.0" text="Nou graf">
-                            <HBox.margin>
-                                <Insets left="160.0" top="60.0"/>
-                            </HBox.margin>
-                        </Button>
-                        <Button fx:id="importGraph" layoutX="160.0" layoutY="20.0" mnemonicParsing="false"
-                                text="Importar graf" onAction="#openDirSelector">
-                            <HBox.margin>
-                                <Insets left="80.0" top="60.0"/>
-                            </HBox.margin>
-                        </Button>
-                    </children>
-                </HBox>
-                <HBox>
-                    <children>
-                        <Button fx:id="closeButton" mnemonicParsing="false" text="Sortir" onAction="#closeButtonAction">
-                            <HBox.margin>
-                                <Insets left="277.0" top="80.0"/>
-                            </HBox.margin>
-                        </Button>
-                    </children>
-                </HBox>
-            </children>
-        </VBox>
-    </center>
-</BorderPane>
--->
