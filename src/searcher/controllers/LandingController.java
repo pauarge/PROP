@@ -11,7 +11,7 @@ import javafx.scene.control.Button;
 import java.io.File;
 
 
-public class RootController {
+public class LandingController {
 
     @FXML private Button closeButton;
     @FXML private Button importGraph;
@@ -36,9 +36,11 @@ public class RootController {
 
     @FXML
     public void openMain() throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../layouts/main.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../layouts/main.fxml"));
+        Parent root = (Parent) loader.load();
+        MainController controller = loader.<MainController>getController();
+        controller.importDir("HOLA K ASE");
         Stage stage = (Stage) createGraph.getScene().getWindow();
-        stage.setTitle("FXML Welcome");
         stage.setScene(new Scene(root));
         stage.show();
     }
