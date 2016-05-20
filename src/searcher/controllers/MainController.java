@@ -1,6 +1,7 @@
 package searcher.controllers;
 
 import common.domain.Graph;
+import common.domain.NodeType;
 import common.persistence.PersistenceController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
@@ -59,6 +61,11 @@ public class MainController implements Initializable {
         System.out.println("Starting graph import...");
         pc.importGraph(path);
         System.out.println("Graph import finished.");
+    }
+
+    @FXML
+    private void getTextAndSearch(){
+
     }
 
     @Override

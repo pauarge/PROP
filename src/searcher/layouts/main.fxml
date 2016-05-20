@@ -14,7 +14,9 @@
         <Button text="Afegir Node"></Button>
     </HBox>
     <HBox GridPane.columnIndex="1" GridPane.rowIndex="2">
-        <Button text="Cercar Node"></Button>
+        <Button fx:id="searchNode"
+                text="Cercar Node"
+                onAction="#getTextAndSearch"></Button>
     </HBox>
     <HBox GridPane.columnIndex="2" GridPane.rowIndex="2">
         <Button text="Cerca per Rellevància"></Button>

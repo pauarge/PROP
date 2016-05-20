@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane fx:controller="searcher.controllers.RelevanceController" minHeight="480" minWidth="480"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="11" vgap="10">
+
+
+</GridPane>
