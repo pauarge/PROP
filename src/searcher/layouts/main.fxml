@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.text.*?>
-<?import javafx.scene.shape.*?>
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 
-<?import javafx.geometry.Insets?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
             prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="searcher.controllers.MainController">
+            fx:controller="searcher.controllers.MainController" fx:id="borderPane">
     <top>
         <MenuBar>
             <menus>
                 <Menu mnemonicParsing="false" text="Fitxer">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Tancar"/>
+                        <MenuItem onAction="#backToLandingAction" mnemonicParsing="false" text="Tornar a l'inici"/>
+                        <SeparatorMenuItem></SeparatorMenuItem>
+                        <MenuItem onAction="#closeWindowAction" mnemonicParsing="false" text="Tancar"/>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Graf">
@@ -66,7 +65,8 @@
                                                               text="Tipus de Relació"/>
                                                         <Text strokeType="OUTSIDE" strokeWidth="0.0"
                                                               text="Terme a Cercar" GridPane.rowIndex="2"/>
-                                                        <ChoiceBox prefWidth="150.0" GridPane.rowIndex="1"/>
+                                                        <ChoiceBox prefWidth="150.0" GridPane.rowIndex="1">
+                                                        </ChoiceBox>
                                                         <TextField GridPane.rowIndex="3"/>
                                                         <Button mnemonicParsing="false" text="Cercar"
                                                                 GridPane.rowIndex="4"/>
