@@ -19,6 +19,11 @@
     <HBox GridPane.columnIndex="2" GridPane.rowIndex="2">
         <Button text="Cerca per Rellevància"></Button>
     </HBox>
+    <HBox GridPane.columnIndex="0" GridPane.rowIndex="3">
+        <Button fx:id="exportGraph"
+                text="Exportar Graf"
+                onAction="#exportGraphAction"></Button>
+    </HBox>
     <HBox GridPane.columnIndex="1" GridPane.rowIndex="3">
         <Button fx:id="returnRoot"
                 text="Tornar"
