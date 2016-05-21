@@ -2,6 +2,7 @@ package searcher.controllers;
 
 import common.domain.*;
 import common.persistence.PersistenceController;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,10 +10,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+import searcher.models.SemanticPath;
 import searcher.models.TableNode;
 
 import java.io.File;
@@ -36,6 +38,15 @@ public class MainController implements Initializable {
     @FXML TextField addNodeText;
     @FXML TextField searchText;
     @FXML TableView searchTable;
+
+    //Relation
+    private ObservableList<SemanticPath> pathData = FXCollections.observableArrayList();
+    @FXML private TableView<SemanticPath> pathList;
+    @FXML private TableColumn<SemanticPath, String> pathNameColumn;
+    @FXML private Label pathName;
+    @FXML private Label pathSummary;
+
+
 
     @FXML
     private void backToLandingAction() throws Exception {
@@ -99,6 +110,16 @@ public class MainController implements Initializable {
         }
     }
 
+    private void showPathDetails (SemanticPath semanticPath) {
+        if (semanticPath == null) {
+            pathName.setText("");
+            pathSummary.setText("");
+        } else {
+            pathName.setText(semanticPath.getName());
+            pathSummary.setText("Falta implementar");
+        }
+    }
+
     public void importDir(String path) {
         System.out.println("Starting graph import...");
         pc.importGraph(path);
@@ -110,6 +131,25 @@ public class MainController implements Initializable {
         System.out.println("Building Graph...");
         graph = new Graph();
         pc = new PersistenceController(graph);
+
+        initializeRelationsTab();
+    }
+
+    private void initializeRelationsTab() {
+        pathNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        pathList.setItems(pathData);
+        pathData.add(new SemanticPath("Prova Numero 1"));
+        pathData.add(new SemanticPath("Prova Numero 2"));
+        pathData.add(new SemanticPath("Prova Numero 3"));
+        showPathDetails(null);
+        pathList.getSelectionModel().selectedItemProperty().addListener(
+                ((observable, oldValue, newValue) -> showPathDetails(newValue))
+        );
+    }
+
+    @FXML private void handleDeletePath() {
+        int i = pathList.getSelectionModel().getSelectedIndex();
+        if (i >= 0) pathData.remove(i);
     }
 
 }

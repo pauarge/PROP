@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private String APP_TITLE = "Cercador Relacional";
+    private static final String APP_TITLE = "Cercador Relacional";
 
     @Override
     public void start(Stage primaryStage) throws Exception {
