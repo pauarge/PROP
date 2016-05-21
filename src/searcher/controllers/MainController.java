@@ -1,9 +1,6 @@
 package searcher.controllers;
 
-import common.domain.Graph;
-import common.domain.GraphException;
-import common.domain.Node;
-import common.domain.NodeType;
+import common.domain.*;
 import common.persistence.PersistenceController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +17,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import searcher.models.TableNode;
 
 import java.awt.*;
 import java.io.File;
@@ -38,7 +36,10 @@ public class MainController implements Initializable {
     @FXML BorderPane borderPane;
     @FXML TabPane mainTabs;
     @FXML ChoiceBox choicesGraphTab;
+    @FXML ChoiceBox choicesSearch;
     @FXML TextField addNodeText;
+    @FXML TextField searchText;
+    @FXML TableView searchTable;
 
     @FXML
     private void backToLandingAction() throws Exception {
@@ -84,11 +85,29 @@ public class MainController implements Initializable {
     @FXML
     private void addNodeAction(){
         NodeType nt = NodeType.valueOf((String) choicesGraphTab.getValue());
+        // TODO: HANDLE NULL nt
         String v = addNodeText.getText();
+        // TODO: CHECK IF V IS EMPTY
         Node node = graph.createNode(nt, v);
         graph.addNode(node);
         System.out.println("Added node " + v);
         addNodeText.clear();
+    }
+
+    @FXML
+    private void searchNodeAction(){
+        NodeType nt = NodeType.valueOf((String) choicesSearch.getValue());
+        // TODO: HANDLE NULL nt
+        String v = searchText.getText();
+        // TODO: CHECK IF V IS EMPTY
+        SimpleSearch ss = new SimpleSearch(graph, nt, v);
+        ss.search();
+        for (GraphSearch.Result r : ss.getResults()) {
+            ObservableList<TableNode> data = searchTable.getItems();
+            data.add(new TableNode(r.from.getId(), (String) choicesSearch.getValue(), r.from.getValue()));
+            System.out.println(r.from.getId() + " " + r.from.getValue());
+        }
+        searchText.clear();
     }
 
     public void importDir(String path) {
