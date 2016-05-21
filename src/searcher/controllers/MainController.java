@@ -1,21 +1,31 @@
 package searcher.controllers;
 
 import common.domain.Graph;
+import common.domain.GraphException;
+import common.domain.Node;
+import common.domain.NodeType;
 import common.persistence.PersistenceController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
+import java.awt.*;
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -24,7 +34,11 @@ public class MainController implements Initializable {
 
     private Graph graph;
     private PersistenceController pc;
+
     @FXML BorderPane borderPane;
+    @FXML TabPane mainTabs;
+    @FXML ChoiceBox choicesGraphTab;
+    @FXML TextField addNodeText;
 
     @FXML
     private void backToLandingAction() throws Exception {
@@ -50,31 +64,37 @@ public class MainController implements Initializable {
         alert.setContentText("Are you ok with this?");
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             stage.close();
         }
     }
 
-    public void exportGraphAction(){
+    @FXML
+    private void exportGraphAction() {
         Stage stage = (Stage) borderPane.getScene().getWindow();
         DirectoryChooser dc = new DirectoryChooser();
         final File selectedDirectory = dc.showDialog(stage);
-        if(selectedDirectory != null) {
+        if (selectedDirectory != null) {
             System.out.println("Starting graph export...");
             pc.exportGraph(selectedDirectory.getAbsolutePath());
             System.out.println("Graph export finished.");
         }
     }
 
-    public void importDir(String path){
+    @FXML
+    private void addNodeAction(){
+        NodeType nt = NodeType.valueOf((String) choicesGraphTab.getValue());
+        String v = addNodeText.getText();
+        Node node = graph.createNode(nt, v);
+        graph.addNode(node);
+        System.out.println("Added node " + v);
+        addNodeText.clear();
+    }
+
+    public void importDir(String path) {
         System.out.println("Starting graph import...");
         pc.importGraph(path);
         System.out.println("Graph import finished.");
-    }
-
-    @FXML
-    private void getTextAndSearch(){
-
     }
 
     @Override

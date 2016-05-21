@@ -1,34 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-            prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="searcher.controllers.MainController" fx:id="borderPane">
+<?import javafx.collections.FXCollections?>
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="searcher.controllers.MainController">
     <top>
         <MenuBar>
             <menus>
                 <Menu mnemonicParsing="false" text="Fitxer">
                     <items>
-                        <MenuItem onAction="#backToLandingAction" mnemonicParsing="false" text="Tornar a l'inici"/>
-                        <SeparatorMenuItem></SeparatorMenuItem>
-                        <MenuItem onAction="#closeWindowAction" mnemonicParsing="false" text="Tancar"/>
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Graf">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Afegir Node"/>
-                        <MenuItem mnemonicParsing="false" text="Exportar Graf"/>
+                        <MenuItem mnemonicParsing="false" onAction="#backToLandingAction" text="Tornar a l'inici"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem mnemonicParsing="false" onAction="#closeWindowAction" text="Tancar"/>
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
     </top>
     <center>
-        <TabPane tabClosingPolicy="UNAVAILABLE">
+        <TabPane fx:id="mainTabs" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Cerca">
                     <content>
@@ -66,6 +61,15 @@
                                                         <Text strokeType="OUTSIDE" strokeWidth="0.0"
                                                               text="Terme a Cercar" GridPane.rowIndex="2"/>
                                                         <ChoiceBox prefWidth="150.0" GridPane.rowIndex="1">
+                                                            <items>
+                                                                <FXCollections fx:factory="observableArrayList">
+                                                                    <String fx:value="AUTHOR"/>
+                                                                    <String fx:value="CONF"/>
+                                                                    <String fx:value="PAPER"/>
+                                                                    <String fx:value="LABEL"/>
+                                                                    <String fx:value="TERM"/>
+                                                                </FXCollections>
+                                                            </items>
                                                         </ChoiceBox>
                                                         <TextField GridPane.rowIndex="3"/>
                                                         <Button mnemonicParsing="false" text="Cercar"
@@ -95,6 +99,29 @@
                 <Tab text="Cerca per Rellevància">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+                    </content>
+                </Tab>
+                <Tab text="Graf">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Button onAction="#exportGraphAction" layoutX="14.0" layoutY="14.0"
+                                        mnemonicParsing="false" text="Exportar Graf"/>
+                                <Button onAction="#addNodeAction" layoutX="175.0" layoutY="102.0" mnemonicParsing="false" text="Afegir Node"/>
+                                <TextField fx:id="addNodeText" layoutX="175.0" layoutY="59.0"/>
+                                <ChoiceBox fx:id="choicesGraphTab" layoutX="175.0" layoutY="14.0" prefWidth="150.0">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                            <String fx:value="AUTHOR"/>
+                                            <String fx:value="CONF"/>
+                                            <String fx:value="PAPER"/>
+                                            <String fx:value="LABEL"/>
+                                            <String fx:value="TERM"/>
+                                        </FXCollections>
+                                    </items>
+                                </ChoiceBox>
+                            </children>
+                        </AnchorPane>
                     </content>
                 </Tab>
                 <Tab text="Relacions">
