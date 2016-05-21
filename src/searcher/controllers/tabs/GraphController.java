@@ -13,6 +13,8 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static searcher.Utils.launchAlert;
+
 
 public class GraphController extends BaseController {
 
@@ -34,10 +36,16 @@ public class GraphController extends BaseController {
 
     @FXML
     private void addNodeAction(){
+        if(choicesGraphTab.getValue() == null){
+            launchAlert((Stage) anchorPane.getScene().getWindow(), "Per fer l'addició, selecciona un tipus de node");
+            return;
+        }
+        if(addNodeText.getText().length() < 1){
+            launchAlert((Stage) anchorPane.getScene().getWindow(), "Per fer l'addició, escriu un valor pel node");
+            return;
+        }
         NodeType nt = NodeType.valueOf((String) choicesGraphTab.getValue());
-        // TODO: HANDLE NULL nt
         String v = addNodeText.getText();
-        // TODO: CHECK IF V IS EMPTY
         Node node = graph.createNode(nt, v);
         graph.addNode(node);
         System.out.println("Added node " + v);
@@ -46,7 +54,7 @@ public class GraphController extends BaseController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("Hello world");
+
     }
 
 }

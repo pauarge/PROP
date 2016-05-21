@@ -46,7 +46,7 @@ public class SearchController extends BaseController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("Hello world");
+
     }
 
 }
