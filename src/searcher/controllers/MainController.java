@@ -6,16 +6,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+import searcher.controllers.tabs.TabSearchController;
 import searcher.models.SemanticPath;
-import searcher.models.TableNode;
 
 import java.io.File;
 import java.net.URL;
@@ -23,21 +23,18 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static searcher.Utils.closeWindow;
-import static searcher.Utils.launchAlert;
 
 
-public class MainController implements Initializable {
+public class MainController extends BaseController {
 
-    private Graph graph;
-    private PersistenceController pc;
-
-    @FXML BorderPane borderPane;
-    @FXML TabPane mainTabs;
-    @FXML ChoiceBox choicesGraphTab;
-    @FXML ChoiceBox choicesSearch;
-    @FXML TextField addNodeText;
-    @FXML TextField searchText;
-    @FXML TableView searchTable;
+    @FXML private BorderPane borderPane;
+    @FXML private TabPane mainTabs;
+    @FXML private ChoiceBox choicesGraphTab;
+    @FXML private TextField addNodeText;
+    @FXML
+    private Parent tabSearch; //embeddedElement
+    @FXML
+    private TabSearchController tabSearchController;
 
     //Relation
     private ObservableList<SemanticPath> pathData = FXCollections.observableArrayList();
@@ -45,7 +42,6 @@ public class MainController implements Initializable {
     @FXML private TableColumn<SemanticPath, String> pathNameColumn;
     @FXML private Label pathName;
     @FXML private Label pathSummary;
-
 
 
     @FXML
@@ -93,23 +89,6 @@ public class MainController implements Initializable {
         addNodeText.clear();
     }
 
-    @FXML
-    private void searchNodeAction(){
-        if(choicesSearch.getValue() == null){
-            launchAlert((Stage) borderPane.getScene().getWindow(), "Per fer la cerca, selecciona un tipus de node");
-            return;
-        }
-        NodeType nt = NodeType.valueOf((String) choicesSearch.getValue());
-        String v = searchText.getText();
-        SimpleSearch ss = new SimpleSearch(graph, nt, v);
-        ss.search();
-        ObservableList<TableNode> data = searchTable.getItems();
-        data.clear();
-        for (GraphSearch.Result r : ss.getResults()) {
-            data.add(new TableNode(r.from.getId(), (String) choicesSearch.getValue(), r.from.getValue()));
-        }
-    }
-
     private void showPathDetails (SemanticPath semanticPath) {
         if (semanticPath == null) {
             pathName.setText("");
@@ -124,15 +103,6 @@ public class MainController implements Initializable {
         System.out.println("Starting graph import...");
         pc.importGraph(path);
         System.out.println("Graph import finished.");
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("Building Graph...");
-        graph = new Graph();
-        pc = new PersistenceController(graph);
-
-        initializeRelationsTab();
     }
 
     private void initializeRelationsTab() {
@@ -150,6 +120,15 @@ public class MainController implements Initializable {
     @FXML private void handleDeletePath() {
         int i = pathList.getSelectionModel().getSelectedIndex();
         if (i >= 0) pathData.remove(i);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("Building Graph...");
+        graph = new Graph();
+        pc = new PersistenceController(graph);
+        tabSearchController.setGraph(graph);
+        initializeRelationsTab();
     }
 
 }
