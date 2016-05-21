@@ -2,7 +2,6 @@ package searcher.controllers;
 
 import common.domain.*;
 import common.persistence.PersistenceController;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,22 +9,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
-import javafx.util.Pair;
 import searcher.models.TableNode;
 
-import java.awt.*;
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+import static searcher.Utils.closeWindow;
 
 
 public class MainController implements Initializable {
@@ -59,15 +54,7 @@ public class MainController implements Initializable {
     @FXML
     private void closeWindowAction() {
         Stage stage = (Stage) borderPane.getScene().getWindow();
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation Dialog");
-        alert.setHeaderText("Estàs segur de tancar el programa?");
-        alert.setContentText("Are you ok with this?");
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-            stage.close();
-        }
+        closeWindow(stage);
     }
 
     @FXML
