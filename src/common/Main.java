@@ -52,7 +52,7 @@ public class Main {
             //aux.add(AP);
             //aux.add(AP);
             RelationStructure rs = new RelationStructure(NodeType.AUTHOR, aux, NodeType.AUTHOR);
-            GraphSearch s = new OriginDestinationSearch(g, rs, g.getNode(NodeType.AUTHOR, 15971), g.getNode(NodeType.AUTHOR, 1399));
+            GraphSearch s = new FreeSearch(g, rs);
             s.search();
             ArrayList<GraphSearch.Result> results = s.getResults();
             for(int i = 0; i < results.size(); ++i) {
