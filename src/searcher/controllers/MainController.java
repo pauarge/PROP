@@ -39,7 +39,6 @@ public class MainController extends BaseController {
     @FXML private Label pathName;
     @FXML private Label pathSummary;
 
-
     @FXML
     private void backToLandingAction() throws Exception {
         Stage stage = (Stage) borderPane.getScene().getWindow();

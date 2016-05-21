@@ -1,23 +1,18 @@
 package searcher.controllers.tabs;
 
-
 import common.domain.*;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import searcher.controllers.BaseController;
-import searcher.models.TableNode;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static searcher.Utils.launchAlert;
 
 public class GraphController extends BaseController {
 

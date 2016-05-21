@@ -43,27 +43,17 @@
             <tabs>
                 <Tab text="Cerca">
                     <content>
-                        <fx:include fx:id="tabSearch" source="tabs/search.fxml"></fx:include>
+                        <fx:include fx:id="tabSearch" source="tabs/search.fxml"/>
                     </content>
                 </Tab>
                 <Tab text="Cerca per Rellevància">
                     <content>
-                        <AnchorPane>
-                            <children>
-                                <SplitPane dividerPositions="0.3" AnchorPane.bottomAnchor="0.0"
-                                           AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                                           AnchorPane.topAnchor="0.0">
-                                    <items>
-
-                                    </items>
-                                </SplitPane>
-                            </children>
-                        </AnchorPane>
+                        <fx:include fx:id="tabRelevance" source="tabs/relevance.fxml"/>
                     </content>
                 </Tab>
                 <Tab text="Graf">
                     <content>
-                        <fx:include fx:id="tabGraph" source="tabs/graph.fxml"></fx:include>
+                        <fx:include fx:id="tabGraph" source="tabs/graph.fxml"/>
                     </content>
                 </Tab>
                 <Tab text="Relacions">
