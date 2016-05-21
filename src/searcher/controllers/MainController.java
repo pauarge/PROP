@@ -89,8 +89,9 @@ public class MainController implements Initializable {
         // TODO: CHECK IF V IS EMPTY
         SimpleSearch ss = new SimpleSearch(graph, nt, v);
         ss.search();
+        ObservableList<TableNode> data = searchTable.getItems();
+        data.clear();
         for (GraphSearch.Result r : ss.getResults()) {
-            ObservableList<TableNode> data = searchTable.getItems();
             data.add(new TableNode(r.from.getId(), (String) choicesSearch.getValue(), r.from.getValue()));
             System.out.println(r.from.getId() + " " + r.from.getValue());
         }
