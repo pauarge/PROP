@@ -21,6 +21,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static searcher.Utils.closeWindow;
+import static searcher.Utils.launchAlert;
 
 
 public class MainController implements Initializable {
@@ -83,19 +84,19 @@ public class MainController implements Initializable {
 
     @FXML
     private void searchNodeAction(){
+        if(choicesSearch.getValue() == null){
+            launchAlert((Stage) borderPane.getScene().getWindow(), "Per fer la cerca, selecciona un tipus de node");
+            return;
+        }
         NodeType nt = NodeType.valueOf((String) choicesSearch.getValue());
-        // TODO: HANDLE NULL nt
         String v = searchText.getText();
-        // TODO: CHECK IF V IS EMPTY
         SimpleSearch ss = new SimpleSearch(graph, nt, v);
         ss.search();
         ObservableList<TableNode> data = searchTable.getItems();
         data.clear();
         for (GraphSearch.Result r : ss.getResults()) {
             data.add(new TableNode(r.from.getId(), (String) choicesSearch.getValue(), r.from.getValue()));
-            System.out.println(r.from.getId() + " " + r.from.getValue());
         }
-        searchText.clear();
     }
 
     public void importDir(String path) {
