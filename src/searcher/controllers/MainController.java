@@ -95,7 +95,6 @@ public class MainController extends BaseController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("Building Graph...");
         graph = new Graph();
         pc = new PersistenceController(graph);
         tabSearchController.setGraph(graph);
