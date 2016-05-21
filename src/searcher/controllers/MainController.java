@@ -10,14 +10,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
-import searcher.controllers.tabs.TabSearchController;
+import searcher.controllers.tabs.GraphController;
+import searcher.controllers.tabs.SearchController;
 import searcher.models.SemanticPath;
 
-import java.io.File;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -29,12 +27,10 @@ public class MainController extends BaseController {
 
     @FXML private BorderPane borderPane;
     @FXML private TabPane mainTabs;
-    @FXML private ChoiceBox choicesGraphTab;
-    @FXML private TextField addNodeText;
-    @FXML
-    private Parent tabSearch; //embeddedElement
-    @FXML
-    private TabSearchController tabSearchController;
+    @FXML private Parent tabSearch;
+    @FXML private SearchController tabSearchController;
+    @FXML private Parent tabGraph;
+    @FXML private GraphController tabGraphController;
 
     //Relation
     private ObservableList<SemanticPath> pathData = FXCollections.observableArrayList();
@@ -63,30 +59,6 @@ public class MainController extends BaseController {
     private void closeWindowAction() {
         Stage stage = (Stage) borderPane.getScene().getWindow();
         closeWindow(stage);
-    }
-
-    @FXML
-    private void exportGraphAction() {
-        Stage stage = (Stage) borderPane.getScene().getWindow();
-        DirectoryChooser dc = new DirectoryChooser();
-        final File selectedDirectory = dc.showDialog(stage);
-        if (selectedDirectory != null) {
-            System.out.println("Starting graph export...");
-            pc.exportGraph(selectedDirectory.getAbsolutePath());
-            System.out.println("Graph export finished.");
-        }
-    }
-
-    @FXML
-    private void addNodeAction(){
-        NodeType nt = NodeType.valueOf((String) choicesGraphTab.getValue());
-        // TODO: HANDLE NULL nt
-        String v = addNodeText.getText();
-        // TODO: CHECK IF V IS EMPTY
-        Node node = graph.createNode(nt, v);
-        graph.addNode(node);
-        System.out.println("Added node " + v);
-        addNodeText.clear();
     }
 
     private void showPathDetails (SemanticPath semanticPath) {
@@ -128,6 +100,7 @@ public class MainController extends BaseController {
         graph = new Graph();
         pc = new PersistenceController(graph);
         tabSearchController.setGraph(graph);
+        tabGraphController.setGraph(graph);
         initializeRelationsTab();
     }
 

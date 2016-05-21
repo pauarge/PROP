@@ -17,7 +17,7 @@
 
 
 <AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="searcher.controllers.tabs.TabSearchController">
+            fx:controller="searcher.controllers.tabs.SearchController">
     <children>
         <SplitPane dividerPositions="0.3" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

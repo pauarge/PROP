@@ -67,26 +67,7 @@
                 </Tab>
                 <Tab text="Graf">
                     <content>
-                        <AnchorPane>
-                            <children>
-                                <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false"
-                                        onAction="#exportGraphAction" text="Exportar Graf"/>
-                                <Button layoutX="175.0" layoutY="102.0" mnemonicParsing="false"
-                                        onAction="#addNodeAction" text="Afegir Node"/>
-                                <TextField fx:id="addNodeText" layoutX="175.0" layoutY="59.0"/>
-                                <ChoiceBox fx:id="choicesGraphTab" layoutX="175.0" layoutY="14.0" prefWidth="150.0">
-                                    <items>
-                                        <FXCollections fx:factory="observableArrayList">
-                                            <String fx:value="AUTHOR"/>
-                                            <String fx:value="CONF"/>
-                                            <String fx:value="PAPER"/>
-                                            <String fx:value="LABEL"/>
-                                            <String fx:value="TERM"/>
-                                        </FXCollections>
-                                    </items>
-                                </ChoiceBox>
-                            </children>
-                        </AnchorPane>
+                        <fx:include fx:id="tabGraph" source="tabs/graph.fxml"></fx:include>
                     </content>
                 </Tab>
                 <Tab text="Relacions">

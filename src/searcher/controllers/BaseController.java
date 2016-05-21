@@ -10,4 +10,8 @@ public abstract class BaseController implements Initializable {
     protected Graph graph;
     protected PersistenceController pc;
 
+    public void setGraph(Graph g){
+        graph = g;
+    }
+
 }
