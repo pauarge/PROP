@@ -1,20 +1,19 @@
 package searcher.controllers;
 
-import common.domain.*;
+import common.domain.Graph;
 import common.persistence.PersistenceController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import searcher.controllers.tabs.GraphController;
+import searcher.controllers.tabs.RelationsController;
 import searcher.controllers.tabs.SearchController;
-import searcher.models.SemanticPath;
 
 import java.net.URL;
 import java.util.Optional;
@@ -31,13 +30,8 @@ public class MainController extends BaseController {
     @FXML private SearchController tabSearchController;
     @FXML private Parent tabGraph;
     @FXML private GraphController tabGraphController;
-
-    //Relation
-    private ObservableList<SemanticPath> pathData = FXCollections.observableArrayList();
-    @FXML private TableView<SemanticPath> pathList;
-    @FXML private TableColumn<SemanticPath, String> pathNameColumn;
-    @FXML private Label pathName;
-    @FXML private Label pathSummary;
+    @FXML private Parent tabRelations;
+    @FXML private RelationsController tabRelationsController;
 
     @FXML
     private void backToLandingAction() throws Exception {
@@ -60,37 +54,10 @@ public class MainController extends BaseController {
         closeWindow(stage);
     }
 
-    private void showPathDetails (SemanticPath semanticPath) {
-        if (semanticPath == null) {
-            pathName.setText("");
-            pathSummary.setText("");
-        } else {
-            pathName.setText(semanticPath.getName());
-            pathSummary.setText("Falta implementar");
-        }
-    }
-
     public void importDir(String path) {
         System.out.println("Starting graph import...");
         pc.importGraph(path);
         System.out.println("Graph import finished.");
-    }
-
-    private void initializeRelationsTab() {
-        pathNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
-        pathList.setItems(pathData);
-        pathData.add(new SemanticPath("Prova Numero 1"));
-        pathData.add(new SemanticPath("Prova Numero 2"));
-        pathData.add(new SemanticPath("Prova Numero 3"));
-        showPathDetails(null);
-        pathList.getSelectionModel().selectedItemProperty().addListener(
-                ((observable, oldValue, newValue) -> showPathDetails(newValue))
-        );
-    }
-
-    @FXML private void handleDeletePath() {
-        int i = pathList.getSelectionModel().getSelectedIndex();
-        if (i >= 0) pathData.remove(i);
     }
 
     @Override
@@ -99,7 +66,7 @@ public class MainController extends BaseController {
         pc = new PersistenceController(graph);
         tabSearchController.setGraph(graph);
         tabGraphController.setGraph(graph);
-        initializeRelationsTab();
+        tabRelationsController.setGraph(graph);
     }
 
 }
