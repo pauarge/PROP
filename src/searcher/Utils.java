@@ -22,7 +22,7 @@ public final class Utils {
         }
     }
 
-    static public void launchAlert(Stage stage, String text){
+    static public void launchAlert(Stage stage, String text) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Alerta");
         alert.setHeaderText(text);
