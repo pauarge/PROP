@@ -48,8 +48,13 @@
                 </Tab>
                 <Tab text="Relacions">
                     <content>
-                        <fx:include fx:id="tabRelations" source="tabs/relations.fxml"/>
+                        <fx:include fx:id="tabRelations" source="tabs/relations.fxml" />
                     </content>
+                </Tab>
+                <Tab text="Terminal">
+                  <content>
+                    <fx:include fx:id="tabTerminal" source="tabs/terminal.fxml"/>
+                  </content>
                 </Tab>
             </tabs>
         </TabPane>

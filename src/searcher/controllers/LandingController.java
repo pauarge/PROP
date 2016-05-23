@@ -49,12 +49,16 @@ public class LandingController {
 
     @FXML
     public void openMain() throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../layouts/main.fxml"));
-        Parent root = (Parent) loader.load();
-        MainController controller = loader.<MainController>getController();
-        Stage stage = (Stage) createGraph.getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../layouts/main.fxml"));
+            Parent root = (Parent) loader.load();
+            MainController controller = loader.<MainController>getController();
+            Stage stage = (Stage) createGraph.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

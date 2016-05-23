@@ -16,6 +16,7 @@ import searcher.controllers.tabs.RelationsController;
 import searcher.controllers.tabs.SearchController;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -32,6 +33,8 @@ public class MainController extends BaseController {
     @FXML private GraphController tabGraphController;
     @FXML private Parent tabRelations;
     @FXML private RelationsController tabRelationsController;
+    @FXML private Parent tabTerminal;
+    @FXML private TuiController tabTerminalController;
 
     @FXML
     private void backToLandingAction() throws Exception {
@@ -64,9 +67,15 @@ public class MainController extends BaseController {
     public void initialize(URL location, ResourceBundle resources) {
         graph = new Graph();
         pc = new PersistenceController(graph);
+        semanticPathMap = new HashMap<>();
+
         tabSearchController.setGraph(graph);
         tabGraphController.setGraph(graph);
         tabRelationsController.setGraph(graph);
+
+        tabTerminalController.setPc(pc);
+
+        tabTerminalController.setSemanticPathMap(semanticPathMap);
     }
 
 }

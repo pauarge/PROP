@@ -11,6 +11,13 @@ public class SemanticPath {
     private NodeType finalType;
     private RelationStructure path;
 
+    public SemanticPath(String name, NodeType initialType, NodeType finalType, RelationStructure path) {
+        this(name);
+        this.initialType = initialType;
+        this.finalType = finalType;
+        this.path = path;
+    }
+
     public SemanticPath(String name) {
         this.name = new SimpleStringProperty(name);
         initialType = null;
@@ -28,5 +35,31 @@ public class SemanticPath {
 
     public void setName(String name) {
         this.name.set(name);
+    }
+
+    public NodeType getInitialType() {
+        return initialType;
+    }
+
+    public NodeType getFinalType() {
+        return finalType;
+    }
+
+    public RelationStructure getPath() {
+        return path;
+    }
+
+    public NodeType[] toTypeArray() {
+        NodeType[] ret = new NodeType[this.path.size()+1];
+        NodeType prev = ret[0] = this.initialType;
+        for (int i = 0; i < this.path.size(); ++i) {
+            if (this.path.get(i).getNodeTypeA() == prev) {
+                prev = this.path.get(i).getNodeTypeB();
+            } else {
+                prev = this.path.get(i).getNodeTypeA();
+            }
+            ret[i+1] = prev;
+        }
+        return ret;
     }
 }

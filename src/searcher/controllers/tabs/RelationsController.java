@@ -46,4 +46,8 @@ public class RelationsController extends BaseController {
         int i = pathList.getSelectionModel().getSelectedIndex();
         if (i >= 0) pathData.remove(i);
     }
+
+    @FXML private void handleNewPath() {
+        System.err.println("new path");
+    }
 }
