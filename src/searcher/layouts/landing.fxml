@@ -23,9 +23,6 @@
                 text="Carregar sessió"
                 onAction="#openDirSelector"/>
     </HBox>
-    <HBox GridPane.columnIndex="7" GridPane.rowIndex="4">
-        <Button text="Executar Shell"></Button>
-    </HBox>
     <HBox GridPane.columnIndex="5" GridPane.rowIndex="6">
         <Button fx:id="closeButton"
                 text="Sortir"
