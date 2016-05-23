@@ -15,7 +15,7 @@
             <menus>
                 <Menu text="Fitxer">
                     <items>
-                  <CheckMenuItem fx:id="terminalToggle" mnemonicParsing="false" onAction="#handleTerminalToggle" selected="true" text="Terminal" />
+                  <CheckMenuItem fx:id="terminalToggle" mnemonicParsing="false" onAction="#handleTerminalToggle" text="Terminal" />
                         <MenuItem mnemonicParsing="false" onAction="#backToLandingAction" text="Tornar a l'inici" />
                         <SeparatorMenuItem />
                         <MenuItem mnemonicParsing="false" onAction="#closeWindowAction" text="Tancar" />

@@ -54,8 +54,14 @@ public class MainController extends BaseController {
 
     @FXML
     private void handleTerminalToggle() {
-        boolean status = terminalToggle.isSelected();
-        //terminalSelector.getGraphic().setVisible(status);
+        boolean visible = terminalToggle.isSelected();
+        if (visible) {
+            if (!mainTabs.getTabs().contains(terminalSelector)) {
+                mainTabs.getTabs().add(terminalSelector);
+            }
+        } else {
+            mainTabs.getTabs().remove(terminalSelector);
+        }
     }
 
     @FXML
@@ -83,6 +89,7 @@ public class MainController extends BaseController {
         tabTerminalController.setPc(pc);
 
         tabTerminalController.setSemanticPathMap(semanticPathMap);
+        handleTerminalToggle();
     }
 
 }
