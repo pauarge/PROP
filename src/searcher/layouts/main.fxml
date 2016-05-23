@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="borderPane" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="searcher.controllers.MainController">
+<BorderPane fx:id="borderPane" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="searcher.controllers.MainController">
     <top>
         <MenuBar>
             <menus>
                 <Menu text="Fitxer">
                     <items>
+                  <CheckMenuItem fx:id="terminalToggle" mnemonicParsing="false" onAction="#handleTerminalToggle" selected="true" text="Terminal" />
                         <MenuItem mnemonicParsing="false" onAction="#backToLandingAction" text="Tornar a l'inici" />
                         <SeparatorMenuItem />
                         <MenuItem mnemonicParsing="false" onAction="#closeWindowAction" text="Tancar" />
@@ -51,9 +52,9 @@
                         <fx:include fx:id="tabRelations" source="tabs/relations.fxml" />
                     </content>
                 </Tab>
-                <Tab text="Terminal">
+                <Tab fx:id="terminalSelector" text="Terminal">
                   <content>
-                    <fx:include fx:id="tabTerminal" source="tabs/terminal.fxml"/>
+                    <fx:include fx:id="tabTerminal" source="tabs/terminal.fxml" />
                   </content>
                 </Tab>
             </tabs>

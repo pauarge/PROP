@@ -6,9 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import searcher.controllers.tabs.GraphController;
@@ -36,6 +34,9 @@ public class MainController extends BaseController {
     @FXML private Parent tabTerminal;
     @FXML private TuiController tabTerminalController;
 
+    @FXML private CheckMenuItem terminalToggle;
+    @FXML private Tab terminalSelector;
+
     @FXML
     private void backToLandingAction() throws Exception {
         Stage stage = (Stage) borderPane.getScene().getWindow();
@@ -49,6 +50,12 @@ public class MainController extends BaseController {
             stage.setScene(new Scene(root));
             stage.show();
         }
+    }
+
+    @FXML
+    private void handleTerminalToggle() {
+        boolean status = terminalToggle.isSelected();
+        //terminalSelector.getGraphic().setVisible(status);
     }
 
     @FXML
