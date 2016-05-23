@@ -35,6 +35,7 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0"/>
                                 <RowConstraints minHeight="10.0" prefHeight="30.0"/>
                                 <RowConstraints minHeight="10.0" prefHeight="30.0"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0"/>
                             </rowConstraints>
                             <children>
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Relació semàntica"/>
@@ -45,11 +46,15 @@
                                         </FXCollections>
                                     </items>
                                 </ChoiceBox>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Terme a Cercar"
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="ID del node d'inici"
                                       GridPane.rowIndex="2"/>
-                                <TextField fx:id="relevanceText" GridPane.rowIndex="3"/>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="(en blanc per a cerca lliure)"
+                                      GridPane.rowIndex="3"/>
+                                <TextField fx:id="relevanceText" GridPane.rowIndex="4"/>
                                 <Button mnemonicParsing="false" onAction="#relevanceSearchAction" text="Cercar"
-                                        GridPane.rowIndex="4"/>
+                                        GridPane.rowIndex="5"/>
                             </children>
                         </GridPane>
                     </children>

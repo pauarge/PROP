@@ -78,6 +78,8 @@
                                         <PropertyValueFactory property="value"/>
                                     </cellValueFactory>
                                 </TableColumn>
+                                <TableColumn text="Accions">
+                                </TableColumn>
                             </columns>
                         </TableView>
                     </children>
