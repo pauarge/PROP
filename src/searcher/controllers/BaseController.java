@@ -9,9 +9,9 @@ import searcher.models.SemanticPath;
 
 public abstract class BaseController implements Initializable {
 
-    protected Graph graph;
-    protected PersistenceController pc;
-    protected ObservableList<SemanticPath> semanticPaths;
+    protected static Graph graph;
+    protected static PersistenceController pc;
+    protected static ObservableList<SemanticPath> semanticPaths;
 
     public void setGraph(Graph g) {
         graph = g;

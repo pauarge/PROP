@@ -103,27 +103,14 @@ public class MainController extends BaseController {
         System.out.println("Graph import finished.");
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        //Iniciatlitzacions
+    public MainController() {
         graph = new Graph();
         pc = new PersistenceController(graph);
         semanticPaths = FXCollections.observableArrayList();
+    }
 
-        //Configuracio Search
-        tabSearchController.setGraph(graph);
-
-        //Configuracio Graf
-        tabGraphController.setGraph(graph);
-
-        //Configuracio Relacions
-        tabRelationsController.setGraph(graph);
-        tabRelationsController.setSemanticPaths(semanticPaths);
-
-        //Configuracio Terminal
-        tabTerminalController.setGraph(graph);
-        tabTerminalController.setPc(pc);
-        tabTerminalController.setSemanticPaths(semanticPaths);
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         handleTerminalToggle();
     }
 
