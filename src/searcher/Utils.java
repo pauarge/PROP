@@ -29,10 +29,28 @@ public final class Utils {
         alert.showAndWait();
     }
 
-    public static NodeType getType(String type) {
+    public static String getName(NodeType type) {
         if (type == null) return null;
-        type = removePlural(type);
         switch (type) {
+            case AUTHOR:
+                return "Autor";
+            case PAPER:
+                return "Paper";
+            case CONF:
+                return "Conferència";
+            case TERM:
+                return "Terme";
+            case LABEL:
+                return "Etiqueta";
+            default:
+                return null;
+        }
+    }
+
+    public static NodeType getType(String name) {
+        if (name == null) return null;
+        name = removePlural(name).toLowerCase();
+        switch (name) {
             case "author":
                 return NodeType.AUTHOR;
             case "paper":
@@ -97,6 +115,15 @@ public final class Utils {
             if (b == NodeType.TERM) return new Relation(b,a,"TermPaper",2);
         }
         return null;
+    }
+
+    public static String convertToText(NodeType[] nodeTypes) {
+        String path = "";
+        if (nodeTypes.length == 0) return path;
+        for (NodeType nt : nodeTypes) {
+            path = path.concat(getName(nt) + " - ");
+        }
+        return path.substring(0, path.length()-3);
     }
 
 }

@@ -6,19 +6,22 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="searcher.controllers.tabs.RelationsController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="searcher.controllers.tabs.RelationsController">
    <children>
-      <SplitPane dividerPositions="0.29797979797979796" prefHeight="538.0" prefWidth="800.0">
+      <SplitPane dividerPositions="0.29797979797979796" prefHeight="538.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <items>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                   <children>
                       <TableView fx:id="pathList" layoutX="34.0" layoutY="23.0" prefHeight="536.0" prefWidth="234.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <placeholder>
+                              <Label text="No hi ha relacions" />
+                          </placeholder>
                           <columns>
                               <TableColumn fx:id="pathNameColumn" prefWidth="75.0" text="Relacions" />
                           </columns>
@@ -30,7 +33,7 @@
               </AnchorPane>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                   <children>
-                      <GridPane layoutX="14.0" layoutY="14.0" prefHeight="90.0" prefWidth="528.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                      <GridPane layoutX="14.0" layoutY="14.0" prefHeight="70.0" prefWidth="528.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
                           <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -38,21 +41,40 @@
                           <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                           <children>
                               <Label text="Cami:" GridPane.rowIndex="1" />
                               <Label text="Nom:" />
-                              <Label fx:id="pathSummary" text="dades cami" GridPane.rowIndex="2" />
                               <Label fx:id="pathName" text="dades nom" GridPane.columnIndex="1" />
+                        <TextField fx:id="addNameField" visible="false" GridPane.columnIndex="1" />
                           </children>
                       </GridPane>
                       <ButtonBar layoutX="342.0" layoutY="482.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
                           <buttons>
-                              <Button mnemonicParsing="false" onAction="#handleDeletePath" text="Esborra" />
-                              <Button mnemonicParsing="false" onAction="#handleNewPath" text="Nou" />
+                              <Button fx:id="buttonBotLeft" mnemonicParsing="false" text="Esborra" />
+                              <Button fx:id="buttonBotRight" mnemonicParsing="false" text="Nou" />
                           </buttons>
                       </ButtonBar>
+                  <GridPane fx:id="pathBuildingButtons" alignment="CENTER" layoutX="128.0" layoutY="238.0" visible="false">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button fx:id="buttonAuthor" mnemonicParsing="false" prefWidth="89.0" text="Autor" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+                        <Button fx:id="buttonPaper" mnemonicParsing="false" prefWidth="89.0" text="Paper" GridPane.columnIndex="1" />
+                        <Button fx:id="buttonConf" mnemonicParsing="false" prefWidth="89.0" text="Conf." GridPane.columnIndex="2" />
+                        <Button fx:id="buttonTerm" mnemonicParsing="false" prefWidth="89.0" text="Terme" GridPane.rowIndex="1" />
+                        <Button fx:id="buttonClear" mnemonicParsing="false" prefWidth="89.0" text="NETEJA" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Button fx:id="buttonLabel" mnemonicParsing="false" prefWidth="89.0" text="Etiqueta" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
+                        <Label fx:id="pathSummary" layoutX="14.0" layoutY="92.0" text="dades cami" />
                   </children>
               </AnchorPane>
           </items>

@@ -25,6 +25,13 @@ public class SemanticPath {
         path = null;
     }
 
+    public SemanticPath(String name, NodeType[] path) {
+        this.name = new SimpleStringProperty(name);
+        this.initialType = path[0];
+        this.finalType = path[path.length-1];
+        this.path = null;
+    }
+
     public String getName() {
         return name.get();
     }
