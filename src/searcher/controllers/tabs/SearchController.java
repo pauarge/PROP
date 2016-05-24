@@ -1,13 +1,12 @@
 package searcher.controllers.tabs;
 
-
-import common.domain.Graph;
 import common.domain.GraphSearch;
 import common.domain.NodeType;
 import common.domain.SimpleSearch;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -20,6 +19,7 @@ import java.util.ResourceBundle;
 
 import static searcher.Utils.launchAlert;
 
+
 public class SearchController extends BaseController {
 
     @FXML ChoiceBox choicesSearch;
@@ -28,8 +28,8 @@ public class SearchController extends BaseController {
     @FXML AnchorPane anchorPane;
 
     @FXML
-    private void searchNodeAction(){
-        if(choicesSearch.getValue() == null){
+    private void searchNodeAction() {
+        if (choicesSearch.getValue() == null) {
             launchAlert((Stage) anchorPane.getScene().getWindow(), "Per fer la cerca, selecciona un tipus de node");
             return;
         }
@@ -47,6 +47,16 @@ public class SearchController extends BaseController {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        searchTable.setRowFactory(tv -> {
+            TableRow<TableNode> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    TableNode rowData = row.getItem();
+                    System.out.println("Clicked on node " + rowData.getId() + " with type " + rowData.getType());
+                }
+            });
+            return row;
+        });
     }
 
 }

@@ -63,22 +63,20 @@
                         <TableView fx:id="searchTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <columns>
-                                <TableColumn text="id">
+                                <TableColumn prefWidth="200.0" text="id">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="id"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn text="Tipus">
+                                <TableColumn prefWidth="75.0" text="Tipus">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="type"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn text="Valor">
+                                <TableColumn prefWidth="75.0" text="Valor">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="value"/>
                                     </cellValueFactory>
-                                </TableColumn>
-                                <TableColumn text="Accions">
                                 </TableColumn>
                             </columns>
                         </TableView>

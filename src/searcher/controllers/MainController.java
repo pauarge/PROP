@@ -13,6 +13,7 @@ import searcher.controllers.tabs.GraphController;
 import searcher.controllers.tabs.RelationsController;
 import searcher.controllers.tabs.SearchController;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Optional;
@@ -23,19 +24,31 @@ import static searcher.Utils.closeWindow;
 
 public class MainController extends BaseController {
 
-    @FXML private BorderPane borderPane;
-    @FXML private TabPane mainTabs;
-    @FXML private Parent tabSearch;
-    @FXML private SearchController tabSearchController;
-    @FXML private Parent tabGraph;
-    @FXML private GraphController tabGraphController;
-    @FXML private Parent tabRelations;
-    @FXML private RelationsController tabRelationsController;
-    @FXML private Parent tabTerminal;
-    @FXML private TuiController tabTerminalController;
+    @FXML
+    private BorderPane borderPane;
+    @FXML
+    private TabPane mainTabs;
+    @FXML
+    private Parent tabSearch;
+    @FXML
+    private SearchController tabSearchController;
+    @FXML
+    private Parent tabGraph;
+    @FXML
+    private GraphController tabGraphController;
+    @FXML
+    private Parent tabRelations;
+    @FXML
+    private RelationsController tabRelationsController;
+    @FXML
+    private Parent tabTerminal;
+    @FXML
+    private TuiController tabTerminalController;
 
-    @FXML private CheckMenuItem terminalToggle;
-    @FXML private Tab terminalSelector;
+    @FXML
+    private CheckMenuItem terminalToggle;
+    @FXML
+    private Tab terminalSelector;
 
     @FXML
     private void backToLandingAction() throws Exception {
@@ -62,6 +75,11 @@ public class MainController extends BaseController {
     private void closeWindowAction() {
         Stage stage = (Stage) borderPane.getScene().getWindow();
         closeWindow(stage);
+    }
+
+    @FXML
+    private void launchHelpWindow() {
+
     }
 
     public void importDir(String path) {

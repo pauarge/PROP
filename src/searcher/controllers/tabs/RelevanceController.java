@@ -10,10 +10,11 @@ import java.util.ResourceBundle;
 
 public class RelevanceController extends BaseController {
 
-    @FXML private TextField relevanceText;
+    @FXML
+    private TextField relevanceText;
 
     @FXML
-    private void relevanceSearchAction(){
+    private void relevanceSearchAction() {
 
     }
 

@@ -26,15 +26,18 @@ public class TuiController extends BaseController {
 
     private boolean readyToQuit = false;
 
-    @FXML private TextArea console;
-    @FXML private TextField input;
+    @FXML
+    private TextArea console;
+    @FXML
+    private TextField input;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         console.setText("");
     }
 
-    @FXML private void handleInput() {
+    @FXML
+    private void handleInput() {
         String line = input.getText();
         input.clear();
         if (line.equals("clear")) {
@@ -109,7 +112,7 @@ public class TuiController extends BaseController {
 
             NodeType nta = Utils.getType(currentType);
             NodeType ntb = Utils.getType(nextType);
-            Relation r = Utils.getDefaultRelation(nta,ntb);
+            Relation r = Utils.getDefaultRelation(nta, ntb);
             alr.add(r);
 
             currentType = nextType;
@@ -241,7 +244,7 @@ public class TuiController extends BaseController {
 
     private String printPaths() {
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<String,SemanticPath> e : semanticPathMap.entrySet()) {
+        for (Map.Entry<String, SemanticPath> e : semanticPathMap.entrySet()) {
             sb.append(e.getKey());
             sb.append(":   ");
 
@@ -360,7 +363,7 @@ public class TuiController extends BaseController {
 
         graphSearch.search();
         StringBuilder sb = new StringBuilder();
-        for (GraphSearch.Result r: graphSearch.getResults()) {
+        for (GraphSearch.Result r : graphSearch.getResults()) {
             sb.append("From: ");
             sb.append(r.from.getValue());
             sb.append("\t\t\tTo: ");
