@@ -10,7 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import searcher.controllers.tabs.GraphController;
+import searcher.controllers.tabs.GraphManController;
 import searcher.controllers.tabs.RelationsController;
 import searcher.controllers.tabs.SearchController;
 
@@ -33,9 +33,9 @@ public class MainController extends BaseController {
     @FXML
     private SearchController tabSearchController;
     @FXML
-    private Parent tabGraph;
+    private Parent tabGraphMan;
     @FXML
-    private GraphController tabGraphController;
+    private GraphManController tabGraphManController;
     @FXML
     private Parent tabRelations;
     @FXML

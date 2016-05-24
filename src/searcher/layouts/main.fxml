@@ -44,7 +44,7 @@
                 </Tab>
                 <Tab text="Graf">
                     <content>
-                        <fx:include fx:id="tabGraph" source="tabs/graph.fxml" />
+                        <fx:include fx:id="tabGraphMan" source="tabs/graph.fxml" />
                     </content>
                 </Tab>
                 <Tab text="Relacions">
