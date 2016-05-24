@@ -25,6 +25,10 @@ public class TableNode {
         return id.get();
     }
 
+    public int getNumericId() {
+        return Integer.parseInt(id.get());
+    }
+
     public void setId(String fName) {
         id.set(fName);
     }

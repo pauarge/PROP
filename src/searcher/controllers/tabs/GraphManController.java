@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 import static searcher.Utils.launchAlert;
 
 
-public class GraphController extends BaseController {
+public class GraphManController extends BaseController {
 
     @FXML
     ChoiceBox choicesGraphTab;

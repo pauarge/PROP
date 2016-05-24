@@ -11,7 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import searcher.controllers.BaseController;
+import searcher.controllers.*;
 import searcher.models.TableNode;
 
 import java.net.URL;
@@ -53,6 +53,8 @@ public class SearchController extends BaseController {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     TableNode rowData = row.getItem();
                     System.out.println("Clicked on node " + rowData.getId() + " with type " + rowData.getType());
+                    GraphController gc = new GraphController(graph);
+                    gc.execute(rowData.getNumericId(), rowData.getValue(), rowData.getType(), 2);
                 }
             });
             return row;

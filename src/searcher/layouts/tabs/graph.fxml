@@ -9,7 +9,7 @@
 
 
 <AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="searcher.controllers.tabs.GraphController">
+            fx:controller="searcher.controllers.tabs.GraphManController">
     <children>
         <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false"
                 onAction="#exportGraphAction" text="Exportar Graf"/>
