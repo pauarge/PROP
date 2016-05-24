@@ -37,7 +37,7 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0"/>
                             </rowConstraints>
                             <children>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tipus de Relació"/>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tipus de Node"/>
                                 <ChoiceBox fx:id="choicesSearch" prefWidth="150.0" GridPane.rowIndex="1">
                                     <items>
                                         <FXCollections fx:factory="observableArrayList">

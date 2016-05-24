@@ -52,7 +52,6 @@ public class SearchController extends BaseController {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     TableNode rowData = row.getItem();
-                    System.out.println("Clicked on node " + rowData.getId() + " with type " + rowData.getType());
                     GraphController gc = new GraphController(graph);
                     gc.execute(rowData.getNumericId(), rowData.getValue(), rowData.getType(), 2);
                 }
