@@ -63,17 +63,17 @@
                         <TableView fx:id="searchTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <columns>
-                                <TableColumn prefWidth="200.0" text="id">
+                                <TableColumn text="id">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="id"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn prefWidth="75.0" text="Tipus">
+                                <TableColumn text="Tipus">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="type"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn prefWidth="75.0" text="Valor">
+                                <TableColumn text="Valor">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="value"/>
                                     </cellValueFactory>
