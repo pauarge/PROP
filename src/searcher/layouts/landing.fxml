@@ -7,25 +7,25 @@
 <GridPane alignment="center" hgap="11" minHeight="400" minWidth="480" vgap="10" xmlns="http://javafx.com/javafx/8"
           xmlns:fx="http://javafx.com/fxml/1" fx:controller="searcher.controllers.LandingController">
     <children>
-        <Text style=" -fx-font-size: 30; -fx-tile-alignment: center" text="CERCA RELACIONAL" GridPane.columnIndex="0"
+        <Text style=" -fx-font-size: 30; -fx-tile-alignment: center" text="CERCADOR RELACIONAL" GridPane.columnIndex="0"
               GridPane.columnSpan="11" GridPane.halignment="CENTER" GridPane.rowIndex="1"/>
         <HBox GridPane.columnIndex="4" GridPane.rowIndex="4">
             <children>
                 <Button fx:id="createGraph" onAction="#openMain" prefWidth="151"
-                        style="-fx-background-color: whitesmoke; -fx-cursor: hand" text="NOVA SESSIÓ"/>
+                        style="-fx-background-color: whitesmoke;" text="NOVA SESSIÓ"/>
             </children>
         </HBox>
 
         <HBox GridPane.columnIndex="5" GridPane.rowIndex="4">
             <children>
                 <Button fx:id="importGraph" onAction="#openDirSelector" prefHeight="27.0" prefWidth="151.0"
-                        style="-fx-background-color: whitesmoke; -fx-cursor: hand " text="CARREGAR SESSIÓ"/>
+                        style="-fx-background-color: whitesmoke;" text="CARREGAR SESSIÓ"/>
             </children>
         </HBox>
         <HBox GridPane.columnIndex="6" GridPane.rowIndex="4">
             <children>
                 <Button fx:id="closeButton" onAction="#closeButtonAction" prefHeight="24.0" prefWidth="151.0"
-                        style="-fx-background-color: whitesmoke; -fx-cursor:hand" text="SORTIR"
+                        style="-fx-background-color: whitesmoke;" text="SORTIR"
                         textOverrun="LEADING_WORD_ELLIPSIS"/>
             </children>
         </HBox>
@@ -36,7 +36,7 @@
         <HBox prefHeight="35" prefWidth="563.0" GridPane.columnIndex="0" GridPane.columnSpan="11"
               GridPane.rowIndex="3"/>
         <Label prefHeight="25" style="-fx-text-fill: rgba(0, 0, 0, 0.54); -fx-title-alignment: center;"
-               text="NOM,ACLARACIO,NOMS" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.columnSpan="11"
+               text="NOM, ACLARACIO, NOMS" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.columnSpan="11"
                GridPane.halignment="center" GridPane.rowIndex="11"/>
     </children>
     <columnConstraints>
@@ -45,10 +45,7 @@
         <ColumnConstraints/>
         <ColumnConstraints/>
         <ColumnConstraints/>
-        <ColumnConstraints/>
-        <ColumnConstraints/>
         <ColumnConstraints halignment="RIGHT"/>
-        <ColumnConstraints/>
         <ColumnConstraints/>
         <ColumnConstraints/>
         <ColumnConstraints/>
