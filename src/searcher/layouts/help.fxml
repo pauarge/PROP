@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane fx:controller="searcher.controllers.HelpController"
+<GridPane
           xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" alignment="center" hgap="11" vgap="10">
     <Text text="Ajuda"
           GridPane.columnIndex="0" GridPane.rowIndex="1"

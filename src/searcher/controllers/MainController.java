@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import searcher.controllers.tabs.GraphController;
 import searcher.controllers.tabs.RelationsController;
@@ -79,7 +80,16 @@ public class MainController extends BaseController {
 
     @FXML
     private void launchHelpWindow() {
-
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("../layouts/help.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Stage secondStage = new Stage();
+        secondStage.setTitle("Finestra d'ajuda");
+        secondStage.setScene(new Scene(root));
+        secondStage.show();
     }
 
     public void importDir(String path) {
