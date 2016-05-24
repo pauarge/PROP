@@ -50,7 +50,7 @@ public class SemanticPath {
     }
 
     public NodeType[] toTypeArray() {
-        NodeType[] ret = new NodeType[this.path.size()+1];
+        NodeType[] ret = new NodeType[this.path.size() + 1];
         NodeType prev = ret[0] = this.initialType;
         for (int i = 0; i < this.path.size(); ++i) {
             if (this.path.get(i).getNodeTypeA() == prev) {
@@ -58,7 +58,7 @@ public class SemanticPath {
             } else {
                 prev = this.path.get(i).getNodeTypeA();
             }
-            ret[i+1] = prev;
+            ret[i + 1] = prev;
         }
         return ret;
     }

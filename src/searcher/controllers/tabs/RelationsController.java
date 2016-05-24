@@ -14,10 +14,14 @@ import java.util.ResourceBundle;
 
 public class RelationsController extends BaseController {
     private ObservableList<SemanticPath> pathData = FXCollections.observableArrayList();
-    @FXML private TableView<SemanticPath> pathList;
-    @FXML private TableColumn<SemanticPath, String> pathNameColumn;
-    @FXML private Label pathName;
-    @FXML private Label pathSummary;
+    @FXML
+    private TableView<SemanticPath> pathList;
+    @FXML
+    private TableColumn<SemanticPath, String> pathNameColumn;
+    @FXML
+    private Label pathName;
+    @FXML
+    private Label pathSummary;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -32,7 +36,7 @@ public class RelationsController extends BaseController {
         );
     }
 
-    private void showPathDetails (SemanticPath semanticPath) {
+    private void showPathDetails(SemanticPath semanticPath) {
         if (semanticPath == null) {
             pathName.setText("");
             pathSummary.setText("");
@@ -42,12 +46,14 @@ public class RelationsController extends BaseController {
         }
     }
 
-    @FXML private void handleDeletePath() {
+    @FXML
+    private void handleDeletePath() {
         int i = pathList.getSelectionModel().getSelectedIndex();
         if (i >= 0) pathData.remove(i);
     }
 
-    @FXML private void handleNewPath() {
+    @FXML
+    private void handleNewPath() {
         System.err.println("new path");
     }
 }

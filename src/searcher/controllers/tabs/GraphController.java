@@ -18,9 +18,12 @@ import static searcher.Utils.launchAlert;
 
 public class GraphController extends BaseController {
 
-    @FXML ChoiceBox choicesGraphTab;
-    @FXML TextField addNodeText;
-    @FXML AnchorPane anchorPane;
+    @FXML
+    ChoiceBox choicesGraphTab;
+    @FXML
+    TextField addNodeText;
+    @FXML
+    AnchorPane anchorPane;
 
     @FXML
     private void exportGraphAction() {
@@ -35,12 +38,12 @@ public class GraphController extends BaseController {
     }
 
     @FXML
-    private void addNodeAction(){
-        if(choicesGraphTab.getValue() == null){
+    private void addNodeAction() {
+        if (choicesGraphTab.getValue() == null) {
             launchAlert((Stage) anchorPane.getScene().getWindow(), "Per fer l'addició, selecciona un tipus de node");
             return;
         }
-        if(addNodeText.getText().length() < 1){
+        if (addNodeText.getText().length() < 1) {
             launchAlert((Stage) anchorPane.getScene().getWindow(), "Per fer l'addició, escriu un valor pel node");
             return;
         }

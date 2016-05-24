@@ -14,7 +14,7 @@ public abstract class BaseController implements Initializable {
     protected PersistenceController pc;
     protected HashMap<String, SemanticPath> semanticPathMap;
 
-    public void setGraph(Graph g){
+    public void setGraph(Graph g) {
         graph = g;
     }
 

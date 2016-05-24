@@ -16,22 +16,25 @@ import static searcher.Utils.closeWindow;
 
 public class LandingController {
 
-    @FXML private Button closeButton;
-    @FXML private Button importGraph;
-    @FXML private Button createGraph;
+    @FXML
+    private Button closeButton;
+    @FXML
+    private Button importGraph;
+    @FXML
+    private Button createGraph;
 
     @FXML
-    private void closeButtonAction(){
+    private void closeButtonAction() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         closeWindow(stage);
     }
 
     @FXML
-    private void openDirSelector(){
+    private void openDirSelector() {
         Stage stage = (Stage) importGraph.getScene().getWindow();
         DirectoryChooser dc = new DirectoryChooser();
         final File selectedDirectory = dc.showDialog(stage);
-        if(selectedDirectory != null){
+        if (selectedDirectory != null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../layouts/main.fxml"));
             Parent root = null;
             try {
