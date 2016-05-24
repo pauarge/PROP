@@ -2,13 +2,13 @@ package searcher.controllers;
 
 import common.domain.Graph;
 import common.persistence.PersistenceController;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import searcher.controllers.tabs.GraphController;
 import searcher.controllers.tabs.RelationsController;
@@ -16,7 +16,6 @@ import searcher.controllers.tabs.SearchController;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -106,17 +105,25 @@ public class MainController extends BaseController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //Iniciatlitzacions
         graph = new Graph();
         pc = new PersistenceController(graph);
-        semanticPathMap = new HashMap<>();
+        semanticPaths = FXCollections.observableArrayList();
 
+        //Configuracio Search
         tabSearchController.setGraph(graph);
+
+        //Configuracio Graf
         tabGraphController.setGraph(graph);
+
+        //Configuracio Relacions
         tabRelationsController.setGraph(graph);
+        tabRelationsController.setSemanticPaths(semanticPaths);
 
+        //Configuracio Terminal
+        tabTerminalController.setGraph(graph);
         tabTerminalController.setPc(pc);
-
-        tabTerminalController.setSemanticPathMap(semanticPathMap);
+        tabTerminalController.setSemanticPaths(semanticPaths);
         handleTerminalToggle();
     }
 

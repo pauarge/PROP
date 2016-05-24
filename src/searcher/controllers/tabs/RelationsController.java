@@ -1,7 +1,5 @@
 package searcher.controllers.tabs;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -13,7 +11,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class RelationsController extends BaseController {
-    private ObservableList<SemanticPath> pathData = FXCollections.observableArrayList();
     @FXML
     private TableView<SemanticPath> pathList;
     @FXML
@@ -26,10 +23,10 @@ public class RelationsController extends BaseController {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         pathNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
-        pathList.setItems(pathData);
-        pathData.add(new SemanticPath("Prova Numero 1"));
-        pathData.add(new SemanticPath("Prova Numero 2"));
-        pathData.add(new SemanticPath("Prova Numero 3"));
+        pathList.setItems(semanticPaths);
+        semanticPaths.add(new SemanticPath("Prova Numero 1"));
+        semanticPaths.add(new SemanticPath("Prova Numero 2"));
+        semanticPaths.add(new SemanticPath("Prova Numero 3"));
         showPathDetails(null);
         pathList.getSelectionModel().selectedItemProperty().addListener(
                 ((observable, oldValue, newValue) -> showPathDetails(newValue))
@@ -49,7 +46,7 @@ public class RelationsController extends BaseController {
     @FXML
     private void handleDeletePath() {
         int i = pathList.getSelectionModel().getSelectedIndex();
-        if (i >= 0) pathData.remove(i);
+        if (i >= 0) semanticPaths.remove(i);
     }
 
     @FXML

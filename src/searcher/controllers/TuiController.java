@@ -1,6 +1,7 @@
 package searcher.controllers;
 
 import common.domain.*;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -9,7 +10,6 @@ import searcher.models.SemanticPath;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 
@@ -120,7 +120,7 @@ public class TuiController extends BaseController {
 
         try {
             RelationStructure rs = new RelationStructure(firstType, alr, Utils.getType(currentType));
-            semanticPathMap.put(name, new SemanticPath(name, firstType, Utils.getType(currentType), rs));
+            semanticPaths.add(new SemanticPath(name, firstType, Utils.getType(currentType), rs));
             return "Cami semantic afegit correctament.";
         } catch (Exception e) {
             e.printStackTrace();
@@ -244,11 +244,11 @@ public class TuiController extends BaseController {
 
     private String printPaths() {
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<String, SemanticPath> e : semanticPathMap.entrySet()) {
-            sb.append(e.getKey());
+        for (SemanticPath path : semanticPaths) {
+            sb.append(path);
             sb.append(":   ");
 
-            for (Relation r : e.getValue().getPath()) {
+            for (Relation r : path.getPath()) {
                 sb.append(r.toString());
                 sb.append("  ");
             }
@@ -329,15 +329,18 @@ public class TuiController extends BaseController {
     }
 
     private String executeRelevance(String parameters) {
-        String semanticPath = Utils.getFirstWord(parameters);
+        String semanticPathName = Utils.getFirstWord(parameters);
         String targets = Utils.getRestOfWords(parameters);
-        if (semanticPath.isEmpty()) return RELEVANCE_HELP;
+        if (semanticPathName.isEmpty()) return RELEVANCE_HELP;
 
         String origin = Utils.getFirstWord(targets);
         String dest = Utils.getFirstWord(Utils.getRestOfWords(targets));
 
-        RelationStructure rs = semanticPathMap.get(semanticPath).getPath();
-        if (rs == null) return "Relacio " + semanticPath + " no trobada.";
+        FilteredList<SemanticPath> fl = semanticPaths.filtered(
+                (path -> path.getName().equals(semanticPathName))
+        );
+        if (fl.size() == 0) return "Relacio " + semanticPathName + " no trobada.";
+        RelationStructure rs = fl.get(0).getPath();
 
         GraphSearch graphSearch = null;
 
@@ -346,13 +349,13 @@ public class TuiController extends BaseController {
                 graphSearch = new FreeSearch(graph, rs);
             } else {
                 int originId = Integer.parseInt(origin);
-                NodeType originType = semanticPathMap.get(semanticPath).getInitialType();
+                NodeType originType = fl.get(0).getInitialType();
                 Node originNode = graph.getNode(originType, originId);
                 if (dest.isEmpty()) {
                     graphSearch = new OriginSearch(graph, rs, originNode);
                 } else {
                     int destId = Integer.parseInt(dest);
-                    NodeType destType = semanticPathMap.get(semanticPath).getFinalType();
+                    NodeType destType = fl.get(0).getFinalType();
                     Node destNode = graph.getNode(destType, destId);
                     graphSearch = new OriginDestinationSearch(graph, rs, originNode, destNode);
                 }
