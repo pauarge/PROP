@@ -36,7 +36,7 @@
         <HBox prefHeight="35" prefWidth="563.0" GridPane.columnIndex="0" GridPane.columnSpan="11"
               GridPane.rowIndex="3"/>
         <Label prefHeight="25" style="-fx-text-fill: rgba(0, 0, 0, 0.54); -fx-title-alignment: center;"
-               text="NOM,ACLARACIO,NOMS" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.columnSpan="11"
+               text="NOM, ACLARACIO, NOMS" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.columnSpan="11"
                GridPane.halignment="center" GridPane.rowIndex="11"/>
     </children>
     <columnConstraints>
