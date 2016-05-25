@@ -15,6 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.Label?>
 <AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="searcher.controllers.tabs.RelevanceController">
     <children>
@@ -63,6 +64,9 @@
                     <children>
                         <TableView fx:id="searchTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <placeholder>
+                                <Label text="Fes una cerca per tenir resultats"/>
+                            </placeholder>
                             <columns>
                                 <TableColumn text="id">
                                     <cellValueFactory>
