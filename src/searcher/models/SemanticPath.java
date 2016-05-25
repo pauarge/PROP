@@ -4,6 +4,7 @@ import common.domain.NodeType;
 import common.domain.RelationStructure;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import searcher.Utils;
 
 public class SemanticPath {
     private final StringProperty name;
@@ -33,7 +34,7 @@ public class SemanticPath {
     }
 
     public String toString() {
-        return getName();
+        return getName() + ": " + Utils.convertToText(this.toTypeArray());
     }
 
     public String getName() {

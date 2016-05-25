@@ -4,6 +4,7 @@
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -15,71 +16,63 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-
-<?import javafx.scene.control.Label?>
-<AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="searcher.controllers.tabs.SearchController">
+<AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="searcher.controllers.tabs.SearchController">
     <children>
-        <SplitPane dividerPositions="0.3" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <SplitPane dividerPositions="0.3" prefHeight="402.0" prefWidth="360.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <AnchorPane>
                     <children>
-                        <GridPane AnchorPane.bottomAnchor="148.0" AnchorPane.leftAnchor="2.0"
-                                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <GridPane AnchorPane.bottomAnchor="148.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <columnConstraints>
-                                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
                             </columnConstraints>
                             <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0"/>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0"/>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0"/>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0"/>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" />
                             </rowConstraints>
                             <children>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tipus de Node"/>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tipus de Node" />
                                 <ChoiceBox fx:id="choicesSearch" prefWidth="150.0" GridPane.rowIndex="1">
                                     <items>
                                         <FXCollections fx:factory="observableArrayList">
-                                            <String fx:value="AUTHOR"/>
-                                            <String fx:value="CONF"/>
-                                            <String fx:value="PAPER"/>
-                                            <String fx:value="LABEL"/>
-                                            <String fx:value="TERM"/>
+                                            <String fx:value="AUTHOR" />
+                                            <String fx:value="CONF" />
+                                            <String fx:value="PAPER" />
+                                            <String fx:value="LABEL" />
+                                            <String fx:value="TERM" />
                                         </FXCollections>
                                     </items>
                                 </ChoiceBox>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Terme a Cercar"
-                                      GridPane.rowIndex="2"/>
-                                <TextField fx:id="searchText" GridPane.rowIndex="3"/>
-                                <Button mnemonicParsing="false" onAction="#searchNodeAction" text="Cercar"
-                                        GridPane.rowIndex="4"/>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Terme a Cercar" GridPane.rowIndex="2" />
+                                <TextField fx:id="searchText" GridPane.rowIndex="3" />
+                                <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="111.0" text="Cercar" GridPane.rowIndex="4" />
                             </children>
                         </GridPane>
                     </children>
                 </AnchorPane>
                 <AnchorPane>
                     <children>
-                        <TableView fx:id="searchTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="searchTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <placeholder>
-                                <Label text="Cerca un node per tenir resultats"/>
+                                <Label text="Cerca un node per tenir resultats" />
                             </placeholder>
                             <columns>
                                 <TableColumn text="id">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="id"/>
+                                        <PropertyValueFactory property="id" />
                                     </cellValueFactory>
                                 </TableColumn>
                                 <TableColumn text="Tipus">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="type"/>
+                                        <PropertyValueFactory property="type" />
                                     </cellValueFactory>
                                 </TableColumn>
                                 <TableColumn text="Valor">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="value"/>
+                                        <PropertyValueFactory property="value" />
                                     </cellValueFactory>
                                 </TableColumn>
                             </columns>
@@ -90,4 +83,3 @@
         </SplitPane>
     </children>
 </AnchorPane>
-
