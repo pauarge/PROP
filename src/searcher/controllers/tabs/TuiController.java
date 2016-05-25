@@ -1,4 +1,4 @@
-package searcher.controllers;
+package searcher.controllers.tabs;
 
 import common.domain.*;
 import javafx.collections.transformation.FilteredList;
@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import searcher.Utils;
+import searcher.controllers.BaseController;
 import searcher.models.SemanticPath;
 
 import java.net.URL;
