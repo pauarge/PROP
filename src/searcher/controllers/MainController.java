@@ -83,6 +83,7 @@ public class MainController extends BaseController {
         closeWindow(stage);
     }
 
+
     @FXML
     private void launchHelpWindow() {
         Parent root = null;

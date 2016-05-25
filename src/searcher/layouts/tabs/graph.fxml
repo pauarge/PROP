@@ -14,7 +14,7 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="517.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="searcher.controllers.tabs.GraphManController">
     <children>
-        <Button layoutX="566.0" layoutY="229.0" mnemonicParsing="false" onAction="#exportGraphAction" text="Exportar Graf" />
+        <Button layoutX="566.0" layoutY="229.0" mnemonicParsing="false" onAction="#exportGraphAction" text="Exportar Graf"/>
         <Button layoutX="19.0" layoutY="51.0" mnemonicParsing="false" onAction="#addNodeAction" text="Afegir Nodes" />
         <Button layoutX="21.0" layoutY="229.0" mnemonicParsing="false" onAction="#addRelationAction" text="Afegir Arestes" />
         <TextField fx:id="addNodeText" layoutX="148.0" layoutY="129.0" promptText="Nom" />

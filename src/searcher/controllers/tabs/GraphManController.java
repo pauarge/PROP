@@ -2,15 +2,19 @@ package searcher.controllers.tabs;
 
 import common.domain.*;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import searcher.controllers.BaseController;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static searcher.Utils.launchAlert;
@@ -24,6 +28,8 @@ public class GraphManController extends BaseController {
     TextField addNodeText;
     @FXML
     AnchorPane anchorPane;
+    @FXML
+    private BorderPane borderPane;
 
     @FXML
     private void exportGraphAction() {
@@ -59,6 +65,80 @@ public class GraphManController extends BaseController {
     private void addRelationAction() {
 
     }
+
+    @FXML
+    private void FileNodesAdded() throws Exception {
+        Stage stage = (Stage) borderPane.getScene().getWindow();
+        Alert alert= new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Modificació realitzada correctament");
+        alert.setContentText("S'ha afegit l'arxiu de nodes.");
+        Optional<ButtonType> result = alert.showAndWait();
+    }
+
+    @FXML
+    private void FileRelationsAdded() throws Exception {
+        Stage stage = (Stage) borderPane.getScene().getWindow();
+        Alert alert= new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Modificació realitzada correctament");
+        alert.setContentText("S'ha afegit l'arxiu d'arestes.");
+        Optional<ButtonType> result = alert.showAndWait();
+    }
+
+    @FXML
+    private void NodeCreated() throws Exception {
+        Stage stage = (Stage) borderPane.getScene().getWindow();
+        Alert alert= new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Modificació realitzada correctament");
+        alert.setContentText("S'ha creat el node.");
+        Optional<ButtonType> result = alert.showAndWait();
+    }
+
+    @FXML
+    private void RelationCreated() throws Exception {
+        Stage stage = (Stage) borderPane.getScene().getWindow();
+        Alert alert= new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Modificació realitzada correctament");
+        alert.setContentText("S'ha creat l'aresta entre els dos nodes introduits.");
+        Optional<ButtonType> result = alert.showAndWait();
+    }
+
+    @FXML
+    private void NodeDeleted() throws Exception {
+        Stage stage = (Stage) borderPane.getScene().getWindow();
+        Alert alert= new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Modificació realitzada correctament");
+        alert.setContentText("S'ha eliminat el node.");
+        Optional<ButtonType> result = alert.showAndWait();
+    }
+
+    @FXML
+    private void RelationDeleted() throws Exception {
+        Stage stage = (Stage) borderPane.getScene().getWindow();
+        Alert alert= new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Modificació realitzada correctament");
+        alert.setContentText("S'ha eliminat l'aresta entre els dos nodes introduits.");
+        Optional<ButtonType> result = alert.showAndWait();
+    }
+
+    @FXML
+    private void RelationsExported() throws Exception {
+        Stage stage = (Stage) borderPane.getScene().getWindow();
+        Alert alert= new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Modificació realitzada correctament");
+        alert.setContentText("S'han exportat les relacions.");
+        Optional<ButtonType> result = alert.showAndWait();
+    }
+
+    @FXML
+    private void GraphExported() throws Exception {
+        Stage stage = (Stage) borderPane.getScene().getWindow();
+        Alert alert= new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Modificació realitzada correctament");
+        alert.setContentText("S'ha exportat el graf.");
+        Optional<ButtonType> result = alert.showAndWait();
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
