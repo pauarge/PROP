@@ -1,11 +1,11 @@
 package searcher.controllers;
 
-
 import common.domain.Graph;
 import common.persistence.PersistenceController;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import searcher.models.SemanticPath;
+
 
 public abstract class BaseController implements Initializable {
 

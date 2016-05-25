@@ -9,9 +9,11 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import searcher.Utils;
 import searcher.controllers.BaseController;
 import searcher.models.SemanticPath;
+import static searcher.Utils.launchAlert;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -133,26 +135,32 @@ public class RelationsController extends BaseController {
     }
 
     private void handleAddNewPath() {
-        if (!addNameField.getText().isEmpty() && newPath.size() > 1) {
-            NodeType prv = newPath.get(0);
-            ArrayList<Relation> alr = new ArrayList<>();
-            for (int i = 1; i < newPath.size(); ++i) {
-                alr.add(Utils.getDefaultRelation(prv, newPath.get(i)));
-                prv = newPath.get(i);
-            }
-            RelationStructure rs = null;
-            try {
-                rs = new RelationStructure(newPath.get(0), alr, newPath.get(newPath.size() - 1));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            SemanticPath sp = new SemanticPath(
-                    addNameField.getText(), newPath.get(0), newPath.get(newPath.size() - 1), rs
-            );
-            semanticPaths.add(sp);
-            clearPathBuilder();
-            switchToBrowse();
+        if(addNameField.getText().isEmpty()){
+            launchAlert((Stage) pathList.getScene().getWindow(), "Has d'afegir un nom per la relació");
+            return;
         }
+        if(newPath.size() < 2){
+            launchAlert((Stage) pathList.getScene().getWindow(), "Has d'afegir almenys dos tipus de nodes per la relació");
+            return;
+        }
+        NodeType prv = newPath.get(0);
+        ArrayList<Relation> alr = new ArrayList<>();
+        for (int i = 1; i < newPath.size(); ++i) {
+            alr.add(Utils.getDefaultRelation(prv, newPath.get(i)));
+            prv = newPath.get(i);
+        }
+        RelationStructure rs = null;
+        try {
+            rs = new RelationStructure(newPath.get(0), alr, newPath.get(newPath.size() - 1));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        SemanticPath sp = new SemanticPath(
+                addNameField.getText(), newPath.get(0), newPath.get(newPath.size() - 1), rs
+        );
+        semanticPaths.add(sp);
+        clearPathBuilder();
+        switchToBrowse();
     }
 
     private void handleCancelNewPath() {
