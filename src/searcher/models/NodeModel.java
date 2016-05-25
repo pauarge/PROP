@@ -2,20 +2,20 @@ package searcher.models;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class TableNode {
+public class NodeModel {
     private final SimpleStringProperty id = new SimpleStringProperty("");
     private final SimpleStringProperty type = new SimpleStringProperty("");
     private final SimpleStringProperty value = new SimpleStringProperty("");
 
-    public TableNode() {
+    public NodeModel() {
         this("", "", "");
     }
 
-    public TableNode(int id, String type, String value) {
+    public NodeModel(int id, String type, String value) {
         this(String.valueOf(id), type, value);
     }
 
-    public TableNode(String id, String type, String value) {
+    public NodeModel(String id, String type, String value) {
         setId(id);
         setType(type);
         setValue(value);
