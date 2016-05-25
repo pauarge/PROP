@@ -55,6 +55,10 @@ public class GraphManController extends BaseController {
         addNodeText.clear();
     }
 
+    @FXML
+    private void addRelationAction() {
+
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
