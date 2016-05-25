@@ -16,6 +16,7 @@
 <?import javafx.scene.text.Text?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ComboBox?>
 <AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="searcher.controllers.tabs.RelevanceController">
     <children>
@@ -41,11 +42,6 @@
                             <children>
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Relació semàntica"/>
                                 <ChoiceBox fx:id="choicesRelevance" prefWidth="150.0" GridPane.rowIndex="1">
-                                    <items>
-                                        <FXCollections fx:factory="observableArrayList">
-
-                                        </FXCollections>
-                                    </items>
                                 </ChoiceBox>
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0"
                                       text="ID del node d'inici"

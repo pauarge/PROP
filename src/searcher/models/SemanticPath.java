@@ -32,6 +32,10 @@ public class SemanticPath {
         this.path = null;
     }
 
+    public String toString() {
+        return getName();
+    }
+
     public String getName() {
         return name.get();
     }
