@@ -28,6 +28,7 @@ public class SearchController extends BaseController {
         String v = searchText.getText();
         SimpleSearch ss = new SimpleSearch(graph, nt, v);
         ss.search();
+
         ObservableList<NodeModel> data = searchTable.getItems();
         data.clear();
         for (GraphSearch.Result r : ss.getResults()) {
@@ -58,23 +59,25 @@ public class SearchController extends BaseController {
         }
     }
 
+    private TableRow<NodeModel> graphEnabledRow(TableView<NodeModel> tv) {
+        TableRow<NodeModel> row = new TableRow<>();
+        row.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                NodeModel rowData = row.getItem();
+                GraphController gc = new GraphController(graph);
+                gc.execute(rowData.getNumericId(), rowData.getValue(), rowData.getType(), 2);
+            }
+        });
+        return row;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        searchTable.setRowFactory(tv -> {
-            TableRow<NodeModel> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    NodeModel rowData = row.getItem();
-                    GraphController gc = new GraphController(graph);
-                    gc.execute(rowData.getNumericId(), rowData.getValue(), rowData.getType(), 2);
-                }
-            });
-            return row;
-        });
+        searchTable.setRowFactory(this::graphEnabledRow);
 
         choicesSearch.setItems(FXCollections.observableArrayList(NodeType.class.getEnumConstants()));
         choicesSearch.getSelectionModel().selectFirst();
-        choicesSearch.setConverter(Utils.getNodeTypeStringConverter());
+        choicesSearch.setConverter(Utils.nodeTypeStringConverter());
 
         searchText.textProperty().addListener((o, ov, nv) -> switchSearchButtonBehavior(nv.isEmpty()));
         switchSearchButtonBehavior(true);

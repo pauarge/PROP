@@ -84,7 +84,7 @@ public final class Utils {
         }
     };
 
-    public static StringConverter<NodeType> getNodeTypeStringConverter() {
+    public static StringConverter<NodeType> nodeTypeStringConverter() {
         return nodeTypeStringConverter;
     }
 
