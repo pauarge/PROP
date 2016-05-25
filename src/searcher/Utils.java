@@ -5,6 +5,7 @@ import common.domain.Relation;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.util.Optional;
 
@@ -43,7 +44,7 @@ public final class Utils {
             case LABEL:
                 return "Etiqueta";
             default:
-                return null;
+                return type.toString();
         }
     }
 
@@ -52,19 +53,39 @@ public final class Utils {
         name = removePlural(name).toLowerCase();
         switch (name) {
             case "author":
+            case "autor":
                 return NodeType.AUTHOR;
             case "paper":
                 return NodeType.PAPER;
             case "conf":
             case "conference":
+            case "conferència":
                 return NodeType.CONF;
             case "term":
+            case "terme":
                 return NodeType.TERM;
+            case "etiqueta":
             case "label":
                 return NodeType.LABEL;
             default:
                 return null;
         }
+    }
+
+    private static StringConverter<NodeType> nodeTypeStringConverter = new StringConverter<NodeType>() {
+        @Override
+        public String toString(NodeType object) {
+            return getName(object);
+        }
+
+        @Override
+        public NodeType fromString(String string) {
+            return getType(string);
+        }
+    };
+
+    public static StringConverter<NodeType> getNodeTypeStringConverter() {
+        return nodeTypeStringConverter;
     }
 
     private static String removePlural(String word) {

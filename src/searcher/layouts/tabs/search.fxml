@@ -36,31 +36,22 @@
                             <children>
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tipus de Node" />
                                 <ChoiceBox fx:id="choicesSearch" prefWidth="150.0" GridPane.rowIndex="1">
-                                    <items>
-                                        <FXCollections fx:factory="observableArrayList">
-                                            <String fx:value="AUTHOR" />
-                                            <String fx:value="CONF" />
-                                            <String fx:value="PAPER" />
-                                            <String fx:value="LABEL" />
-                                            <String fx:value="TERM" />
-                                        </FXCollections>
-                                    </items>
                                 </ChoiceBox>
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Terme a Cercar" GridPane.rowIndex="2" />
-                                <TextField fx:id="searchText" GridPane.rowIndex="3" />
-                                <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="111.0" text="Cercar" GridPane.rowIndex="4" />
+                                <TextField fx:id="searchText" maxWidth="-Infinity" prefWidth="220.0" GridPane.rowIndex="3" />
+                                <Button fx:id="searchButton" mnemonicParsing="false" prefWidth="111.0" text="Cercar" GridPane.rowIndex="4" />
                             </children>
                         </GridPane>
                     </children>
                 </AnchorPane>
                 <AnchorPane>
                     <children>
-                        <TableView fx:id="searchTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="searchTable" prefHeight="400.0" prefWidth="247.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <placeholder>
                                 <Label text="Cerca un node per tenir resultats" />
                             </placeholder>
                             <columns>
-                                <TableColumn text="id">
+                                <TableColumn text="ID">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="id" />
                                     </cellValueFactory>
@@ -70,12 +61,15 @@
                                         <PropertyValueFactory property="type" />
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn text="Valor">
+                                <TableColumn text="Nom">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="value" />
                                     </cellValueFactory>
                                 </TableColumn>
                             </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
                         </TableView>
                     </children>
                 </AnchorPane>

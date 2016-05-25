@@ -6,6 +6,7 @@ import common.domain.NodeType;
 import common.domain.Relation;
 import common.domain.Graph;
 import org.graphstream.graph.implementations.SingleGraph;
+import searcher.Utils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -92,7 +93,7 @@ public class GraphController {
 
     public void execute(int ni, String valor, String ntstr, int distance) {
         org.graphstream.graph.Graph graph = new SingleGraph("Prova");
-        NodeType nt = NodeType.valueOf(ntstr);
+        NodeType nt = Utils.getType(ntstr);
         String s = assign(nt);
         String color = assignColor(s);
         String id = s + Integer.toString(ni);
