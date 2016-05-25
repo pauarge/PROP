@@ -1,17 +1,13 @@
 package searcher.controllers.tabs;
 
-import common.domain.GraphSearch;
-import common.domain.NodeType;
-import common.domain.SimpleSearch;
+import common.domain.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import searcher.controllers.*;
+import searcher.controllers.BaseController;
+import searcher.controllers.GraphController;
 import searcher.models.TableNode;
 
 import java.net.URL;
@@ -22,12 +18,12 @@ import static searcher.Utils.launchAlert;
 
 public class SearchController extends BaseController {
 
-    @FXML ChoiceBox choicesSearch;
-    @FXML TextField searchText;
-    @FXML TableView searchTable;
-    @FXML AnchorPane anchorPane;
+    @FXML private ChoiceBox choicesSearch;
+    @FXML private TextField searchText;
+    @FXML private TableView<TableNode> searchTable;
+    @FXML private AnchorPane anchorPane;
+    @FXML private Button searchButton;
 
-    @FXML
     private void searchNodeAction() {
         if (choicesSearch.getValue() == null) {
             launchAlert((Stage) anchorPane.getScene().getWindow(), "Per fer la cerca, selecciona un tipus de node");
@@ -44,9 +40,34 @@ public class SearchController extends BaseController {
         }
     }
 
+    private void printAllNodes() {
+        if (choicesSearch.getValue() == null) {
+            launchAlert((Stage) anchorPane.getScene().getWindow(), "Per fer la cerca, selecciona un tipus de node");
+            return;
+        }
+
+        NodeType nt = NodeType.valueOf((String) choicesSearch.getValue());
+        Container.ContainerIterator it = graph.getNodeIterator(nt);
+        ObservableList<TableNode> data = searchTable.getItems();
+
+        while (it.hasNext()) {
+            Node node = (Node) it.next();
+            data.add(new TableNode(node.getId(), (String) choicesSearch.getValue(), node.getValue()));
+        }
+    }
+
+    private void switchSearchButtonBehavior(boolean isEmpty) {
+        if (isEmpty) {
+            searchButton.setOnAction(event -> printAllNodes());
+            searchButton.setText("Mostra tots");
+        } else {
+            searchButton.setOnAction(event -> searchNodeAction());
+            searchButton.setText("Cerca");
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         searchTable.setRowFactory(tv -> {
             TableRow<TableNode> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
@@ -58,6 +79,9 @@ public class SearchController extends BaseController {
             });
             return row;
         });
+
+        searchText.textProperty().addListener((o, ov, nv) -> switchSearchButtonBehavior(nv.isEmpty()));
+        switchSearchButtonBehavior(true);
     }
 
 }
