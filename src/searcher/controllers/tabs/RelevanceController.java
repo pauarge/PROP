@@ -25,18 +25,49 @@ public class RelevanceController extends BaseController {
     @FXML
     private void relevanceSearchAction() {
         System.out.println("Starting relevance search");
-        int originId = Integer.parseInt(relevanceOriginId.getText());
-        int destintyId = Integer.parseInt(relevanceDestinyId.getText());
+
         SemanticPath rel = (SemanticPath) choicesRelevance.getValue();
         NodeType originType = rel.getInitialType();
         NodeType destinyType = rel.getFinalType();
-        try {
-            Node originNode = graph.getNode(originType, originId);
-            Node destintyNode = graph.getNode(destinyType, destintyId);
-        } catch (GraphException e) {
-            e.printStackTrace();
+
+        if(relevanceOriginId.getText().isEmpty()){
+            gs = new FreeSearch(graph, rel.getPath());
+        } else {
+            int originId = Integer.parseInt(relevanceOriginId.getText());
+            Node originNode = null;
+            try {
+                originNode = graph.getNode(originType, originId);
+            } catch (GraphException e) {
+                e.printStackTrace();
+            }
+            if(relevanceDestinyId.getText().isEmpty()) {
+                gs = new OriginSearch(graph, rel.getPath(), originNode);
+            } else {
+                int destinyId = Integer.parseInt(relevanceDestinyId.getText());
+                Node destintyNode = null;
+                try {
+                    destintyNode = graph.getNode(destinyType, destinyId);
+                } catch (GraphException e) {
+                    e.printStackTrace();
+                }
+                new OriginDestinationSearch(graph, rel.getPath(), originNode, destintyNode);
+            }
+
         }
-        System.out.println("Searching " + originId + ", " + rel);
+
+        gs.search();
+        StringBuilder sb = new StringBuilder();
+        for (GraphSearch.Result r : gs.getResults()) {
+            sb.append("From: ");
+            sb.append(r.from.getValue());
+            sb.append("\t\t\tTo: ");
+            sb.append(r.to.getValue());
+            sb.append("\t\t\tRelevance: ");
+            sb.append(r.hetesim);
+            sb.append('\n');
+        }
+
+        System.out.println(sb);
     }
 
     @Override

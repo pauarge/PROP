@@ -1,28 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ComboBox?>
-<AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="searcher.controllers.tabs.RelevanceController">
     <children>
-        <SplitPane dividerPositions="0.3" AnchorPane.bottomAnchor="0.0"
-                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                   AnchorPane.topAnchor="0.0">
+        <SplitPane dividerPositions="0.3" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <AnchorPane>
                     <children>
@@ -38,17 +25,16 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0"/>
                                 <RowConstraints minHeight="10.0" prefHeight="30.0"/>
                                 <RowConstraints minHeight="10.0" prefHeight="30.0"/>
+                                <RowConstraints/>
                             </rowConstraints>
                             <children>
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Relació semàntica"/>
                                 <ChoiceBox fx:id="choicesRelevance" prefWidth="150.0" GridPane.rowIndex="1">
                                 </ChoiceBox>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0"
-                                      text="ID del node d'inici"
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID del node d'inici"
                                       GridPane.rowIndex="2"/>
                                 <TextField fx:id="relevanceOriginId" GridPane.rowIndex="3"/>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0"
-                                      text="ID del node de destí"
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID del node de destí"
                                       GridPane.rowIndex="4"/>
                                 <TextField fx:id="relevanceDestinyId" GridPane.rowIndex="5"/>
                                 <Button mnemonicParsing="false" onAction="#relevanceSearchAction" text="Cercar"
@@ -65,19 +51,29 @@
                                 <Label text="Fes una cerca per tenir resultats"/>
                             </placeholder>
                             <columns>
-                                <TableColumn text="id">
+                                <TableColumn text="id Orígen">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="id"/>
+                                        <PropertyValueFactory property="id_orgn"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn text="Tipus">
+                                <TableColumn text="Valor Orígen">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="type"/>
+                                        <PropertyValueFactory property="value_orgn"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn text="Valor">
+                                <TableColumn text="id Destí">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="value"/>
+                                        <PropertyValueFactory property="id_dest"/>
+                                    </cellValueFactory>
+                                </TableColumn>
+                                <TableColumn text="Valor Destí">
+                                    <cellValueFactory>
+                                        <PropertyValueFactory property="value_dest"/>
+                                    </cellValueFactory>
+                                </TableColumn>
+                                <TableColumn text="Rellevància">
+                                    <cellValueFactory>
+                                        <PropertyValueFactory property="relevance"/>
                                     </cellValueFactory>
                                 </TableColumn>
                             </columns>
