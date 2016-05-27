@@ -7,7 +7,7 @@ import java.util.List;
 
 public final class FileHandler {
 
-    protected static List<String> readFile(String path) {
+    public static List<String> readFile(String path) {
         List<String> toReturn = new ArrayList<>();
         try {
             String absolutePath = new File(path).getAbsolutePath();
@@ -23,7 +23,7 @@ public final class FileHandler {
         return toReturn;
     }
 
-    protected static void writeFile(String path, List<String> strings) {
+    public static void writeFile(String path, List<String> strings) {
         try {
             String absolutePath = new File(path).getAbsolutePath();
             File file = new File(absolutePath);
@@ -40,7 +40,7 @@ public final class FileHandler {
         }
     }
 
-    protected static List<String> readDir(String path) {
+    public static List<String> readDir(String path) {
         List<String> toReturn = new ArrayList<>();
         String absolutePath = new File(path).getAbsolutePath();
         File folder = new File(absolutePath);
@@ -53,7 +53,7 @@ public final class FileHandler {
         return toReturn;
     }
 
-    protected static void clearDir(String path) {
+    public static void clearDir(String path) {
         String absolutePath = new File(path).getAbsolutePath();
         File folder = new File(absolutePath);
         if (!folder.exists()) {
@@ -68,7 +68,7 @@ public final class FileHandler {
         }
     }
 
-    protected static String handlePath(String path){
+    public static String handlePath(String path){
         int last = path.length() - 1;
         if(last > -1){
             if(!path.substring(last).equals("/")){

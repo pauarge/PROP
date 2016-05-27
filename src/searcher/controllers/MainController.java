@@ -31,23 +31,6 @@ public class MainController extends BaseController {
     @FXML
     private TabPane mainTabs;
     @FXML
-    private Parent tabSearch;
-    @FXML
-    private SearchController tabSearchController;
-    @FXML
-    private Parent tabGraphMan;
-    @FXML
-    private GraphManController tabGraphManController;
-    @FXML
-    private Parent tabRelations;
-    @FXML
-    private RelationsController tabRelationsController;
-    @FXML
-    private Parent tabTerminal;
-    @FXML
-    private TuiController tabTerminalController;
-
-    @FXML
     private CheckMenuItem terminalToggle;
     @FXML
     private Tab terminalSelector;
@@ -108,8 +91,8 @@ public class MainController extends BaseController {
 
     public MainController() {
         graph = new Graph();
-        pc = new ExtendedPersistenceController(graph);
         semanticPaths = FXCollections.observableArrayList();
+        pc = new ExtendedPersistenceController(graph, semanticPaths);
     }
 
     @Override
