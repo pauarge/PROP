@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane alignment="center" hgap="11" minHeight="400" minWidth="480" vgap="10" xmlns="http://javafx.com/javafx/8"
+<GridPane alignment="CENTER" cacheHint="SCALE" centerShape="false" hgap="11" minHeight="340.0" minWidth="480"
+          prefHeight="386.0" prefWidth="565.0" scaleShape="false" vgap="10" xmlns="http://javafx.com/javafx/8"
           xmlns:fx="http://javafx.com/fxml/1" fx:controller="searcher.controllers.LandingController">
     <children>
         <Text style=" -fx-font-size: 30; -fx-tile-alignment: center" text="CERCADOR RELACIONAL" GridPane.columnIndex="0"
@@ -12,32 +15,31 @@
         <HBox GridPane.columnIndex="4" GridPane.rowIndex="4">
             <children>
                 <Button fx:id="createGraph" onAction="#openMain" prefWidth="151"
-                        style="-fx-background-color: whitesmoke;" text="NOVA SESSIÓ"/>
+                        text="NOVA SESSIÓ"/>
             </children>
         </HBox>
 
         <HBox GridPane.columnIndex="5" GridPane.rowIndex="4">
             <children>
                 <Button fx:id="importGraph" onAction="#openDirSelector" prefHeight="27.0" prefWidth="151.0"
-                        style="-fx-background-color: whitesmoke;" text="CARREGAR SESSIÓ"/>
+                        text="CARREGAR SESSIÓ"/>
             </children>
         </HBox>
         <HBox GridPane.columnIndex="6" GridPane.rowIndex="4">
             <children>
                 <Button fx:id="closeButton" onAction="#closeButtonAction" prefHeight="24.0" prefWidth="151.0"
-                        style="-fx-background-color: whitesmoke;" text="SORTIR"
-                        textOverrun="LEADING_WORD_ELLIPSIS"/>
+                        text="SORTIR"/>
             </children>
         </HBox>
-        <HBox prefHeight="25" prefWidth="563.0" GridPane.columnIndex="0" GridPane.columnSpan="11"
+        <HBox prefHeight="0.0" prefWidth="563.0" GridPane.columnIndex="0" GridPane.columnSpan="11"
               GridPane.rowIndex="0"/>
-        <HBox prefHeight="65.0" prefWidth="563.0" GridPane.columnIndex="0" GridPane.columnSpan="11"
-              GridPane.rowIndex="6"/>
-        <HBox prefHeight="35" prefWidth="563.0" GridPane.columnIndex="0" GridPane.columnSpan="11"
-              GridPane.rowIndex="3"/>
+        <HBox maxHeight="-Infinity" prefHeight="25.0" prefWidth="563.0" GridPane.columnIndex="0"
+              GridPane.columnSpan="11" GridPane.rowIndex="6"/>
+        <HBox minHeight="-Infinity" prefHeight="66.0" prefWidth="563.0" GridPane.columnIndex="0"
+              GridPane.columnSpan="11" GridPane.rowIndex="3"/>
         <Label prefHeight="25" style="-fx-text-fill: rgba(0, 0, 0, 0.54); -fx-title-alignment: center;"
-               text="NOM, ACLARACIO, NOMS" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.columnSpan="11"
-               GridPane.halignment="center" GridPane.rowIndex="11"/>
+               text="NOM, ACLARACIO, NOMS" textAlignment="CENTER" GridPane.columnSpan="11" GridPane.halignment="center"
+               GridPane.rowIndex="11"/>
     </children>
     <columnConstraints>
         <ColumnConstraints/>
@@ -56,7 +58,7 @@
         <RowConstraints/>
         <RowConstraints/>
         <RowConstraints/>
-        <RowConstraints maxHeight="62.0" minHeight="42.0" prefHeight="46.0"/>
+        <RowConstraints maxHeight="62.0" minHeight="70.0" prefHeight="46.0"/>
         <RowConstraints maxHeight="27.0" minHeight="0.0" prefHeight="16.0"/>
         <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0"/>
         <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0"/>
@@ -66,4 +68,7 @@
         <RowConstraints maxHeight="22.0" minHeight="0.0" prefHeight="7.0"/>
         <RowConstraints maxHeight="21.0" minHeight="3.0" prefHeight="18.0"/>
     </rowConstraints>
+    <opaqueInsets>
+        <Insets/>
+    </opaqueInsets>
 </GridPane>

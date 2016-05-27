@@ -4,6 +4,7 @@ import common.domain.*;
 import org.graphstream.graph.implementations.SingleGraph;
 import org.graphstream.ui.view.View;
 import org.graphstream.ui.view.Viewer;
+import searcher.Utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -110,7 +111,7 @@ public class GraphController {
 
     public void execute(int ni, String valor, String ntstr, int distance) {
         org.graphstream.graph.Graph graph = new SingleGraph("Prova");
-        NodeType nt = NodeType.valueOf(ntstr);
+        NodeType nt = Utils.getType(ntstr);
         String s = assign(nt);
         String color = assignColor(s);
         String id = s + Integer.toString(ni);
