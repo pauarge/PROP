@@ -16,7 +16,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import searcher.Utils;
 import searcher.controllers.BaseController;
-import searcher.controllers.GraphController;
 import searcher.controllers.NodeViewController;
 import searcher.models.NodeModel;
 
@@ -109,10 +108,6 @@ public class SearchController extends BaseController {
             if (event.getClickCount() == 2 && (!row.isEmpty())) {
                 NodeModel model = row.getItem();
                 openNodeDetails(model);
-
-                Node node = model.getNode();
-                GraphController gc = new GraphController(graph);
-                gc.execute(node.getId(), node.getValue(), Utils.getName(model.getNodeType()), 2);
             }
         });
         return row;
@@ -129,6 +124,7 @@ public class SearchController extends BaseController {
             nodeInfoStage.initModality(Modality.WINDOW_MODAL);
             nodeInfoStage.initOwner(null);
             Scene scene = new Scene(pane);
+            nodeInfoStage.setScene(scene);
 
             NodeViewController controller = loader.getController();
             controller.setModel(model);

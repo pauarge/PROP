@@ -53,20 +53,25 @@ public final class Utils {
         if (name == null) return null;
         name = removePlural(name).toLowerCase();
         switch (name) {
+            case "a":
             case "author":
             case "autor":
                 return NodeType.AUTHOR;
+            case "p":
             case "paper":
                 return NodeType.PAPER;
+            case "c":
             case "conf":
             case "conference":
             case "conferència":
                 return NodeType.CONF;
+            case "t":
             case "term":
             case "terme":
                 return NodeType.TERM;
-            case "etiqueta":
+            case "l":
             case "label":
+            case "etiqueta":
                 return NodeType.LABEL;
             default:
                 return null;
