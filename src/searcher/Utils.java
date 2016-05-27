@@ -21,6 +21,7 @@ public final class Utils {
         if (result.get() == ButtonType.OK) {
             stage.close();
         }
+        System.exit(0);
     }
 
     static public void launchAlert(Stage stage, String text) {
