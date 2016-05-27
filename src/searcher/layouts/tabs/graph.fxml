@@ -15,17 +15,6 @@
         <Button layoutX="21.0" layoutY="229.0" mnemonicParsing="false" onAction="#addRelationAction"
                 text="Afegir Arestes"/>
         <TextField fx:id="addNodeText" layoutX="148.0" layoutY="129.0" promptText="Nom"/>
-        <!--<ChoiceBox fx:id="choicesGraphTab" layoutX="145.0" layoutY="247.0" prefHeight="27.0" prefWidth="167.0">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="AUTHOR" />
-                    <String fx:value="CONF" />
-                    <String fx:value="PAPER" />
-                    <String fx:value="LABEL" />
-                    <String fx:value="TERM" />
-                </FXCollections>
-            </items>
-        </ChoiceBox>-->
         <Text layoutX="19.0" layoutY="39.0" opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Node"/>
 
         <TextField layoutX="148.0" layoutY="90.0" promptText="ID"/>
