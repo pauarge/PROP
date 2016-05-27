@@ -5,19 +5,16 @@
 <?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="517.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="searcher.controllers.tabs.GraphManController">
+<AnchorPane fx:id="anchorPane" prefHeight="517.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="searcher.controllers.tabs.GraphManController">
     <children>
-        <Button layoutX="566.0" layoutY="229.0" mnemonicParsing="false" onAction="#exportGraphAction" text="Exportar Graf"/>
-        <Button layoutX="19.0" layoutY="51.0" mnemonicParsing="false" onAction="#addNodeAction" text="Afegir Nodes" />
-        <Button layoutX="21.0" layoutY="229.0" mnemonicParsing="false" onAction="#addRelationAction" text="Afegir Arestes" />
-        <TextField fx:id="addNodeText" layoutX="148.0" layoutY="129.0" promptText="Nom" />
+        <Button layoutX="566.0" layoutY="229.0" mnemonicParsing="false" onAction="#exportGraphAction"
+                text="Exportar Graf"/>
+        <Button layoutX="19.0" layoutY="51.0" mnemonicParsing="false" onAction="#addNodeAction" text="Afegir Nodes"/>
+        <Button layoutX="21.0" layoutY="229.0" mnemonicParsing="false" onAction="#addRelationAction"
+                text="Afegir Arestes"/>
+        <TextField fx:id="addNodeText" layoutX="148.0" layoutY="129.0" promptText="Nom"/>
         <!--<ChoiceBox fx:id="choicesGraphTab" layoutX="145.0" layoutY="247.0" prefHeight="27.0" prefWidth="167.0">
             <items>
                 <FXCollections fx:factory="observableArrayList">
@@ -29,83 +26,88 @@
                 </FXCollections>
             </items>
         </ChoiceBox>-->
-      <Text layoutX="19.0" layoutY="39.0" opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Node" />
-      
-      <TextField layoutX="148.0" layoutY="90.0" promptText="ID" />
-      <Text layoutX="20.0" layoutY="218.0" opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Arestes" />
+        <Text layoutX="19.0" layoutY="39.0" opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Node"/>
 
-      <Text layoutX="566.0" layoutY="218.0" opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Graf" />
-      <Text layoutX="23.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Eliminar Node:" />
-      <Text layoutX="23.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Eliminar Aresta:" />
-      <Text layoutX="23.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Afegir Node:" />
-      <Button layoutX="462.0" layoutY="90.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="37.0" text="&gt;&gt;" />
-      <Button layoutX="462.0" layoutY="129.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="37.0" text="&gt;&gt;" />
-      <Text layoutX="566.0" layoutY="39.0" opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Relacions:" />
-      <Button layoutX="566.0" layoutY="51.0" mnemonicParsing="false" text="Exportar Relacions" />
-      <TextField layoutX="146.0" layoutY="272.0" promptText="ID Node1" />
-      <TextField layoutX="146.0" layoutY="305.0" promptText="ID Node2" />
-      <Button layoutX="462.0" layoutY="305.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="37.0" text="&gt;&gt;" />
-      <ComboBox layoutX="324.0" layoutY="129.0" prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node" >
-        <items>
-          <FXCollections fx:factory="observableArrayList">
-            <String fx:value="AUTHOR" />
-            <String fx:value="CONF" />
-            <String fx:value="PAPER" />
-            <String fx:value="LABEL" />
-            <String fx:value="TERM" />
-          </FXCollections>
-        </items>
-      </ComboBox>
-      <Text layoutX="24.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Afegir Aresta:" />
-      <TextField layoutX="146.0" layoutY="366.0" promptText="ID Node1" />
-      <TextField layoutX="146.0" layoutY="401.0" promptText="ID Node2" />
-      <ComboBox layoutX="322.0" layoutY="366.0" prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node1">
-                <items>
-                  <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="AUTHOR" />
-                    <String fx:value="CONF" />
-                    <String fx:value="PAPER" />
-                    <String fx:value="LABEL" />
-                    <String fx:value="TERM" />
-                  </FXCollections>
-                </items>
-    </ComboBox>
-      <ComboBox layoutX="322.0" layoutY="401.0" prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node2" />
-      <Button layoutX="462.0" layoutY="401.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="37.0" text="&gt;&gt;" />
-      <Button layoutX="148.0" layoutY="51.0" mnemonicParsing="false" onAction="#addNodeAction" text="Exportar Nodes" />
-      <Button layoutX="144.0" layoutY="229.0" mnemonicParsing="false" onAction="#addRelationAction" text="Eliminar Arestes" />
-      <ComboBox layoutX="324.0" layoutY="90.0" prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node">
-              <items>
+        <TextField layoutX="148.0" layoutY="90.0" promptText="ID"/>
+        <Text layoutX="20.0" layoutY="218.0" opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Arestes"/>
+
+        <Text layoutX="566.0" layoutY="218.0" opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Graf"/>
+        <Text layoutX="23.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Eliminar Node:"/>
+        <Text layoutX="23.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Eliminar Aresta:"/>
+        <Text layoutX="23.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Afegir Node:"/>
+        <Button layoutX="462.0" layoutY="90.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="37.0"
+                text="&gt;&gt;"/>
+        <Button layoutX="462.0" layoutY="129.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="37.0"
+                text="&gt;&gt;"/>
+        <Text layoutX="566.0" layoutY="39.0" opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Relacions:"/>
+        <Button layoutX="566.0" layoutY="51.0" mnemonicParsing="false" text="Exportar Relacions"/>
+        <TextField layoutX="146.0" layoutY="272.0" promptText="ID Node1"/>
+        <TextField layoutX="146.0" layoutY="305.0" promptText="ID Node2"/>
+        <Button layoutX="462.0" layoutY="305.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="37.0"
+                text="&gt;&gt;"/>
+        <ComboBox layoutX="324.0" layoutY="129.0" prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node">
+            <items>
                 <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="AUTHOR" />
-                  <String fx:value="CONF" />
-                  <String fx:value="PAPER" />
-                  <String fx:value="LABEL" />
-                  <String fx:value="TERM" />
+                    <String fx:value="AUTHOR"/>
+                    <String fx:value="CONF"/>
+                    <String fx:value="PAPER"/>
+                    <String fx:value="LABEL"/>
+                    <String fx:value="TERM"/>
                 </FXCollections>
-              </items>
-      </ComboBox>
-      <ComboBox layoutX="322.0" layoutY="272.0" prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node1" >
-        <items>
-          <FXCollections fx:factory="observableArrayList">
-            <String fx:value="AUTHOR" />
-            <String fx:value="CONF" />
-            <String fx:value="PAPER" />
-            <String fx:value="LABEL" />
-            <String fx:value="TERM" />
-          </FXCollections>
-        </items>
-      </ComboBox>
-      <ComboBox layoutX="322.0" layoutY="305.0" prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node2" >
-        <items>
-          <FXCollections fx:factory="observableArrayList">
-            <String fx:value="AUTHOR" />
-            <String fx:value="CONF" />
-            <String fx:value="PAPER" />
-            <String fx:value="LABEL" />
-            <String fx:value="TERM" />
-          </FXCollections>
-        </items>
-      </ComboBox>
+            </items>
+        </ComboBox>
+        <Text layoutX="24.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Afegir Aresta:"/>
+        <TextField layoutX="146.0" layoutY="366.0" promptText="ID Node1"/>
+        <TextField layoutX="146.0" layoutY="401.0" promptText="ID Node2"/>
+        <ComboBox layoutX="322.0" layoutY="366.0" prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node1">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="AUTHOR"/>
+                    <String fx:value="CONF"/>
+                    <String fx:value="PAPER"/>
+                    <String fx:value="LABEL"/>
+                    <String fx:value="TERM"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <ComboBox layoutX="322.0" layoutY="401.0" prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node2"/>
+        <Button layoutX="462.0" layoutY="401.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="37.0"
+                text="&gt;&gt;"/>
+        <Button layoutX="148.0" layoutY="51.0" mnemonicParsing="false" onAction="#addNodeAction" text="Exportar Nodes"/>
+        <Button layoutX="144.0" layoutY="229.0" mnemonicParsing="false" onAction="#addRelationAction"
+                text="Eliminar Arestes"/>
+        <ComboBox layoutX="324.0" layoutY="90.0" prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="AUTHOR"/>
+                    <String fx:value="CONF"/>
+                    <String fx:value="PAPER"/>
+                    <String fx:value="LABEL"/>
+                    <String fx:value="TERM"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <ComboBox layoutX="322.0" layoutY="272.0" prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node1">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="AUTHOR"/>
+                    <String fx:value="CONF"/>
+                    <String fx:value="PAPER"/>
+                    <String fx:value="LABEL"/>
+                    <String fx:value="TERM"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <ComboBox layoutX="322.0" layoutY="305.0" prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node2">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="AUTHOR"/>
+                    <String fx:value="CONF"/>
+                    <String fx:value="PAPER"/>
+                    <String fx:value="LABEL"/>
+                    <String fx:value="TERM"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
     </children>
 </AnchorPane>
