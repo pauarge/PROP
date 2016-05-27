@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import searcher.controllers.tabs.GraphManController;
 import searcher.controllers.tabs.RelationsController;
 import searcher.controllers.tabs.SearchController;
+import searcher.controllers.tabs.TuiController;
 
 import java.io.IOException;
 import java.net.URL;

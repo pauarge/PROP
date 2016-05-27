@@ -5,6 +5,7 @@
 
 # Package Files #
 *.jar
+!lib/graph-stream/*.jar
 *.war
 *.ear
 
