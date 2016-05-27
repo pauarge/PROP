@@ -51,12 +51,12 @@
                                 <Label text="Fes una cerca per tenir resultats"/>
                             </placeholder>
                             <columns>
-                                <TableColumn text="id Orígen">
+                                <TableColumn text="id Origen">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="id_orgn"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn text="Valor Orígen">
+                                <TableColumn text="Valor Origen">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="value_orgn"/>
                                     </cellValueFactory>
