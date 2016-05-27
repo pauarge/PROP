@@ -1,13 +1,15 @@
 package searcher.controllers;
 
 import common.domain.*;
+import javafx.embed.swing.SwingNode;
+import javafx.scene.layout.AnchorPane;
 import org.graphstream.graph.implementations.SingleGraph;
 import org.graphstream.ui.view.View;
 import org.graphstream.ui.view.Viewer;
 import searcher.Utils;
+import searcher.models.NodeModel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -109,7 +111,16 @@ public class GraphController {
         this.g = g;
     }
 
-    public void execute(int ni, String valor, String ntstr, int distance) {
+    public SwingNode getGraph(NodeModel model, int distance) {
+        Node node = model.getNode();
+        NodeType nodeType = model.getNodeType();
+        int ni = node.getId();
+        String valor = node.getValue();
+        String ntstr = Utils.getName(nodeType);
+        return getGraph(ni, valor, ntstr, distance);
+    }
+
+    public SwingNode getGraph(int ni, String valor, String ntstr, int distance) {
         org.graphstream.graph.Graph graph = new SingleGraph("Prova");
         NodeType nt = Utils.getType(ntstr);
         String s = assign(nt);
@@ -126,13 +137,35 @@ public class GraphController {
             e.printStackTrace();
         }
         graph.addAttribute("ui.stylesheet", "node { size: 15px; text-size: 15px; }");
-        Viewer viewer = graph.display();
+
+      /*  Viewer viewer = new Viewer(graph, Viewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
         View view = viewer.addDefaultView(false);
-        JFrame jFrame = new JFrame();
+        viewer.enableAutoLayout();
+        viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.EXIT);
+        SwingNode swingNode = new SwingNode();
+        swingNode.setContent((JComponent) view);
+        AnchorPane anchorPane = new AnchorPane();
+        anchorPane.getChildren().add(swingNode);
+        return anchorPane;*/
+
+
+        Viewer viewer = new Viewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
+        View view = viewer.addDefaultView(false);
+        viewer.enableAutoLayout();
+        viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.EXIT);
+
+        SwingNode swingNode = new SwingNode();
+        swingNode.setContent((JComponent) view);
+        AnchorPane anchorPane = new AnchorPane();
+        anchorPane.getChildren().add(swingNode);
+        return swingNode;
+
+        /*JFrame jFrame = new JFrame();
         jFrame.add((Component) view);
         jFrame.setDefaultCloseOperation(jFrame.DISPOSE_ON_CLOSE);
         jFrame.setSize(800, 600);
         jFrame.setVisible(true);
+        return new AnchorPane();*/
     }
 
 }

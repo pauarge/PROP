@@ -44,9 +44,10 @@ public class LandingController {
             }
             MainController controller = loader.<MainController>getController();
             controller.importDir(selectedDirectory.getAbsolutePath());
-            stage = (Stage) createGraph.getScene().getWindow();
+            stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
+            ((Stage) closeButton.getScene().getWindow()).close();
         }
     }
 
@@ -56,9 +57,10 @@ public class LandingController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../layouts/main.fxml"));
             Parent root = (Parent) loader.load();
             MainController controller = loader.<MainController>getController();
-            Stage stage = (Stage) createGraph.getScene().getWindow();
+            Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
+            ((Stage) closeButton.getScene().getWindow()).close();
         } catch (Exception e) {
             e.printStackTrace();
         }
