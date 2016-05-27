@@ -65,12 +65,5 @@ public class LandingController {
             e.printStackTrace();
         }
     }
-/*
-    @FXML
-    private void changingStyle() {
-    Stage stage = (Stage) importGraph.hoverProperty();
-    stage.sty} */
-
-
 
 }
