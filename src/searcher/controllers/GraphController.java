@@ -1,12 +1,12 @@
 package searcher.controllers;
 
-import common.domain.GraphException;
-import common.domain.Node;
-import common.domain.NodeType;
-import common.domain.Relation;
-import common.domain.Graph;
+import common.domain.*;
 import org.graphstream.graph.implementations.SingleGraph;
+import org.graphstream.ui.view.View;
+import org.graphstream.ui.view.Viewer;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -40,20 +40,39 @@ public class GraphController {
     }
 
     private String assignColor(String s) {
-        if (s == "A") return "red";
-        else if (s == "P") return "black";
-        else if (s == "C") return "yellow";
-        else if (s == "T") return "green";
-        else return "blue";
+        switch (s) {
+            case "A":
+                return "red";
+            case "P":
+                return "black";
+            case "C":
+                return "yellow";
+            case "T":
+                return "green";
+            default:
+                return "blue";
+        }
     }
 
     private NodeType getNodeType(String s) {
         NodeType nt;
-        if (s == "A") nt = NodeType.AUTHOR;
-        else if (s == "P") nt = NodeType.PAPER;
-        else if (s == "C") nt = NodeType.CONF;
-        else if (s == "L") nt = NodeType.LABEL;
-        else nt = NodeType.TERM;
+        switch (s) {
+            case "A":
+                nt = NodeType.AUTHOR;
+                break;
+            case "P":
+                nt = NodeType.PAPER;
+                break;
+            case "C":
+                nt = NodeType.CONF;
+                break;
+            case "L":
+                nt = NodeType.LABEL;
+                break;
+            default:
+                nt = NodeType.TERM;
+                break;
+        }
         return nt;
     }
 
@@ -65,8 +84,7 @@ public class GraphController {
             ArrayList<Relation> rs = getRelationsForTypeAux(nt);
             for (Relation rel : rs) {
                 ArrayList<Node> node_list = g.getEdges(rel.getId(), nodeInici);
-                for (int i = 0; i < node_list.size(); ++i) {
-                    Node n2 = node_list.get(i);
+                for (Node n2 : node_list) {
                     String s2;
                     if (nt == rel.getNodeTypeA()) s2 = assign(rel.getNodeTypeB());
                     else s2 = assign(rel.getNodeTypeA());
@@ -107,7 +125,13 @@ public class GraphController {
             e.printStackTrace();
         }
         graph.addAttribute("ui.stylesheet", "node { size: 15px; text-size: 15px; }");
-        graph.display();
+        Viewer viewer = graph.display();
+        View view = viewer.addDefaultView(false);
+        JFrame jFrame = new JFrame();
+        jFrame.add((Component) view);
+        jFrame.setDefaultCloseOperation(jFrame.DISPOSE_ON_CLOSE);
+        jFrame.setSize(800, 600);
+        jFrame.setVisible(true);
     }
 
 }

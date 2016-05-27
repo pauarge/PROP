@@ -20,6 +20,7 @@ public final class Utils {
         if (result.get() == ButtonType.OK) {
             stage.close();
         }
+        System.exit(0);
     }
 
     static public void launchAlert(Stage stage, String text) {
@@ -29,7 +30,7 @@ public final class Utils {
         alert.showAndWait();
     }
 
-    public static String getName(NodeType type) {
+    private static String getName(NodeType type) {
         if (type == null) return null;
         switch (type) {
             case AUTHOR:
