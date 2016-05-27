@@ -3,6 +3,7 @@ package searcher.controllers;
 import common.domain.*;
 import javafx.embed.swing.SwingNode;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Pair;
 import org.graphstream.graph.implementations.SingleGraph;
 import org.graphstream.ui.view.View;
 import org.graphstream.ui.view.Viewer;
@@ -10,15 +11,14 @@ import searcher.Utils;
 import searcher.models.NodeModel;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 
 public class GraphController {
 
     private Graph g;
+    private Map<Node, Boolean> vis = new HashMap<>();
+    private Map<Pair<Node, NodeType>, Pair<Node, NodeType>> prev = new HashMap<>();
 
     private ArrayList<Relation> getRelationsForTypeAux(NodeType type){
         ArrayList<Relation> toReturn = new ArrayList<>();
@@ -120,7 +120,7 @@ public class GraphController {
         return getGraph(ni, valor, ntstr, distance);
     }
 
-    public SwingNode getGraph(int ni, String valor, String ntstr, int distance) {
+    private SwingNode getGraph(int ni, String valor, String ntstr, int distance) {
         org.graphstream.graph.Graph graph = new SingleGraph("Prova");
         NodeType nt = Utils.getType(ntstr);
         String s = assign(nt);
@@ -166,6 +166,83 @@ public class GraphController {
         jFrame.setSize(800, 600);
         jFrame.setVisible(true);
         return new AnchorPane();*/
+    }
+
+    private ArrayList shortestPath(Node start, NodeType ntStart, Node finish, NodeType ntFinish) throws GraphException {
+        ArrayList<Pair<Node, NodeType>> directions = new ArrayList<>();
+        Queue<Pair<Node, NodeType>> q = new LinkedList<>();
+        Node current = start;
+        Pair<Node,NodeType> p = new Pair<>(current, ntStart);
+        q.add(p);
+        vis.put(current, true);
+        while (!q.isEmpty()) {
+            p = q.remove();
+            current = p.getKey();
+            NodeType ntCurrent = p.getValue();
+            if (current.equals(finish) && ntFinish == ntCurrent) {
+                break;
+            }
+            ArrayList<Relation> rs = getRelationsForTypeAux(p.getValue());
+            for (Relation rel : rs) {
+                ArrayList<Node> node_list = g.getEdges(rel.getId(), current);
+                for (Node node : node_list) {
+                    if (!vis.containsKey(node)) {
+                        NodeType nodeType = rel.getNodeTypeA();
+                        if (ntCurrent == rel.getNodeTypeA()) nodeType = rel.getNodeTypeB();
+                        Pair<Node, NodeType> p2 = new Pair<>(node, nodeType);
+                        q.add(p2);
+                        vis.put(node, true);
+                        prev.put(p2, p);
+                    }
+                }
+            }
+        }
+        if (!current.equals(finish)) {
+            System.out.println("can't reach destination");
+        }
+        else {
+            for (Pair<Node, NodeType> i = new Pair<>(finish, ntFinish); i != null; i = prev.get(i)) {
+                directions.add(i);
+            }
+            Collections.reverse(directions);
+            return directions;
+        }
+        return null;
+    }
+
+    public void getShortestPath(int start, String ntStart, int finish, String ntFinish) throws GraphException {
+        NodeType ntype1 = Utils.getType(ntStart);
+        NodeType ntype2 = Utils.getType(ntFinish);
+        Node ini = g.getNode(ntype1, start);
+        Node fi = g.getNode(ntype2, finish);
+        ArrayList<Pair<Node, NodeType>> path = shortestPath(ini, ntype1, fi, ntype2);
+        if (path != null) {
+            org.graphstream.graph.Graph graph = new SingleGraph("Prova");
+            int cont = 0;
+            for (Pair<Node, NodeType> n : path) {
+                String s = assign(n.getValue());
+                String id = s + Integer.toString(n.getKey().getId());
+                org.graphstream.graph.Node nodeUI = graph.addNode(id);
+                String color = assignColor(s);
+                graph.getNode(nodeUI.getId()).addAttribute("ui.style", "fill-color:" + color + ";");
+                nodeUI.addAttribute("ui.label", n.getKey().getValue());
+                if (cont > 0) {
+                    graph.addEdge(id, graph.getNode(cont - 1).getId(), id);
+                }
+                ++cont;
+            }
+
+
+            graph.addAttribute("ui.stylesheet", "node { size: 15px; text-size: 15px; }");
+           /* Viewer viewer = graph.display();
+            View view = viewer.addDefaultView(false);
+            JFrame jFrame = new JFrame();
+            jFrame.add((Component) view);
+            jFrame.setDefaultCloseOperation(jFrame.EXIT_ON_CLOSE);
+            jFrame.setSize(800, 600);
+            jFrame.setVisible(true);*/
+            graph.display();
+        }
     }
 
 }
