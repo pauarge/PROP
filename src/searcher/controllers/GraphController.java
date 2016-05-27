@@ -7,7 +7,6 @@ import javafx.util.Pair;
 import org.graphstream.graph.implementations.SingleGraph;
 import org.graphstream.ui.view.View;
 import org.graphstream.ui.view.Viewer;
-import searcher.Utils;
 import searcher.models.NodeModel;
 
 import javax.swing.*;
@@ -116,13 +115,11 @@ public class GraphController {
         NodeType nodeType = model.getNodeType();
         int ni = node.getId();
         String valor = node.getValue();
-        String ntstr = Utils.getName(nodeType);
-        return getGraph(ni, valor, ntstr, distance);
+        return getGraph(ni, valor, nodeType, distance);
     }
 
-    private SwingNode getGraph(int ni, String valor, String ntstr, int distance) {
+    private SwingNode getGraph(int ni, String valor, NodeType nt, int distance) {
         org.graphstream.graph.Graph graph = new SingleGraph("Prova");
-        NodeType nt = Utils.getType(ntstr);
         String s = assign(nt);
         String color = assignColor(s);
         String id = s + Integer.toString(ni);
@@ -210,9 +207,7 @@ public class GraphController {
         return null;
     }
 
-    public void getShortestPath(int start, String ntStart, int finish, String ntFinish) throws GraphException {
-        NodeType ntype1 = Utils.getType(ntStart);
-        NodeType ntype2 = Utils.getType(ntFinish);
+    public void getShortestPath(int start, NodeType ntype1, int finish, NodeType ntype2) throws GraphException {
         Node ini = g.getNode(ntype1, start);
         Node fi = g.getNode(ntype2, finish);
         ArrayList<Pair<Node, NodeType>> path = shortestPath(ini, ntype1, fi, ntype2);
