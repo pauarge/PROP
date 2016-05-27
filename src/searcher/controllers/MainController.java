@@ -14,6 +14,7 @@ import searcher.controllers.tabs.GraphManController;
 import searcher.controllers.tabs.RelationsController;
 import searcher.controllers.tabs.SearchController;
 import searcher.controllers.tabs.TuiController;
+import searcher.persistence.ExtendedPersistenceController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -106,7 +107,7 @@ public class MainController extends BaseController {
 
     public MainController() {
         graph = new Graph();
-        pc = new PersistenceController(graph);
+        pc = new ExtendedPersistenceController(graph);
         semanticPaths = FXCollections.observableArrayList();
     }
 
