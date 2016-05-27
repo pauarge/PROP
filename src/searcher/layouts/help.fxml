@@ -1,14 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane
-          xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" alignment="center" hgap="11" vgap="10">
-    <Text text="Ajuda"
-          GridPane.columnIndex="0" GridPane.rowIndex="1"
-          GridPane.halignment="CENTER"
-          GridPane.columnSpan="11"
-          style="-fx-font-family: Arial Black; -fx-font-size: 30; -fx-tile-alignment: center"
-    />
-</GridPane>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <HBox prefHeight="66.0" prefWidth="600.0">
+               <children>
+                   <Text Style="-fx-font-size: 40" text="AJUDA" textAlignment="CENTER">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+             </HBox>
+            <HBox>
+               <children>
+                  <Text Style="-fx-font-size: 15;" text="saiuhfdhsDHIUFSAHIODGJIOS dlksjakjfjksfjklasjkdkjlsadfjlkjlfkjajkfkfdkjsadfkjldsakljfaljksdfjlkdsflkjdaflakdjfsldkfsalkdsfafldjksfdjklaslfdksalkfasd" wrappingWidth="576.9140625">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin></Text>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</Pane>
