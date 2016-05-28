@@ -10,10 +10,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import searcher.Utils;
-import searcher.controllers.tabs.GraphManController;
-import searcher.controllers.tabs.RelationsController;
-import searcher.controllers.tabs.SearchController;
-import searcher.controllers.tabs.TuiController;
 import searcher.persistence.ExtendedPersistenceController;
 
 import java.io.IOException;
@@ -73,7 +69,7 @@ public class MainController extends BaseController {
     private void launchHelpWindow() {
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("../layouts/help.fxml"));
+            root = FXMLLoader.load(getClass().getResource("../layouts/popups/help.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
