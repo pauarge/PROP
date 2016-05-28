@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.geometry.*?>
+
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-      prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <VBox prefHeight="400.0" prefWidth="600.0">
             <children>
-                <HBox prefHeight="66.0" prefWidth="600.0">
+                <HBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="600.0">
                     <children>
-                        <Text Style="-fx-font-size: 40" text="AJUDA" textAlignment="CENTER">
+                        <Text Style="-fx-font-size: 25" text="Informació i ajuda sobre el Cercador Relacional" textAlignment="CENTER">
                             <HBox.margin>
-                                <Insets bottom="10.0" left="10.0" top="10.0"/>
+                                <Insets bottom="10.0" left="10.0" top="10.0" />
                             </HBox.margin>
                         </Text>
                     </children>
@@ -21,12 +22,11 @@
                 <HBox>
                     <children>
                         <Text Style="-fx-font-size: 15;"
-                              text="saiuhfdhsDHIUFSAHIODGJIOS dlksjakjfjksfjklasjkdkjlsadfjlkjlfkjajkfkfdkjsadfkjldsakljfaljksdfjlkdsflkjdaflakdjfsldkfsalkdsfafldjksfdjklaslfdksalkfasd"
+                              Text="Cercador Relacional és una eina per a realitzar cerques personalitzades sobre una base de dades d'autors, articles, conferències, termes i temes.  &#10;Per començar, pots escollir entre carregar una sessió nova (la qual t'importa una base de dades per defecte) o bé carregar una base de dades (important arxius de text).  &#10;Un cop carregada la base de dades, comencem a navegar. Podem visualitzar les dades en un llistat o bé en forma de graf, on cada tipus de node es diferencia per un color en concret.  &#10;També podem seleccionar els tipus de nodes que volem veure i les relacions entre ells. Si introduim el ID d'un node en concret, apareixerà aquest amb els nodes amb el qual està relacionat en la base de dades.  &#10;En l'apartat graf, podem crear nous nodes i relacions, així com eliminar-ne o exportar dades. &#10;Al decidir sortir del programa, podem guardar la sessió per a utilitzar la base de dades modificada en un futur."
                               wrappingWidth="576.9140625">
                             <HBox.margin>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-                            </HBox.margin>
-                        </Text>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                            </HBox.margin></Text>
                     </children>
                 </HBox>
             </children>
