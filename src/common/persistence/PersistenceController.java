@@ -34,7 +34,7 @@ public class PersistenceController {
             NodeSerializer serializer = new NodeSerializer(it.next());
             strings.add(serializer.getData());
         }
-        writeFile(path, strings);
+        writeFile(path, strings, true);
     }
 
     public void exportNodes(String path) {
@@ -93,7 +93,7 @@ public class PersistenceController {
         Iterator it = strings.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
-            writeFile(path + pair.getKey() + ".txt", (List<String>) pair.getValue());
+            writeFile(path + pair.getKey() + ".txt", (List<String>) pair.getValue(), true);
         }
 
     }

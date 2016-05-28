@@ -1,7 +1,7 @@
 package searcher.models;
 
-
 import javafx.beans.property.SimpleStringProperty;
+
 
 public class RelevanceModel {
     private final SimpleStringProperty id_orgn = new SimpleStringProperty("");

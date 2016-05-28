@@ -7,12 +7,17 @@ import javafx.collections.ObservableList;
 import searcher.models.SemanticPath;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import static common.persistence.FileHandler.handlePath;
+import static common.persistence.FileHandler.readFile;
 import static common.persistence.FileHandler.writeFile;
+
 
 public class ExtendedPersistenceController extends PersistenceController {
 
-    private static ObservableList<SemanticPath> sp;
+    private String spFileName = "semanticPaths.txt";
+    private ObservableList<SemanticPath> sp;
 
     public ExtendedPersistenceController(Graph graph) {
         super(graph);
@@ -24,15 +29,21 @@ public class ExtendedPersistenceController extends PersistenceController {
     }
 
     public void exportSemanticPaths(String path) {
+        path = handlePath(path) + spFileName;
         ArrayList<String> strings = new ArrayList<>();
         for (SemanticPath s : sp) {
             strings.add(s.toString());
         }
-        writeFile(path + "semanticPaths.txt", strings);
+        writeFile(path, strings, false);
     }
 
     public void importSemanticPaths(String path) {
-        System.out.println("Hello world");
+        path = handlePath(path) + spFileName;
+        List<String> strings = readFile(path);
+        for (String s : strings) {
+            SemanticPathSerializer serializer = new SemanticPathSerializer(s);
+
+        }
     }
 
 }

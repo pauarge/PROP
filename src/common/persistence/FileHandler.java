@@ -23,12 +23,12 @@ public final class FileHandler {
         return toReturn;
     }
 
-    public static void writeFile(String path, List<String> strings) {
+    public static void writeFile(String path, List<String> strings, boolean append) {
         try {
             String absolutePath = new File(path).getAbsolutePath();
             File file = new File(absolutePath);
             file.createNewFile();
-            FileWriter fw = new FileWriter(file, true);
+            FileWriter fw = new FileWriter(file, append);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter out = new PrintWriter(bw);
             for (String s : strings) {
