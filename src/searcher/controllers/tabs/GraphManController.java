@@ -3,7 +3,7 @@ package searcher.controllers.tabs;
 import common.domain.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.DirectoryChooser;
@@ -21,7 +21,7 @@ import searcher.controllers.BaseController;
 public class GraphManController extends BaseController {
 
     @FXML
-    ChoiceBox choicesGraphTab;
+    ComboBox choicesGraphTab;
     @FXML
     TextField addNodeText;
     @FXML

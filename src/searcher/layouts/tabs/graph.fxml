@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.*?>
 
 
+<?import java.lang.String?>
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="searcher.controllers.tabs.GraphManController">
     <children>
@@ -46,11 +47,6 @@
                                 text="Importar Relacions"/>
                     </children>
                 </HBox>
-                <HBox GridPane.ColumnIndex="2" GridPane.rowIndex="2">
-                    <children>
-                        <TextField promptText="ID"/>
-                    </children>
-                </HBox>
                 <HBox GridPane.ColumnIndex="1" GridPane.rowIndex="2">
                     <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Afegir Node:"/>
@@ -58,19 +54,27 @@
                 </HBox>
                 <HBox GridPane.ColumnIndex="2" GridPane.rowIndex="3">
                     <children>
-                        <TextField promptText="Nom"/>
+                        <TextField fx:id="addNodeText" promptText="Valor"/>
                     </children>
                 </HBox>
                 <HBox GridPane.ColumnIndex="2" GridPane.rowIndex="4">
                     <children>
-                        <ComboBox prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node">
-
+                        <ComboBox fx:id="choicesGraphTab" prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="AUTHOR"/>
+                                    <String fx:value="CONF"/>
+                                    <String fx:value="PAPER"/>
+                                    <String fx:value="LABEL"/>
+                                    <String fx:value="TERM"/>
+                                </FXCollections>
+                            </items>
                         </ComboBox>
                     </children>
                 </HBox>
                 <HBox GridPane.ColumnIndex="4" GridPane.rowIndex="4">
                     <children>
-                        <Button text="&gt;&gt;"/>
+                        <Button onAction="#addNodeAction" text="&gt;&gt;"/>
                     </children>
                 </HBox>
                 <HBox GridPane.columnIndex="1" GridPane.rowIndex="5">
