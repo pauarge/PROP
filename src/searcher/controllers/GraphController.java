@@ -10,6 +10,7 @@ import org.graphstream.ui.view.Viewer;
 import searcher.models.NodeModel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.*;
 
 
@@ -223,7 +224,13 @@ public class GraphController {
                 ++cont;
             }
             graph.addAttribute("ui.stylesheet", "node { size: 15px; text-size: 15px; }");
-            graph.display();
+            Viewer viewer = graph.display();
+            View view = viewer.addDefaultView(false);
+            JFrame jFrame = new JFrame();
+            jFrame.add((Component) view);
+            jFrame.setDefaultCloseOperation(2);
+            jFrame.setSize(800, 600);
+            jFrame.setVisible(true);
         }
     }
 
