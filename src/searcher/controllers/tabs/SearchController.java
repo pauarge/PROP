@@ -96,34 +96,6 @@ public class SearchController extends BaseController {
         else buttonSearch.setText("Cerca");
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        tableResults.setRowFactory(this::graphEnabledRow);
-        idColumn.setCellValueFactory(cv -> new ReadOnlyStringWrapper(String.valueOf(cv.getValue().getNode().getId())));
-        nameColumn.setCellValueFactory(cv -> new ReadOnlyStringWrapper(cv.getValue().getNode().getValue()));
-        typeColumn.setCellValueFactory(cv -> new ReadOnlyStringWrapper(Utils.getName(cv.getValue().getNodeType())));
-
-        textSearchField.textProperty().addListener((o, ov, nv) -> switchSearchButtonText(nv.isEmpty()));
-        buttonSearch.setOnAction(e -> handleSearch());
-        textSearchField.setOnAction(e -> handleSearch());
-
-        tableResults.getSelectionModel().selectedItemProperty().addListener(
-                (o, ov, nv) -> buttonDetails.setDisable(nv == null)
-        );
-        buttonDetails.setOnAction(e -> openNodeDetails(tableResults.getSelectionModel().getSelectedItem()));
-    }
-
-    private TableRow<NodeModel> graphEnabledRow(TableView<NodeModel> tv) {
-        TableRow<NodeModel> row = new TableRow<>();
-        row.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                NodeModel model = row.getItem();
-                openNodeDetails(model);
-            }
-        });
-        return row;
-    }
-
     private boolean openNodeDetails(NodeModel model) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -149,4 +121,33 @@ public class SearchController extends BaseController {
             return false;
         }
     }
+
+    private TableRow<NodeModel> graphEnabledRow(TableView<NodeModel> tv) {
+        TableRow<NodeModel> row = new TableRow<>();
+        row.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                NodeModel model = row.getItem();
+                openNodeDetails(model);
+            }
+        });
+        return row;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        tableResults.setRowFactory(this::graphEnabledRow);
+        idColumn.setCellValueFactory(cv -> new ReadOnlyStringWrapper(String.valueOf(cv.getValue().getNode().getId())));
+        nameColumn.setCellValueFactory(cv -> new ReadOnlyStringWrapper(cv.getValue().getNode().getValue()));
+        typeColumn.setCellValueFactory(cv -> new ReadOnlyStringWrapper(Utils.getName(cv.getValue().getNodeType())));
+
+        textSearchField.textProperty().addListener((o, ov, nv) -> switchSearchButtonText(nv.isEmpty()));
+        buttonSearch.setOnAction(e -> handleSearch());
+        textSearchField.setOnAction(e -> handleSearch());
+
+        tableResults.getSelectionModel().selectedItemProperty().addListener(
+                (o, ov, nv) -> buttonDetails.setDisable(nv == null)
+        );
+        buttonDetails.setOnAction(e -> openNodeDetails(tableResults.getSelectionModel().getSelectedItem()));
+    }
+
 }

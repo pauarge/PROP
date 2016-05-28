@@ -5,12 +5,12 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.util.Callback;
 import javafx.util.StringConverter;
 import searcher.controllers.BaseController;
+import searcher.controllers.GraphController;
+import searcher.models.NodeModel;
 import searcher.models.RelevanceModel;
 import searcher.models.SemanticPath;
 
@@ -31,7 +31,7 @@ public class RelevanceController extends BaseController {
     @FXML
     private TableView searchTable;
     @FXML
-    private TableColumn<RelevanceModel, String>  oIdColumn;
+    private TableColumn<RelevanceModel, String> oIdColumn;
     @FXML
     private TableColumn<RelevanceModel, String> oNameColumn;
     @FXML
@@ -47,7 +47,7 @@ public class RelevanceController extends BaseController {
         NodeType originType = rel.getInitialType();
         NodeType destinyType = rel.getFinalType();
 
-        if(relevanceOriginId.getText().isEmpty()){
+        if (relevanceOriginId.getText().isEmpty()) {
             gs = new FreeSearch(graph, rel.getPath());
         } else {
             int originId = Integer.parseInt(relevanceOriginId.getText());
@@ -57,7 +57,7 @@ public class RelevanceController extends BaseController {
             } catch (GraphException e) {
                 e.printStackTrace();
             }
-            if(relevanceDestinyId.getText().isEmpty()) {
+            if (relevanceDestinyId.getText().isEmpty()) {
                 gs = new OriginSearch(graph, rel.getPath(), originNode);
             } else {
                 int destinyId = Integer.parseInt(relevanceDestinyId.getText());
@@ -75,7 +75,7 @@ public class RelevanceController extends BaseController {
         gs.search();
         ArrayList<GraphSearch.Result> results = gs.getResults();
         ObservableList<RelevanceModel> res = FXCollections.observableArrayList();
-        for(GraphSearch.Result r : results){
+        for (GraphSearch.Result r : results) {
             res.add(new RelevanceModel(r.from, r.to, r.hetesim));
         }
         searchTable.setItems(res);
@@ -91,9 +91,31 @@ public class RelevanceController extends BaseController {
                 if (path == null) return null;
                 return path.getName();
             }
+
             @Override
             public SemanticPath fromString(String string) {
                 return null;
+            }
+        });
+        searchTable.setRowFactory(new Callback<TableView, TableRow>() {
+            @Override
+            public TableRow call(TableView param) {
+                TableRow<RelevanceModel> row = new TableRow<>();
+                row.setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                        SemanticPath rel = (SemanticPath) choicesRelevance.getValue();
+                        NodeType originType = rel.getInitialType();
+                        NodeType destinyType = rel.getFinalType();
+                        RelevanceModel model = row.getItem();
+                        GraphController gc = new GraphController(graph);
+                        try {
+                            gc.getShortestPath(model.getOrigin(), originType, model.getDestiny(), destinyType);
+                        } catch (GraphException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                return row;
             }
         });
         oIdColumn.setCellValueFactory(cv -> new ReadOnlyStringWrapper(String.valueOf(cv.getValue().getOrigin().getId())));

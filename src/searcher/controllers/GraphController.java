@@ -205,9 +205,7 @@ public class GraphController {
 
     }
 
-    public void getShortestPath(int start, NodeType ntype1, int finish, NodeType ntype2) throws GraphException {
-        Node ini = g.getNode(ntype1, start);
-        Node fi = g.getNode(ntype2, finish);
+    public void getShortestPath(Node ini, NodeType ntype1, Node fi, NodeType ntype2) throws GraphException {
         ArrayList<Pair<Node, NodeType>> path = shortestPath(ini, ntype1, fi, ntype2);
         if (path != null) {
             org.graphstream.graph.Graph graph = new SingleGraph("Prova");
@@ -225,13 +223,6 @@ public class GraphController {
                 ++cont;
             }
             graph.addAttribute("ui.stylesheet", "node { size: 15px; text-size: 15px; }");
-           /* Viewer viewer = graph.display();
-            View view = viewer.addDefaultView(false);
-            JFrame jFrame = new JFrame();
-            jFrame.add((Component) view);
-            jFrame.setDefaultCloseOperation(jFrame.EXIT_ON_CLOSE);
-            jFrame.setSize(800, 600);
-            jFrame.setVisible(true);*/
             graph.display();
         }
     }
