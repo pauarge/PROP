@@ -22,17 +22,23 @@
         </HBox>
         <HBox GridPane.columnIndex="1" GridPane.rowIndex="2">
             <children>
-                <Button mnemonicParsing="false" onAction="#addNodeAction" text="Afegir Nodes"/>
+                <Button onAction="#addNodeAction" text="Afegir Nodes"/>
             </children>
         </HBox>
         <HBox GridPane.columnIndex="2" GridPane.rowIndex="2">
             <children>
-                <Button mnemonicParsing="false" onAction="#addNodeAction" text="Exportar Nodes"/>
+                <Button onAction="#addNodeAction" text="Exportar Nodes"/>
             </children>
         </HBox>
         <HBox GridPane.columnIndex="5" GridPane.rowIndex="2">
             <children>
-                <Button onAction="#exportRelationsAction" mnemonicParsing="false" prefHeight="27.0" prefWidth="134.0" text="Exportar Relacions"/>
+                <Button onAction="#exportRelationsAction" prefHeight="27.0" prefWidth="134.0"
+                        text="Exportar Relacions"/>
+            </children>
+        </HBox>
+        <HBox GridPane.columnIndex="5" GridPane.rowIndex="3">
+            <children>
+                <Button prefHeight="27.0" prefWidth="134.0" text="Importar Relacions"/>
             </children>
         </HBox>
         <HBox GridPane.ColumnIndex="1" GridPane.rowIndex="3">
@@ -54,7 +60,7 @@
         </HBox>
         <HBox GridPane.ColumnIndex="4" GridPane.rowIndex="3">
             <children>
-                <Button mnemonicParsing="false" text="&gt;&gt;"/>
+                <Button text="&gt;&gt;"/>
             </children>
         </HBox>
         <HBox GridPane.ColumnIndex="1" GridPane.rowIndex="4">
@@ -76,7 +82,7 @@
         </HBox>
         <HBox GridPane.ColumnIndex="4" GridPane.rowIndex="4">
             <children>
-                <Button mnemonicParsing="false" text="&gt;&gt;"/>
+                <Button text="&gt;&gt;"/>
             </children>
         </HBox>
 
@@ -93,17 +99,17 @@
         </HBox>
         <HBox GridPane.columnIndex="1" GridPane.rowIndex="6">
             <children>
-                <Button mnemonicParsing="false" text="Afegir Arestes"/>
+                <Button text="Afegir Arestes"/>
             </children>
         </HBox>
         <HBox GridPane.columnIndex="2" GridPane.rowIndex="6">
             <children>
-                <Button mnemonicParsing="false" text="Eliminar Arestes"/>
+                <Button text="Eliminar Arestes"/>
             </children>
         </HBox>
         <HBox GridPane.columnIndex="5" GridPane.rowIndex="6">
             <children>
-                <Button mnemonicParsing="false" onAction="#exportGraphAction" text="Exportar Graf"/>
+                <Button onAction="#exportGraphAction" text="Exportar Graf"/>
             </children>
         </HBox>
         <HBox prefHeight="14.0" prefWidth="106.0" GridPane.ColumnIndex="1" GridPane.rowIndex="7">
@@ -125,7 +131,7 @@
         </HBox>
         <HBox GridPane.ColumnIndex="4" GridPane.rowIndex="8">
             <children>
-                <Button mnemonicParsing="false" text="&gt;&gt;"/>
+                <Button text="&gt;&gt;"/>
             </children>
         </HBox>
         <HBox GridPane.columnIndex="2" GridPane.rowIndex="9">
@@ -167,7 +173,7 @@
         </HBox>
         <HBox GridPane.ColumnIndex="4" GridPane.rowIndex="10">
             <children>
-                <Button mnemonicParsing="false" text="&gt;&gt;"/>
+                <Button text="&gt;&gt;"/>
             </children>
         </HBox>
 

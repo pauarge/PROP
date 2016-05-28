@@ -20,110 +20,69 @@ public class GraphController {
     private Map<Node, Boolean> vis = new HashMap<>();
     private Map<Pair<Node, NodeType>, Pair<Node, NodeType>> prev = new HashMap<>();
 
-    private ArrayList<Relation> getRelationsForTypeAux(NodeType type){
+    private ArrayList<Relation> getRelationsForTypeAux(NodeType type) {
         ArrayList<Relation> toReturn = new ArrayList<>();
         Iterator it = g.getRelationIterator();
         while (it.hasNext()) {
             Relation r = (Relation) it.next();
-            if(r.getNodeTypeA() == type || r.getNodeTypeB() == type){
+            if (r.getNodeTypeA() == type || r.getNodeTypeB() == type) {
                 toReturn.add(r);
             }
         }
         return toReturn;
     }
 
-    private String assign(NodeType n) {
-        String s;
-        if (n == NodeType.AUTHOR) s = "A";
-        else if (n == NodeType.PAPER) s = "P";
-        else if (n == NodeType.CONF) s = "C";
-        else if (n == NodeType.LABEL) s = "L";
-        else s = "T";
-        return s;
-    }
-
-    private String assignColor(String s) {
-        switch (s) {
-            case "A":
+    private String assignColor(NodeType nt) {
+        switch (nt) {
+            case AUTHOR:
                 return "red";
-            case "P":
+            case PAPER:
                 return "black";
-            case "C":
+            case CONF:
                 return "yellow";
-            case "T":
+            case TERM:
                 return "green";
             default:
                 return "blue";
         }
     }
 
-    private NodeType getNodeType(String s) {
-        NodeType nt;
-        switch (s) {
-            case "A":
-                nt = NodeType.AUTHOR;
-                break;
-            case "P":
-                nt = NodeType.PAPER;
-                break;
-            case "C":
-                nt = NodeType.CONF;
-                break;
-            case "L":
-                nt = NodeType.LABEL;
-                break;
-            default:
-                nt = NodeType.TERM;
-                break;
-        }
-        return nt;
-    }
-
     private void spanNode(org.graphstream.graph.Graph graph, common.domain.Graph g, Node nodeInici, NodeType nt, int distance, Set<String> nAfegits) throws GraphException {
         if (distance > 0) {
-            String s;
-            String color;
-            s = assign(nt);
             ArrayList<Relation> rs = getRelationsForTypeAux(nt);
             for (Relation rel : rs) {
                 ArrayList<Node> node_list = g.getEdges(rel.getId(), nodeInici);
                 for (Node n2 : node_list) {
-                    String s2;
-                    if (nt == rel.getNodeTypeA()) s2 = assign(rel.getNodeTypeB());
-                    else s2 = assign(rel.getNodeTypeA());
-                    color = assignColor(s2);
-                    String id = s2 + Integer.toString(n2.getId());
+                    NodeType nt2;
+                    if (nt == rel.getNodeTypeA()) nt2 = rel.getNodeTypeB();
+                    else nt2 = rel.getNodeTypeA();
+                    String id = nt2.toString() + Integer.toString(n2.getId());
                     if (!nAfegits.contains(id)) {
                         org.graphstream.graph.Node node = graph.addNode(id);
                         node.addAttribute("ui.label", n2.getValue());
-                        graph.getNode(id).addAttribute("ui.style", "fill-color:" + color + ";");
-                        graph.addEdge(id, s + Integer.toString(nodeInici.getId()), s2 + Integer.toString(n2.getId()));
+                        graph.getNode(id).addAttribute("ui.style", "fill-color:" + assignColor(nt2) + ";");
+                        graph.addEdge(id, nt + Integer.toString(nodeInici.getId()), nt2 + Integer.toString(n2.getId()));
                         nAfegits.add(id);
-                        int d = distance - 1;
-                        spanNode(graph, g, n2, getNodeType(s2), d, nAfegits);
+                        spanNode(graph, g, n2, nt2, distance - 1, nAfegits);
                     }
                 }
             }
         }
     }
 
-    public GraphController(Graph g){
+    public GraphController(Graph g) {
         this.g = g;
     }
 
     public SwingNode getGraph(NodeModel model, int distance) {
         Node node = model.getNode();
-        NodeType nodeType = model.getNodeType();
-        int ni = node.getId();
-        String valor = node.getValue();
-        return getGraph(ni, valor, nodeType, distance);
+        return getGraph(node.getId(), node.getValue(), model.getNodeType(), distance);
     }
 
     private SwingNode getGraph(int ni, String valor, NodeType nt, int distance) {
         org.graphstream.graph.Graph graph = new SingleGraph("Prova");
-        String s = assign(nt);
-        String color = assignColor(s);
-        String id = s + Integer.toString(ni);
+        String color = assignColor(nt);
+        String id = nt.toString() + Integer.toString(ni);
         org.graphstream.graph.Node nIni = graph.addNode(id);
         graph.getNode(nIni.getId()).addAttribute("ui.style", "fill-color:" + color + ";");
         nIni.addAttribute("ui.label", valor);
@@ -136,17 +95,6 @@ public class GraphController {
         }
         graph.addAttribute("ui.stylesheet", "node { size: 15px; text-size: 15px; }");
 
-      /*  Viewer viewer = new Viewer(graph, Viewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
-        View view = viewer.addDefaultView(false);
-        viewer.enableAutoLayout();
-        viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.EXIT);
-        SwingNode swingNode = new SwingNode();
-        swingNode.setContent((JComponent) view);
-        AnchorPane anchorPane = new AnchorPane();
-        anchorPane.getChildren().add(swingNode);
-        return anchorPane;*/
-
-
         Viewer viewer = new Viewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
         View view = viewer.addDefaultView(false);
         viewer.enableAutoLayout();
@@ -158,19 +106,13 @@ public class GraphController {
         anchorPane.getChildren().add(swingNode);
         return swingNode;
 
-        /*JFrame jFrame = new JFrame();
-        jFrame.add((Component) view);
-        jFrame.setDefaultCloseOperation(jFrame.DISPOSE_ON_CLOSE);
-        jFrame.setSize(800, 600);
-        jFrame.setVisible(true);
-        return new AnchorPane();*/
     }
 
     private ArrayList shortestPath(Node start, NodeType ntStart, Node finish, NodeType ntFinish) throws GraphException {
         ArrayList<Pair<Node, NodeType>> directions = new ArrayList<>();
         Queue<Pair<Node, NodeType>> q = new LinkedList<>();
         Node current = start;
-        Pair<Node,NodeType> p = new Pair<>(current, ntStart);
+        Pair<Node, NodeType> p = new Pair<>(current, ntStart);
         q.add(p);
         vis.put(current, true);
         while (!q.isEmpty()) {
@@ -195,10 +137,6 @@ public class GraphController {
                 }
             }
         }
-        if (!current.equals(finish)) {
-            System.out.println("can't reach destination");
-            return null;
-        }
         for (Pair<Node, NodeType> i = new Pair<>(finish, ntFinish); i != null; i = prev.get(i)) {
             directions.add(i);
         }
@@ -208,30 +146,27 @@ public class GraphController {
 
     public void getShortestPath(Node ini, NodeType ntype1, Node fi, NodeType ntype2) throws GraphException {
         ArrayList<Pair<Node, NodeType>> path = shortestPath(ini, ntype1, fi, ntype2);
-        if (path != null) {
-            org.graphstream.graph.Graph graph = new SingleGraph("Prova");
-            int cont = 0;
-            for (Pair<Node, NodeType> n : path) {
-                String s = assign(n.getValue());
-                String id = s + Integer.toString(n.getKey().getId());
-                org.graphstream.graph.Node nodeUI = graph.addNode(id);
-                String color = assignColor(s);
-                graph.getNode(nodeUI.getId()).addAttribute("ui.style", "fill-color:" + color + ";");
-                nodeUI.addAttribute("ui.label", n.getKey().getValue());
-                if (cont > 0) {
-                    graph.addEdge(id, graph.getNode(cont - 1).getId(), id);
-                }
-                ++cont;
+        org.graphstream.graph.Graph graph = new SingleGraph("Prova");
+        int cont = 0;
+        for (Pair<Node, NodeType> n : path) {
+            String id = n.getValue() + Integer.toString(n.getKey().getId());
+            org.graphstream.graph.Node nodeUI = graph.addNode(id);
+            String color = assignColor(n.getValue());
+            graph.getNode(nodeUI.getId()).addAttribute("ui.style", "fill-color:" + color + ";");
+            nodeUI.addAttribute("ui.label", n.getKey().getValue());
+            if (cont > 0) {
+                graph.addEdge(id, graph.getNode(cont - 1).getId(), id);
             }
-            graph.addAttribute("ui.stylesheet", "node { size: 15px; text-size: 15px; }");
-            Viewer viewer = graph.display();
-            View view = viewer.addDefaultView(false);
-            JFrame jFrame = new JFrame();
-            jFrame.add((Component) view);
-            jFrame.setDefaultCloseOperation(2);
-            jFrame.setSize(800, 600);
-            jFrame.setVisible(true);
+            ++cont;
         }
+        graph.addAttribute("ui.stylesheet", "node { size: 15px; text-size: 15px; }");
+        Viewer viewer = graph.display();
+        View view = viewer.addDefaultView(false);
+        JFrame jFrame = new JFrame();
+        jFrame.add((Component) view);
+        jFrame.setDefaultCloseOperation(2);
+        jFrame.setSize(800, 600);
+        jFrame.setVisible(true);
     }
 
 }

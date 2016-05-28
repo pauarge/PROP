@@ -18,8 +18,10 @@
                     <items>
                         <CheckMenuItem fx:id="terminalToggle" mnemonicParsing="false" onAction="#handleTerminalToggle"
                                        text="Terminal"/>
-                        <MenuItem mnemonicParsing="false" onAction="#backToLandingAction" text="Tornar a l'inici"/>
                         <SeparatorMenuItem/>
+                        <MenuItem mnemonicParsing="false" text="Guardar sessió"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem mnemonicParsing="false" onAction="#backToLandingAction" text="Tornar a l'inici"/>
                         <MenuItem mnemonicParsing="false" onAction="#closeWindowAction" text="Tancar"/>
                     </items>
                 </Menu>
