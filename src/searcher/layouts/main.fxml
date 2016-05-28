@@ -19,6 +19,7 @@
                         <CheckMenuItem fx:id="terminalToggle" mnemonicParsing="false" onAction="#handleTerminalToggle"
                                        text="Terminal"/>
                         <SeparatorMenuItem/>
+                        <MenuItem mnemonicParsing="false" text="Importar sessió"/>
                         <MenuItem mnemonicParsing="false" text="Guardar sessió"/>
                         <SeparatorMenuItem/>
                         <MenuItem mnemonicParsing="false" onAction="#backToLandingAction" text="Tornar a l'inici"/>
