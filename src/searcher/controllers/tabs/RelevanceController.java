@@ -1,14 +1,21 @@
 package searcher.controllers.tabs;
 
 import common.domain.*;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.util.StringConverter;
 import searcher.controllers.BaseController;
+import searcher.models.RelevanceModel;
 import searcher.models.SemanticPath;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -21,11 +28,21 @@ public class RelevanceController extends BaseController {
     private TextField relevanceDestinyId;
     @FXML
     ChoiceBox<SemanticPath> choicesRelevance;
+    @FXML
+    private TableView searchTable;
+    @FXML
+    private TableColumn<RelevanceModel, String>  oIdColumn;
+    @FXML
+    private TableColumn<RelevanceModel, String> oNameColumn;
+    @FXML
+    private TableColumn<RelevanceModel, String> dIdColumn;
+    @FXML
+    private TableColumn<RelevanceModel, String> dNameColumn;
+    @FXML
+    private TableColumn<RelevanceModel, String> relevanceColumn;
 
     @FXML
     private void relevanceSearchAction() {
-        System.out.println("Starting relevance search");
-
         SemanticPath rel = (SemanticPath) choicesRelevance.getValue();
         NodeType originType = rel.getInitialType();
         NodeType destinyType = rel.getFinalType();
@@ -56,18 +73,13 @@ public class RelevanceController extends BaseController {
         }
 
         gs.search();
-        StringBuilder sb = new StringBuilder();
-        for (GraphSearch.Result r : gs.getResults()) {
-            sb.append("From: ");
-            sb.append(r.from.getValue());
-            sb.append("\t\t\tTo: ");
-            sb.append(r.to.getValue());
-            sb.append("\t\t\tRelevance: ");
-            sb.append(r.hetesim);
-            sb.append('\n');
+        ArrayList<GraphSearch.Result> results = gs.getResults();
+        ObservableList<RelevanceModel> res = FXCollections.observableArrayList();
+        for(GraphSearch.Result r : results){
+            res.add(new RelevanceModel(r.from, r.to, r.hetesim));
         }
+        searchTable.setItems(res);
 
-        System.out.println(sb);
     }
 
     @Override
@@ -79,12 +91,16 @@ public class RelevanceController extends BaseController {
                 if (path == null) return null;
                 return path.getName();
             }
-
             @Override
             public SemanticPath fromString(String string) {
                 return null;
             }
         });
+        oIdColumn.setCellValueFactory(cv -> new ReadOnlyStringWrapper(String.valueOf(cv.getValue().getOrigin().getId())));
+        oNameColumn.setCellValueFactory(cv -> new ReadOnlyStringWrapper(String.valueOf(cv.getValue().getOrigin().getValue())));
+        dIdColumn.setCellValueFactory(cv -> new ReadOnlyStringWrapper(String.valueOf(cv.getValue().getDestiny().getId())));
+        dNameColumn.setCellValueFactory(cv -> new ReadOnlyStringWrapper(String.valueOf(cv.getValue().getDestiny().getValue())));
+        relevanceColumn.setCellValueFactory(cv -> new ReadOnlyStringWrapper(String.valueOf(cv.getValue().getRelevance())));
     }
 
 }

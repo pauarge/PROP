@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
@@ -51,31 +50,11 @@
                                 <Label text="Fes una cerca per tenir resultats"/>
                             </placeholder>
                             <columns>
-                                <TableColumn text="id Origen">
-                                    <cellValueFactory>
-                                        <PropertyValueFactory property="id_orgn"/>
-                                    </cellValueFactory>
-                                </TableColumn>
-                                <TableColumn text="Valor Origen">
-                                    <cellValueFactory>
-                                        <PropertyValueFactory property="value_orgn"/>
-                                    </cellValueFactory>
-                                </TableColumn>
-                                <TableColumn text="id Destí">
-                                    <cellValueFactory>
-                                        <PropertyValueFactory property="id_dest"/>
-                                    </cellValueFactory>
-                                </TableColumn>
-                                <TableColumn text="Valor Destí">
-                                    <cellValueFactory>
-                                        <PropertyValueFactory property="value_dest"/>
-                                    </cellValueFactory>
-                                </TableColumn>
-                                <TableColumn text="Rellevància">
-                                    <cellValueFactory>
-                                        <PropertyValueFactory property="relevance"/>
-                                    </cellValueFactory>
-                                </TableColumn>
+                                <TableColumn fx:id="oIdColumn" text="id Origen"/>
+                                <TableColumn fx:id="oNameColumn" text="Valor Origen"/>
+                                <TableColumn fx:id="dIdColumn" text="id Destí"/>
+                                <TableColumn fx:id="dNameColumn" text="Valor Destí"/>
+                                <TableColumn fx:id="relevanceColumn" text="Rellevància"/>
                             </columns>
                             <columnResizePolicy>
                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>

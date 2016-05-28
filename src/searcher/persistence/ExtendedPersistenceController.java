@@ -1,6 +1,5 @@
 package searcher.persistence;
 
-
 import common.domain.Graph;
 import common.persistence.PersistenceController;
 import javafx.collections.ObservableList;

@@ -27,24 +27,35 @@ import java.util.ResourceBundle;
 
 
 public class SearchController extends BaseController {
-    @FXML private AnchorPane root;
 
-    @FXML private TextField textSearchField;
-    @FXML private Button buttonSearch;
-
-    @FXML private CheckBox checkAuthors;
-    @FXML private CheckBox checkConfs;
-    @FXML private CheckBox checkLabels;
-    @FXML private CheckBox checkPapers;
-    @FXML private CheckBox checkTerms;
-
-    @FXML private Button buttonDetails;
-
-    @FXML private TableView<NodeModel> tableResults;
-    @FXML private TableColumn<NodeModel, String> idColumn;
-    @FXML private TableColumn<NodeModel, String> nameColumn;
-    @FXML private TableColumn<NodeModel, String> typeColumn;
-    @FXML private Label placeHolder;
+    @FXML
+    private AnchorPane root;
+    @FXML
+    private TextField textSearchField;
+    @FXML
+    private Button buttonSearch;
+    @FXML
+    private CheckBox checkAuthors;
+    @FXML
+    private CheckBox checkConfs;
+    @FXML
+    private CheckBox checkLabels;
+    @FXML
+    private CheckBox checkPapers;
+    @FXML
+    private CheckBox checkTerms;
+    @FXML
+    private Button buttonDetails;
+    @FXML
+    private TableView<NodeModel> tableResults;
+    @FXML
+    private TableColumn<NodeModel, String> idColumn;
+    @FXML
+    private TableColumn<NodeModel, String> nameColumn;
+    @FXML
+    private TableColumn<NodeModel, String> typeColumn;
+    @FXML
+    private Label placeHolder;
 
     private ObservableList<NodeModel> filterNodes(String filter, NodeType type) {
         ObservableList<NodeModel> ret = FXCollections.observableArrayList();
