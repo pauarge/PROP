@@ -1,5 +1,6 @@
 package common.persistence;
 
+import java.io.File;
 import java.util.*;
 
 import common.domain.*;
@@ -27,26 +28,24 @@ public class PersistenceController {
         }
     }
 
-    public void exportNode(String path, NodeType n){
-        List<String> strings = new ArrayList<>();
-        Container<Node>.ContainerIterator it = graph.getNodeIterator(n);
-        while (it.hasNext()) {
-            NodeSerializer serializer = new NodeSerializer(it.next());
-            strings.add(serializer.getData());
-        }
-        writeFile(path, strings, true);
-    }
-
     public void exportNodes(String path) {
+        path = handlePath(path);
         for (NodeType n : NodeType.values()) {
             if (n != LABEL) {
                 String filepath = path + n.toString().toLowerCase() + ".txt";
-                exportNode(filepath, n);
+                List<String> strings = new ArrayList<>();
+                Container<Node>.ContainerIterator it = graph.getNodeIterator(n);
+                while (it.hasNext()) {
+                    NodeSerializer serializer = new NodeSerializer(it.next());
+                    strings.add(serializer.getData());
+                }
+                writeFile(filepath, strings, true);
             }
         }
     }
 
     public void exportEdges(String path) {
+        path = handlePath(path);
         Map<String, ArrayList<String>> strings = new HashMap<String, ArrayList<String>>();
 
         Iterator iter = graph.getRelationIterator();
@@ -99,9 +98,11 @@ public class PersistenceController {
     }
 
     public void importNodes(String path) {
+        path = handlePath(path);
         for (NodeType n : NodeType.values()) {
-            if (n != LABEL) {
-                String filepath = path + n.toString().toLowerCase() + ".txt";
+            String filepath = path + n.toString().toLowerCase() + ".txt";
+            File f = new File(filepath);
+            if (f.exists() && !f.isDirectory()) {
                 List<String> strings = readFile(filepath);
                 for (String s : strings) {
                     NodeSerializer serializer = new NodeSerializer(s);
@@ -117,6 +118,7 @@ public class PersistenceController {
     }
 
     public void importEdges(String path) {
+        path = handlePath(path);
         List<String> files = readDir(path);
         for (String f : files) {
             String relation_name = null;
@@ -155,13 +157,11 @@ public class PersistenceController {
     }
 
     public void importGraph(String path) {
-        path = handlePath(path);
         importNodes(path);
         importEdges(path);
     }
 
     public void exportGraph(String path) {
-        path = handlePath(path);
         clearDir(path);
         exportNodes(path);
         exportEdges(path);

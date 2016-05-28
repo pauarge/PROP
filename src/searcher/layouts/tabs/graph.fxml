@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
@@ -10,76 +9,59 @@
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="searcher.controllers.tabs.GraphManController">
     <children>
-        <GridPane fx:id="gridPane" alignment="CENTER" cacheHint="SCALE" centerShape="false" hgap="8.0"
+        <GridPane fx:id="gridPane" alignment="CENTER" cacheHint="SCALE" centerShape="false" hgap="8"
                   maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="542.0" prefWidth="777.0" scaleShape="false"
                   vgap="6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                   AnchorPane.topAnchor="0.0">
             <children>
-                <HBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <HBox GridPane.columnIndex="1" GridPane.rowIndex="0">
                     <children>
                         <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Node"/>
                     </children>
                 </HBox>
-                <HBox GridPane.columnIndex="5" GridPane.rowIndex="1">
+                <HBox GridPane.columnIndex="5" GridPane.rowIndex="0">
                     <children>
                         <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Relacions"/>
                     </children>
                 </HBox>
-                <HBox GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <HBox GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <children>
-                        <Button onAction="#addNodeAction" text="Afegir Nodes"/>
+                        <Button onAction="#importNodesAction" text="Importar Nodes"/>
                     </children>
                 </HBox>
-                <HBox GridPane.columnIndex="2" GridPane.rowIndex="2">
+                <HBox GridPane.columnIndex="2" GridPane.rowIndex="1">
                     <children>
-                        <Button onAction="#addNodeAction" text="Exportar Nodes"/>
+                        <Button onAction="#exportNodesAction" text="Exportar Nodes"/>
                     </children>
                 </HBox>
-                <HBox GridPane.columnIndex="5" GridPane.rowIndex="2">
+                <HBox GridPane.columnIndex="5" GridPane.rowIndex="1">
                     <children>
                         <Button onAction="#exportRelationsAction" prefHeight="27.0" prefWidth="134.0"
                                 text="Exportar Relacions"/>
                     </children>
                 </HBox>
-                <HBox GridPane.columnIndex="5" GridPane.rowIndex="3">
+                <HBox GridPane.columnIndex="5" GridPane.rowIndex="2">
                     <children>
                         <Button onAction="#importRelationsAction" prefHeight="27.0" prefWidth="134.0"
                                 text="Importar Relacions"/>
                     </children>
                 </HBox>
-                <HBox GridPane.ColumnIndex="1" GridPane.rowIndex="3">
-                    <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Eliminar Node:"/>
-                    </children>
-                </HBox>
-                <HBox GridPane.ColumnIndex="2" GridPane.rowIndex="3">
+                <HBox GridPane.ColumnIndex="2" GridPane.rowIndex="2">
                     <children>
                         <TextField promptText="ID"/>
                     </children>
                 </HBox>
-                <HBox GridPane.ColumnIndex="3" GridPane.rowIndex="3">
-                    <children>
-                        <ComboBox prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node">
-
-                        </ComboBox>
-                    </children>
-                </HBox>
-                <HBox GridPane.ColumnIndex="4" GridPane.rowIndex="3">
-                    <children>
-                        <Button text="&gt;&gt;"/>
-                    </children>
-                </HBox>
-                <HBox GridPane.ColumnIndex="1" GridPane.rowIndex="4">
+                <HBox GridPane.ColumnIndex="1" GridPane.rowIndex="2">
                     <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Afegir Node:"/>
                     </children>
                 </HBox>
-                <HBox GridPane.ColumnIndex="2" GridPane.rowIndex="4">
+                <HBox GridPane.ColumnIndex="2" GridPane.rowIndex="3">
                     <children>
                         <TextField promptText="Nom"/>
                     </children>
                 </HBox>
-                <HBox GridPane.ColumnIndex="3" GridPane.rowIndex="4">
+                <HBox GridPane.ColumnIndex="2" GridPane.rowIndex="4">
                     <children>
                         <ComboBox prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node">
 
@@ -91,8 +73,6 @@
                         <Button text="&gt;&gt;"/>
                     </children>
                 </HBox>
-
-
                 <HBox GridPane.columnIndex="1" GridPane.rowIndex="5">
                     <children>
                         <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Arestes"/>
@@ -100,25 +80,24 @@
                 </HBox>
                 <HBox GridPane.ColumnIndex="5" GridPane.rowIndex="5">
                     <children>
-                        <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Graf"/>
+                        <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Sessió"/>
                     </children>
                 </HBox>
                 <HBox GridPane.columnIndex="1" GridPane.rowIndex="6">
                     <children>
-                        <Button text="Afegir Arestes"/>
+                        <Button onAction="#importEdgesAction" text="Importar Arestes"/>
                     </children>
                 </HBox>
                 <HBox GridPane.columnIndex="2" GridPane.rowIndex="6">
                     <children>
-                        <Button text="Eliminar Arestes"/>
+                        <Button onAction="#exportEdgesAction" text="Exportar Arestes"/>
                     </children>
                 </HBox>
                 <HBox GridPane.columnIndex="5" GridPane.rowIndex="6">
                     <children>
-                        <Button onAction="#exportGraphAction" text="Exportar Graf"/>
+                        <Button onAction="#exportSessionAction" text="Exportar Sessió"/>
                     </children>
                 </HBox>
-
             </children>
             <columnConstraints>
                 <ColumnConstraints/>
@@ -130,16 +109,13 @@
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints/>
-                <RowConstraints/>
                 <RowConstraints maxHeight="38.0" minHeight="31.0" prefHeight="33.0"/>
+                <RowConstraints maxHeight="29.0" minHeight="16.0" prefHeight="27.0"/>
                 <RowConstraints maxHeight="29.0" minHeight="16.0" prefHeight="27.0"/>
                 <RowConstraints maxHeight="77.0" minHeight="19.0" prefHeight="74.0"/>
                 <RowConstraints maxHeight="53.0" minHeight="0.0" prefHeight="17.0"/>
                 <RowConstraints/>
             </rowConstraints>
-            <padding>
-                <Insets left="-70.0" top="-125.0"/>
-            </padding>
         </GridPane>
     </children>
 </AnchorPane>

@@ -14,6 +14,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static searcher.Utils.launchAlert;
+
 import searcher.controllers.BaseController;
 
 
@@ -27,12 +28,79 @@ public class GraphManController extends BaseController {
     GridPane gridPane;
 
     @FXML
-    private void exportGraphAction() {
+    private void importNodesAction() {
+        Stage stage = (Stage) gridPane.getScene().getWindow();
+        DirectoryChooser dc = new DirectoryChooser();
+        final File selectedDirectory = dc.showDialog(stage);
+        if (selectedDirectory != null) {
+            pc.importNodes(selectedDirectory.getAbsolutePath());
+            launchAlert(stage, "S'han importat correctament els nodes.", Alert.AlertType.INFORMATION);
+        }
+    }
+
+    @FXML
+    private void exportNodesAction() {
+        Stage stage = (Stage) gridPane.getScene().getWindow();
+        DirectoryChooser dc = new DirectoryChooser();
+        final File selectedDirectory = dc.showDialog(stage);
+        if (selectedDirectory != null) {
+            pc.exportNodes(selectedDirectory.getAbsolutePath());
+            launchAlert(stage, "S'han exportat correctament els nodes.", Alert.AlertType.INFORMATION);
+        }
+    }
+
+    @FXML
+    private void exportRelationsAction() {
+        Stage stage = (Stage) gridPane.getScene().getWindow();
+        DirectoryChooser dc = new DirectoryChooser();
+        final File selectedDirectory = dc.showDialog(stage);
+        if (selectedDirectory != null) {
+            pc.exportSemanticPaths(selectedDirectory.getAbsolutePath());
+            launchAlert(stage, "S'han exportat correctament les relacions.", Alert.AlertType.INFORMATION);
+        }
+    }
+
+    @FXML
+    private void importRelationsAction() {
+        Stage stage = (Stage) gridPane.getScene().getWindow();
+        DirectoryChooser dc = new DirectoryChooser();
+        final File selectedDirectory = dc.showDialog(stage);
+        if (selectedDirectory != null) {
+            pc.importSemanticPaths(selectedDirectory.getAbsolutePath());
+            launchAlert(stage, "S'han importat correctament les relacions.", Alert.AlertType.INFORMATION);
+        }
+    }
+
+    @FXML
+    private void importEdgesAction() {
+        Stage stage = (Stage) gridPane.getScene().getWindow();
+        DirectoryChooser dc = new DirectoryChooser();
+        final File selectedDirectory = dc.showDialog(stage);
+        if (selectedDirectory != null) {
+            pc.importEdges(selectedDirectory.getAbsolutePath());
+            launchAlert(stage, "S'han importat correctament les arestes.", Alert.AlertType.INFORMATION);
+        }
+    }
+
+    @FXML
+    private void exportEdgesAction() {
+        Stage stage = (Stage) gridPane.getScene().getWindow();
+        DirectoryChooser dc = new DirectoryChooser();
+        final File selectedDirectory = dc.showDialog(stage);
+        if (selectedDirectory != null) {
+            pc.exportEdges(selectedDirectory.getAbsolutePath());
+            launchAlert(stage, "S'han exportat correctament les arestes.", Alert.AlertType.INFORMATION);
+        }
+    }
+
+    @FXML
+    private void exportSessionAction() {
         Stage stage = (Stage) gridPane.getScene().getWindow();
         DirectoryChooser dc = new DirectoryChooser();
         final File selectedDirectory = dc.showDialog(stage);
         if (selectedDirectory != null) {
             pc.exportGraph(selectedDirectory.getAbsolutePath());
+            launchAlert(stage, "S'han exportat la sessió.", Alert.AlertType.INFORMATION);
         }
     }
 
@@ -54,27 +122,6 @@ public class GraphManController extends BaseController {
         addNodeText.clear();
     }
 
-    @FXML
-    private void exportRelationsAction() {
-        Stage stage = (Stage) gridPane.getScene().getWindow();
-        DirectoryChooser dc = new DirectoryChooser();
-        final File selectedDirectory = dc.showDialog(stage);
-        if(selectedDirectory != null){
-            pc.exportSemanticPaths(selectedDirectory.getAbsolutePath());
-            launchAlert(stage, "S'han exportat correctament les relacions.", Alert.AlertType.INFORMATION);
-        }
-    }
-
-    @FXML
-    private void importRelationsAction(){
-        Stage stage = (Stage) gridPane.getScene().getWindow();
-        DirectoryChooser dc = new DirectoryChooser();
-        final File selectedDirectory = dc.showDialog(stage);
-        if(selectedDirectory != null){
-            pc.importSemanticPaths(selectedDirectory.getAbsolutePath());
-            launchAlert(stage, "S'han importat correctament les relacions.", Alert.AlertType.INFORMATION);
-        }
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
