@@ -1,7 +1,6 @@
 package searcher.controllers;
 
 import common.domain.Graph;
-import common.persistence.PersistenceController;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import searcher.Utils;
 import searcher.controllers.tabs.GraphManController;
 import searcher.controllers.tabs.RelationsController;
 import searcher.controllers.tabs.SearchController;
@@ -30,6 +30,23 @@ public class MainController extends BaseController {
     private BorderPane borderPane;
     @FXML
     private TabPane mainTabs;
+    @FXML
+    private Parent tabSearch;
+    @FXML
+    private SearchController tabSearchController;
+    @FXML
+    private Parent tabGraphMan;
+    @FXML
+    private GraphManController tabGraphManController;
+    @FXML
+    private Parent tabRelations;
+    @FXML
+    private RelationsController tabRelationsController;
+    @FXML
+    private Parent tabTerminal;
+    @FXML
+    private TuiController tabTerminalController;
+
     @FXML
     private CheckMenuItem terminalToggle;
     @FXML
@@ -92,6 +109,7 @@ public class MainController extends BaseController {
     public MainController() {
         graph = new Graph();
         semanticPaths = FXCollections.observableArrayList();
+        edgeTypes = FXCollections.observableArrayList(Utils.getDefaultRelations());
         pc = new ExtendedPersistenceController(graph, semanticPaths);
     }
 

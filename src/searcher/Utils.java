@@ -131,17 +131,28 @@ public final class Utils {
         }
 
         if (a == NodeType.AUTHOR) {
-            if (b == NodeType.LABEL) return new Relation(a,b,"AuthorLabel",3);
-            if (b == NodeType.PAPER) return new Relation(a,b,"AuthorPaper",0);
+            if (b == NodeType.LABEL) return new Relation(a,b,"Especialitat",3);
+            if (b == NodeType.PAPER) return new Relation(a,b,"Autor",0);
         } else if (a == NodeType.CONF) {
-            if (b == NodeType.LABEL) return new Relation(a,b,"ConferenceLabel",5);
-            if (b == NodeType.PAPER) return new Relation(a,b,"ConferencePaper",1);
+            if (b == NodeType.LABEL) return new Relation(a,b,"Tematica",5);
+            if (b == NodeType.PAPER) return new Relation(a,b,"Presentacio",1);
         } else if (a == NodeType.LABEL) {
-            if (b == NodeType.PAPER) return new Relation(b,a,"PaperLabel",4);
+            if (b == NodeType.PAPER) return new Relation(b,a,"Ambit",4);
         } else if (a == NodeType.PAPER) {
-            if (b == NodeType.TERM) return new Relation(b,a,"TermPaper",2);
+            if (b == NodeType.TERM) return new Relation(b,a,"Apareix",2);
         }
         return null;
+    }
+
+    public static Relation[] getDefaultRelations() {
+        Relation[] ret = new Relation[6];
+        ret[3] = new Relation(NodeType.AUTHOR,NodeType.LABEL,"Especialitat",3);
+        ret[0] = new Relation(NodeType.AUTHOR,NodeType.PAPER,"Autor",0);
+        ret[5] = new Relation(NodeType.CONF,NodeType.LABEL,"Tematica",5);
+        ret[1] = new Relation(NodeType.CONF,NodeType.PAPER,"Presentacio",1);
+        ret[4] = new Relation(NodeType.PAPER,NodeType.LABEL,"Ambit",4);
+        ret[2] = new Relation(NodeType.TERM,NodeType.PAPER,"Apareix",2);
+        return ret;
     }
 
     public static String convertToText(NodeType[] nodeTypes) {

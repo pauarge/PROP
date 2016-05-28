@@ -128,7 +128,6 @@ public class SearchController extends BaseController {
 
             NodeViewController controller = loader.getController();
             controller.setModel(model);
-            controller.loadGraph();
 
             root.setDisable(true);
             nodeInfoStage.showAndWait();

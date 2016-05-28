@@ -1,6 +1,7 @@
 package searcher.controllers;
 
 import common.domain.Graph;
+import common.domain.Relation;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import searcher.models.SemanticPath;
@@ -12,6 +13,7 @@ public abstract class BaseController implements Initializable {
     protected static Graph graph;
     protected static ExtendedPersistenceController pc;
     protected static ObservableList<SemanticPath> semanticPaths;
+    protected static ObservableList<Relation> edgeTypes;
 
     public void setGraph(Graph g) {
         graph = g;
