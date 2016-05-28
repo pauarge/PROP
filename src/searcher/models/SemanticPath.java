@@ -37,6 +37,15 @@ public class SemanticPath {
         return getName() + ": " + Utils.convertToText(this.toTypeArray());
     }
 
+    public String convertToExport() {
+        String path = getName() + ": ";
+        if (toTypeArray().length == 0) return path;
+        for (NodeType nt : toTypeArray()) {
+            path = path.concat(nt.toString() + " - ");
+        }
+        return path.substring(0, path.length() - 3);
+    }
+
     public String getName() {
         return name.get();
     }

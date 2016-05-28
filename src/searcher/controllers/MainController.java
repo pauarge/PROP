@@ -31,23 +31,6 @@ public class MainController extends BaseController {
     @FXML
     private TabPane mainTabs;
     @FXML
-    private Parent tabSearch;
-    @FXML
-    private SearchController tabSearchController;
-    @FXML
-    private Parent tabGraphMan;
-    @FXML
-    private GraphManController tabGraphManController;
-    @FXML
-    private Parent tabRelations;
-    @FXML
-    private RelationsController tabRelationsController;
-    @FXML
-    private Parent tabTerminal;
-    @FXML
-    private TuiController tabTerminalController;
-
-    @FXML
     private CheckMenuItem terminalToggle;
     @FXML
     private Tab terminalSelector;
@@ -101,9 +84,8 @@ public class MainController extends BaseController {
     }
 
     public void importDir(String path) {
-        System.out.println("Starting graph import...");
         pc.importGraph(path);
-        System.out.println("Graph import finished.");
+        pc.importSemanticPaths(path);
     }
 
     public MainController() {
