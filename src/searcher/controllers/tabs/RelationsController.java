@@ -136,11 +136,11 @@ public class RelationsController extends BaseController {
 
     private void handleAddNewPath() {
         if(addNameField.getText().isEmpty()){
-            launchAlert((Stage) pathList.getScene().getWindow(), "Has d'afegir un nom per la relació");
+            launchAlert((Stage) pathList.getScene().getWindow(), "Has d'afegir un nom per la relació", Alert.AlertType.WARNING);
             return;
         }
         if(newPath.size() < 2){
-            launchAlert((Stage) pathList.getScene().getWindow(), "Has d'afegir almenys dos tipus de nodes per la relació");
+            launchAlert((Stage) pathList.getScene().getWindow(), "Has d'afegir almenys dos tipus de nodes per la relació", Alert.AlertType.WARNING);
             return;
         }
         NodeType prv = newPath.get(0);

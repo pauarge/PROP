@@ -1,205 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane alignment="CENTER" cacheHint="SCALE" centerShape="false" hgap="11" maxHeight="-Infinity" maxWidth="-Infinity"
-          minHeight="340.0" minWidth="480.0" prefHeight="542.0" prefWidth="777.0" scaleShape="false" vgap="10"
-          xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="searcher.controllers.tabs.GraphManController" fx:id="gridPane">
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="searcher.controllers.tabs.GraphManController">
     <children>
-        <HBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <GridPane fx:id="gridPane" alignment="CENTER" cacheHint="SCALE" centerShape="false" hgap="8.0"
+                  maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="542.0" prefWidth="777.0" scaleShape="false"
+                  vgap="6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                  AnchorPane.topAnchor="0.0">
             <children>
-                <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Node"/>
-            </children>
-        </HBox>
-        <HBox GridPane.columnIndex="5" GridPane.rowIndex="1">
-            <children>
-                <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Relacions"/>
-            </children>
-        </HBox>
-        <HBox GridPane.columnIndex="1" GridPane.rowIndex="2">
-            <children>
-                <Button onAction="#addNodeAction" text="Afegir Nodes"/>
-            </children>
-        </HBox>
-        <HBox GridPane.columnIndex="2" GridPane.rowIndex="2">
-            <children>
-                <Button onAction="#addNodeAction" text="Exportar Nodes"/>
-            </children>
-        </HBox>
-        <HBox GridPane.columnIndex="5" GridPane.rowIndex="2">
-            <children>
-                <Button onAction="#exportRelationsAction" prefHeight="27.0" prefWidth="134.0"
-                        text="Exportar Relacions"/>
-            </children>
-        </HBox>
-        <HBox GridPane.columnIndex="5" GridPane.rowIndex="3">
-            <children>
-                <Button prefHeight="27.0" prefWidth="134.0" text="Importar Relacions"/>
-            </children>
-        </HBox>
-        <HBox GridPane.ColumnIndex="1" GridPane.rowIndex="3">
-            <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Eliminar Node:"/>
-            </children>
-        </HBox>
-        <HBox GridPane.ColumnIndex="2" GridPane.rowIndex="3">
-            <children>
-                <TextField promptText="ID"/>
-            </children>
-        </HBox>
-        <HBox GridPane.ColumnIndex="3" GridPane.rowIndex="3">
-            <children>
-                <ComboBox prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node">
+                <HBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <children>
+                        <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Node"/>
+                    </children>
+                </HBox>
+                <HBox GridPane.columnIndex="5" GridPane.rowIndex="1">
+                    <children>
+                        <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Relacions"/>
+                    </children>
+                </HBox>
+                <HBox GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <children>
+                        <Button onAction="#addNodeAction" text="Afegir Nodes"/>
+                    </children>
+                </HBox>
+                <HBox GridPane.columnIndex="2" GridPane.rowIndex="2">
+                    <children>
+                        <Button onAction="#addNodeAction" text="Exportar Nodes"/>
+                    </children>
+                </HBox>
+                <HBox GridPane.columnIndex="5" GridPane.rowIndex="2">
+                    <children>
+                        <Button onAction="#exportRelationsAction" prefHeight="27.0" prefWidth="134.0"
+                                text="Exportar Relacions"/>
+                    </children>
+                </HBox>
+                <HBox GridPane.columnIndex="5" GridPane.rowIndex="3">
+                    <children>
+                        <Button onAction="#importRelationsAction" prefHeight="27.0" prefWidth="134.0"
+                                text="Importar Relacions"/>
+                    </children>
+                </HBox>
+                <HBox GridPane.ColumnIndex="1" GridPane.rowIndex="3">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Eliminar Node:"/>
+                    </children>
+                </HBox>
+                <HBox GridPane.ColumnIndex="2" GridPane.rowIndex="3">
+                    <children>
+                        <TextField promptText="ID"/>
+                    </children>
+                </HBox>
+                <HBox GridPane.ColumnIndex="3" GridPane.rowIndex="3">
+                    <children>
+                        <ComboBox prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node">
 
-                </ComboBox>
-            </children>
-        </HBox>
-        <HBox GridPane.ColumnIndex="4" GridPane.rowIndex="3">
-            <children>
-                <Button text="&gt;&gt;"/>
-            </children>
-        </HBox>
-        <HBox GridPane.ColumnIndex="1" GridPane.rowIndex="4">
-            <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Afegir Node:"/>
-            </children>
-        </HBox>
-        <HBox GridPane.ColumnIndex="2" GridPane.rowIndex="4">
-            <children>
-                <TextField promptText="Nom"/>
-            </children>
-        </HBox>
-        <HBox GridPane.ColumnIndex="3" GridPane.rowIndex="4">
-            <children>
-                <ComboBox prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node">
+                        </ComboBox>
+                    </children>
+                </HBox>
+                <HBox GridPane.ColumnIndex="4" GridPane.rowIndex="3">
+                    <children>
+                        <Button text="&gt;&gt;"/>
+                    </children>
+                </HBox>
+                <HBox GridPane.ColumnIndex="1" GridPane.rowIndex="4">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Afegir Node:"/>
+                    </children>
+                </HBox>
+                <HBox GridPane.ColumnIndex="2" GridPane.rowIndex="4">
+                    <children>
+                        <TextField promptText="Nom"/>
+                    </children>
+                </HBox>
+                <HBox GridPane.ColumnIndex="3" GridPane.rowIndex="4">
+                    <children>
+                        <ComboBox prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node">
 
-                </ComboBox>
-            </children>
-        </HBox>
-        <HBox GridPane.ColumnIndex="4" GridPane.rowIndex="4">
-            <children>
-                <Button text="&gt;&gt;"/>
-            </children>
-        </HBox>
+                        </ComboBox>
+                    </children>
+                </HBox>
+                <HBox GridPane.ColumnIndex="4" GridPane.rowIndex="4">
+                    <children>
+                        <Button text="&gt;&gt;"/>
+                    </children>
+                </HBox>
 
 
-        <HBox GridPane.columnIndex="1" GridPane.rowIndex="5">
-            <children>
-                <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Arestes"/>
-            </children>
-        </HBox>
-        <HBox GridPane.ColumnIndex="5" GridPane.rowIndex="5">
-            <children>
-                <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Graf"/>
-            </children>
-        </HBox>
-        <HBox GridPane.columnIndex="1" GridPane.rowIndex="6">
-            <children>
-                <Button text="Afegir Arestes"/>
-            </children>
-        </HBox>
-        <HBox GridPane.columnIndex="2" GridPane.rowIndex="6">
-            <children>
-                <Button text="Eliminar Arestes"/>
-            </children>
-        </HBox>
-        <HBox GridPane.columnIndex="5" GridPane.rowIndex="6">
-            <children>
-                <Button onAction="#exportGraphAction" text="Exportar Graf"/>
-            </children>
-        </HBox>
-        <HBox prefHeight="14.0" prefWidth="106.0" GridPane.ColumnIndex="1" GridPane.rowIndex="7">
-            <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Eliminar Aresta:"/>
-            </children>
-        </HBox>
-        <HBox GridPane.ColumnIndex="2" GridPane.rowIndex="7">
-            <children>
-                <TextField promptText="ID Node1"/>
-            </children>
-        </HBox>
-        <HBox GridPane.ColumnIndex="3" GridPane.rowIndex="7">
-            <children>
-                <ComboBox prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node1">
+                <HBox GridPane.columnIndex="1" GridPane.rowIndex="5">
+                    <children>
+                        <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Arestes"/>
+                    </children>
+                </HBox>
+                <HBox GridPane.ColumnIndex="5" GridPane.rowIndex="5">
+                    <children>
+                        <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Graf"/>
+                    </children>
+                </HBox>
+                <HBox GridPane.columnIndex="1" GridPane.rowIndex="6">
+                    <children>
+                        <Button text="Afegir Arestes"/>
+                    </children>
+                </HBox>
+                <HBox GridPane.columnIndex="2" GridPane.rowIndex="6">
+                    <children>
+                        <Button text="Eliminar Arestes"/>
+                    </children>
+                </HBox>
+                <HBox GridPane.columnIndex="5" GridPane.rowIndex="6">
+                    <children>
+                        <Button onAction="#exportGraphAction" text="Exportar Graf"/>
+                    </children>
+                </HBox>
 
-                </ComboBox>
             </children>
-        </HBox>
-        <HBox GridPane.ColumnIndex="4" GridPane.rowIndex="8">
-            <children>
-                <Button text="&gt;&gt;"/>
-            </children>
-        </HBox>
-        <HBox GridPane.columnIndex="2" GridPane.rowIndex="9">
-            <children>
-                <TextField promptText="ID Node1"/>
-            </children>
-        </HBox>
-        <HBox GridPane.columnIndex="2" GridPane.rowIndex="10">
-            <children>
-                <TextField promptText="ID Node2"/>
-            </children>
-        </HBox>
-        <HBox GridPane.columnIndex="3" GridPane.rowIndex="9">
-            <children>
-                <ComboBox prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node1"/>
-            </children>
-        </HBox>
-        <HBox GridPane.columnIndex="3" GridPane.rowIndex="10">
-            <children>
-                <ComboBox prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node2"/>
-            </children>
-        </HBox>
-        <HBox GridPane.ColumnIndex="1" GridPane.rowIndex="9">
-            <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Afegir Aresta:"/>
-            </children>
-        </HBox>
-        <HBox GridPane.ColumnIndex="2" GridPane.rowIndex="8">
-            <children>
-                <TextField promptText="ID Node2"/>
-            </children>
-        </HBox>
-        <HBox GridPane.ColumnIndex="3" GridPane.rowIndex="8">
-            <children>
-                <ComboBox prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node2">
-
-                </ComboBox>
-            </children>
-        </HBox>
-        <HBox GridPane.ColumnIndex="4" GridPane.rowIndex="10">
-            <children>
-                <Button text="&gt;&gt;"/>
-            </children>
-        </HBox>
-
+            <columnConstraints>
+                <ColumnConstraints/>
+                <ColumnConstraints maxWidth="123.0" minWidth="110.0" prefWidth="122.0"/>
+                <ColumnConstraints maxWidth="187.0" minWidth="167.0" prefWidth="168.0"/>
+                <ColumnConstraints maxWidth="150.0" minWidth="130.0" prefWidth="133.0"/>
+                <ColumnConstraints maxWidth="100.0" minWidth="40.0" prefWidth="82.0"/>
+                <ColumnConstraints maxWidth="170.0" minWidth="91.0" prefWidth="135.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints/>
+                <RowConstraints/>
+                <RowConstraints maxHeight="38.0" minHeight="31.0" prefHeight="33.0"/>
+                <RowConstraints maxHeight="29.0" minHeight="16.0" prefHeight="27.0"/>
+                <RowConstraints maxHeight="77.0" minHeight="19.0" prefHeight="74.0"/>
+                <RowConstraints maxHeight="53.0" minHeight="0.0" prefHeight="17.0"/>
+                <RowConstraints/>
+            </rowConstraints>
+            <padding>
+                <Insets left="-70.0" top="-125.0"/>
+            </padding>
+        </GridPane>
     </children>
-    <columnConstraints>
-        <ColumnConstraints/>
-        <ColumnConstraints maxWidth="123.0" minWidth="110.0" prefWidth="122.0"/>
-        <ColumnConstraints maxWidth="187.0" minWidth="167.0" prefWidth="168.0"/>
-        <ColumnConstraints maxWidth="150.0" minWidth="130.0" prefWidth="133.0"/>
-        <ColumnConstraints maxWidth="100.0" minWidth="40.0" prefWidth="82.0"/>
-        <ColumnConstraints maxWidth="170.0" minWidth="91.0" prefWidth="135.0"/>
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints/>
-        <RowConstraints/>
-        <RowConstraints maxHeight="38.0" minHeight="31.0" prefHeight="33.0"/>
-        <RowConstraints maxHeight="29.0" minHeight="16.0" prefHeight="27.0"/>
-        <RowConstraints maxHeight="77.0" minHeight="19.0" prefHeight="74.0"/>
-        <RowConstraints maxHeight="53.0" minHeight="0.0" prefHeight="17.0"/>
-        <RowConstraints maxHeight="54.0" minHeight="0.0" prefHeight="32.0"/>
-        <RowConstraints maxHeight="41.0" minHeight="0.0" prefHeight="16.0"/>
-        <RowConstraints maxHeight="46.0" minHeight="0.0" prefHeight="33.0"/>
-        <RowConstraints maxHeight="54.0" minHeight="19.0" prefHeight="27.0"/>
-        <RowConstraints maxHeight="50.0" minHeight="0.0" prefHeight="19.0"/>
-    </rowConstraints>
-    <padding>
-        <Insets left="-70.0" top="-125.0"/>
-    </padding>
-</GridPane>
+</AnchorPane>
