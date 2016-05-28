@@ -27,7 +27,7 @@
                 </HBox>
                 <HBox GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <children>
-                        <Button onAction="#addNodeAction" text="Afegir Nodes"/>
+                        <Button onAction="#importNodesAction" text="Importar Nodes"/>
                     </children>
                 </HBox>
                 <HBox GridPane.columnIndex="2" GridPane.rowIndex="2">

@@ -27,6 +27,17 @@ public class GraphManController extends BaseController {
     GridPane gridPane;
 
     @FXML
+    private void importNodesAction(){
+        Stage stage = (Stage) gridPane.getScene().getWindow();
+        DirectoryChooser dc = new DirectoryChooser();
+        final File selectedDirectory = dc.showDialog(stage);
+        if (selectedDirectory != null) {
+            pc.importNodes(selectedDirectory.getAbsolutePath());
+            launchAlert(stage, "S'han importat correctament els nodes.", Alert.AlertType.INFORMATION);
+        }
+    }
+
+    @FXML
     private void exportGraphAction() {
         Stage stage = (Stage) gridPane.getScene().getWindow();
         DirectoryChooser dc = new DirectoryChooser();
