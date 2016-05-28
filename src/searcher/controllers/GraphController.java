@@ -196,15 +196,13 @@ public class GraphController {
         }
         if (!current.equals(finish)) {
             System.out.println("can't reach destination");
+            return null;
         }
-        else {
-            for (Pair<Node, NodeType> i = new Pair<>(finish, ntFinish); i != null; i = prev.get(i)) {
-                directions.add(i);
-            }
-            Collections.reverse(directions);
-            return directions;
+        for (Pair<Node, NodeType> i = new Pair<>(finish, ntFinish); i != null; i = prev.get(i)) {
+            directions.add(i);
         }
-        return null;
+        return directions;
+
     }
 
     public void getShortestPath(int start, NodeType ntype1, int finish, NodeType ntype2) throws GraphException {
@@ -226,8 +224,6 @@ public class GraphController {
                 }
                 ++cont;
             }
-
-
             graph.addAttribute("ui.stylesheet", "node { size: 15px; text-size: 15px; }");
            /* Viewer viewer = graph.display();
             View view = viewer.addDefaultView(false);
