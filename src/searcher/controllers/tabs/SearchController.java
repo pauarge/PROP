@@ -99,7 +99,7 @@ public class SearchController extends BaseController {
     private boolean openNodeDetails(NodeModel model) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(searcher.Main.class.getResource("layouts/node.fxml"));
+            loader.setLocation(searcher.Main.class.getResource("layouts/popups/node.fxml"));
             AnchorPane pane = loader.load();
 
             Stage nodeInfoStage = new Stage();
