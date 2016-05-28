@@ -1,4 +1,4 @@
-package searcher.controllers;
+package searcher.controllers.popups;
 
 import common.domain.Node;
 import common.domain.NodeType;
@@ -14,6 +14,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import searcher.Utils;
+import searcher.controllers.BaseController;
+import searcher.controllers.GraphController;
 import searcher.models.NodeModel;
 import searcher.models.NodeModelRelated;
 

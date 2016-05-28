@@ -16,7 +16,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import searcher.Utils;
 import searcher.controllers.BaseController;
-import searcher.controllers.NodeViewController;
+import searcher.controllers.popups.NodeViewController;
 import searcher.models.NodeModel;
 
 import java.io.IOException;

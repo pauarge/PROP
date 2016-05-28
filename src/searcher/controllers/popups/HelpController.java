@@ -1,4 +1,4 @@
-package searcher.controllers;
+package searcher.controllers.popups;
 
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
