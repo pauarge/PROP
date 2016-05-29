@@ -4,7 +4,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+import javax.swing.*;
+import java.net.URL;
 
 
 public class Main extends Application {
@@ -20,6 +24,14 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("layouts/landing.fxml"));
         primaryStage.setTitle(APP_TITLE);
+        try {
+            URL iconURL = Main.class.getResource("img/magnifier.png");
+            java.awt.Image image = new ImageIcon(iconURL).getImage();
+            com.apple.eawt.Application.getApplication().setDockIconImage(image);
+        } catch (Exception e) {
+            // Won't work on Windows or Linux.
+        }
+        primaryStage.getIcons().add(new Image("file:img/magnifier.png"));
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
