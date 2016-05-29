@@ -23,19 +23,17 @@
                     <RowConstraints minHeight="10.0" prefHeight="30.0"/>
                     <RowConstraints/>
                 </rowConstraints>
-                <children>
-                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Relació semàntica"/>
-                    <ChoiceBox fx:id="choicesRelevance" prefWidth="150.0" GridPane.rowIndex="1">
-                    </ChoiceBox>
-                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID del node d'inici"
-                          GridPane.rowIndex="2"/>
-                    <TextField fx:id="relevanceOriginId" GridPane.rowIndex="3"/>
-                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID del node de destí"
-                          GridPane.rowIndex="4"/>
-                    <TextField fx:id="relevanceDestinyId" GridPane.rowIndex="5"/>
-                    <Button mnemonicParsing="false" onAction="#relevanceSearchAction" text="Cercar"
-                            GridPane.rowIndex="6"/>
-                </children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Relació semàntica"/>
+                <ChoiceBox fx:id="choicesRelevance" prefWidth="150.0" GridPane.rowIndex="1">
+                </ChoiceBox>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID del node d'inici"
+                      GridPane.rowIndex="2"/>
+                <TextField fx:id="relevanceOriginId" GridPane.rowIndex="3"/>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID del node de destí"
+                      GridPane.rowIndex="4"/>
+                <TextField fx:id="relevanceDestinyId" GridPane.rowIndex="5"/>
+                <Button mnemonicParsing="false" onAction="#relevanceSearchAction" text="Cercar"
+                        GridPane.rowIndex="6"/>
             </GridPane>
         </AnchorPane>
         <AnchorPane>

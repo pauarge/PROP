@@ -16,6 +16,7 @@ import searcher.models.SemanticPath;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 
 public class RelevanceController extends BaseController {
@@ -74,9 +75,7 @@ public class RelevanceController extends BaseController {
         gs.search();
         ArrayList<GraphSearch.Result> results = gs.getResults();
         ObservableList<RelevanceModel> res = FXCollections.observableArrayList();
-        for (GraphSearch.Result r : results) {
-            res.add(new RelevanceModel(r.from, r.to, r.hetesim));
-        }
+        res.addAll(results.stream().map(r -> new RelevanceModel(r.from, r.to, r.hetesim)).collect(Collectors.toList()));
         searchTable.setItems(res);
 
     }
@@ -96,26 +95,23 @@ public class RelevanceController extends BaseController {
                 return null;
             }
         });
-        searchTable.setRowFactory(new Callback<TableView, TableRow>() {
-            @Override
-            public TableRow call(TableView param) {
-                TableRow<RelevanceModel> row = new TableRow<>();
-                row.setOnMouseClicked(event -> {
-                    if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                        SemanticPath rel = (SemanticPath) choicesRelevance.getValue();
-                        NodeType originType = rel.getInitialType();
-                        NodeType destinyType = rel.getFinalType();
-                        RelevanceModel model = row.getItem();
-                        GraphController gc = new GraphController(graph);
-                        try {
-                            gc.getShortestPath(model.getOrigin(), originType, model.getDestiny(), destinyType);
-                        } catch (GraphException e) {
-                            e.printStackTrace();
-                        }
+        searchTable.setRowFactory(param -> {
+            TableRow<RelevanceModel> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    SemanticPath rel = (SemanticPath) choicesRelevance.getValue();
+                    NodeType originType = rel.getInitialType();
+                    NodeType destinyType = rel.getFinalType();
+                    RelevanceModel model = row.getItem();
+                    GraphController gc = new GraphController(graph);
+                    try {
+                        gc.getShortestPath(model.getOrigin(), originType, model.getDestiny(), destinyType);
+                    } catch (GraphException e) {
+                        e.printStackTrace();
                     }
-                });
-                return row;
-            }
+                }
+            });
+            return row;
         });
         oIdColumn.setCellValueFactory(cv -> new ReadOnlyStringWrapper(String.valueOf(cv.getValue().getOrigin().getId())));
         oNameColumn.setCellValueFactory(cv -> new ReadOnlyStringWrapper(String.valueOf(cv.getValue().getOrigin().getValue())));
