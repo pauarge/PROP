@@ -56,6 +56,10 @@ public class SearchController extends BaseController {
     private TableColumn<NodeModel, String> typeColumn;
     @FXML
     private Label placeHolder;
+    @FXML
+    private Button buttonAdd;
+    @FXML
+    private Button buttonDelete;
 
     private ObservableList<NodeModel> filterNodes(String filter, NodeType type) {
         ObservableList<NodeModel> ret = FXCollections.observableArrayList();
@@ -144,10 +148,21 @@ public class SearchController extends BaseController {
         buttonSearch.setOnAction(e -> handleSearch());
         textSearchField.setOnAction(e -> handleSearch());
 
-        tableResults.getSelectionModel().selectedItemProperty().addListener(
-                (o, ov, nv) -> buttonDetails.setDisable(nv == null)
-        );
+        tableResults.getSelectionModel().selectedItemProperty().addListener((o, ov, nv) -> {
+            buttonDetails.setDisable(nv == null);
+            buttonDelete.setDisable(nv == null);
+        });
         buttonDetails.setOnAction(e -> openNodeDetails(tableResults.getSelectionModel().getSelectedItem()));
+        buttonDelete.setOnAction(event -> deleteNode(tableResults.getSelectionModel().getSelectedItem()));
+    }
+
+    private void deleteNode(NodeModel model) {
+        try {
+            graph.removeNode(model.getNodeType(), model.getNode().getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        tableResults.getItems().remove(model);
     }
 
 }

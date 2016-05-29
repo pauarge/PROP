@@ -45,8 +45,8 @@
             <ButtonBar layoutX="20.0" layoutY="349.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="0.0">
                <buttons>
                      <Button fx:id="buttonDetails" disable="true" mnemonicParsing="false" text="Detalls" />
-                  <Button mnemonicParsing="false" text="Afegeix" />
-                  <Button mnemonicParsing="false" text="Esborra" />
+                  <Button fx:id="buttonDelete" disable="true" mnemonicParsing="false" text="Esborra" />
+                  <Button fx:id="buttonAdd" mnemonicParsing="false" text="Afegeix" />
                </buttons>
                <padding>
                   <Insets right="20.0" />
