@@ -3,7 +3,6 @@ package searcher.controllers.tabs;
 import common.domain.Container;
 import common.domain.Node;
 import common.domain.NodeType;
-import common.domain.SimpleSearch;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import searcher.Utils;
@@ -32,8 +32,6 @@ public class SearchController extends BaseController {
     private AnchorPane root;
     @FXML
     private TextField textSearchField;
-    @FXML
-    private Button buttonSearch;
     @FXML
     private CheckBox checkAuthors;
     @FXML
@@ -60,17 +58,25 @@ public class SearchController extends BaseController {
     private Button buttonAdd;
     @FXML
     private Button buttonDelete;
+    @FXML
+    private GridPane paneAddNode;
+    @FXML
+    private TextField textAddNode;
+    @FXML
+    private ChoiceBox<NodeType> choiceAddNode;
+    @FXML
+    private AnchorPane paneTable;
+    @FXML
+    private GridPane paneFilter;
 
     private ObservableList<NodeModel> filterNodes(String filter, NodeType type) {
         ObservableList<NodeModel> ret = FXCollections.observableArrayList();
-        if (filter.isEmpty()) {
-            Container.ContainerIterator it = graph.getNodeIterator(type);
-            while (it.hasNext()) ret.add(new NodeModel((Node) it.next(), type));
-        } else {
-            SimpleSearch ss = new SimpleSearch(graph, type, filter);
-            ss.search();
-            ss.getResults().stream().forEach(r -> ret.add(new NodeModel(r.from, type)));
-        }
+        Container.ContainerIterator it = graph.getNodeIterator(type);
+        while (it.hasNext()) ret.add(new NodeModel((Node) it.next(), type));
+        ret = ret.filtered(nm ->
+                nm.getNode().getValue().toLowerCase().matches(".*"+filter.toLowerCase()+".*") ||
+                Integer.toString(nm.getNode().getId()).matches(".*"+filter+".*")
+        );
         return ret;
     }
 
@@ -93,11 +99,6 @@ public class SearchController extends BaseController {
         ObservableList<NodeModel> result = filterNodes(textSearchField.getText(), nodeTypes);
         tableResults.setItems(result);
         placeHolder.setText("No hi ha resultats");
-    }
-
-    private void switchSearchButtonText(boolean isEmpty) {
-        if (isEmpty) buttonSearch.setText("Mostra tots");
-        else buttonSearch.setText("Cerca");
     }
 
     private boolean openNodeDetails(NodeModel model) {
@@ -144,16 +145,65 @@ public class SearchController extends BaseController {
         nameColumn.setCellValueFactory(cv -> new ReadOnlyStringWrapper(cv.getValue().getNode().getValue()));
         typeColumn.setCellValueFactory(cv -> new ReadOnlyStringWrapper(Utils.getName(cv.getValue().getNodeType())));
 
-        textSearchField.textProperty().addListener((o, ov, nv) -> switchSearchButtonText(nv.isEmpty()));
-        buttonSearch.setOnAction(e -> handleSearch());
-        textSearchField.setOnAction(e -> handleSearch());
+        textSearchField.textProperty().addListener((o, ov, nv) -> handleSearch());
+        checkTerms.setOnAction(event -> handleSearch());
+        checkLabels.setOnAction(event -> handleSearch());
+        checkPapers.setOnAction(event -> handleSearch());
+        checkConfs.setOnAction(event -> handleSearch());
+        checkAuthors.setOnAction(event -> handleSearch());
 
         tableResults.getSelectionModel().selectedItemProperty().addListener((o, ov, nv) -> {
             buttonDetails.setDisable(nv == null);
             buttonDelete.setDisable(nv == null);
         });
         buttonDetails.setOnAction(e -> openNodeDetails(tableResults.getSelectionModel().getSelectedItem()));
-        buttonDelete.setOnAction(event -> deleteNode(tableResults.getSelectionModel().getSelectedItem()));
+        buttonDelete.setOnAction(e -> deleteNode(tableResults.getSelectionModel().getSelectedItem()));
+        buttonAdd.setOnAction(e -> newNode());
+
+        choiceAddNode.setItems(FXCollections.observableArrayList(NodeType.class.getEnumConstants()));
+        choiceAddNode.setConverter(Utils.nodeTypeStringConverter());
+        choiceAddNode.getSelectionModel().selectFirst();
+        textAddNode.textProperty().addListener((o, ov, nv) -> buttonAdd.setDisable(nv.isEmpty()));
+    }
+
+    private void newNode() {
+        paneFilter.setVisible(false);
+        paneAddNode.setVisible(true);
+        paneTable.setDisable(true);
+        buttonAdd.setText("Afegeix");
+        buttonAdd.setDisable(true);
+        buttonAdd.setOnAction(event -> addNode());
+        buttonDelete.setText("Enrere");
+        buttonDelete.setOnAction(event -> backFromAdd());
+        buttonDelete.setDisable(false);
+        buttonDetails.setVisible(false);
+        textAddNode.clear();
+    }
+
+    private void backFromAdd() {
+        buttonDetails.setVisible(true);
+        buttonDelete.setOnAction(e -> deleteNode(tableResults.getSelectionModel().getSelectedItem()));
+        buttonDelete.setText("Esborra");
+        buttonAdd.setOnAction(event -> newNode());
+        buttonAdd.setDisable(false);
+        buttonAdd.setText("Nou");
+        paneTable.setDisable(false);
+        paneAddNode.setVisible(false);
+        paneFilter.setVisible(true);
+    }
+
+    private void addNode() {
+        Node newNode;
+        try {
+            newNode = graph.createNode(choiceAddNode.getValue(), textAddNode.getText());
+            graph.addNode(newNode);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+        tableResults.getItems().add(new NodeModel(newNode, choiceAddNode.getValue()));
+        handleSearch();
+        backFromAdd();
     }
 
     private void deleteNode(NodeModel model) {
