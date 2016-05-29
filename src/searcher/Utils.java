@@ -94,6 +94,22 @@ public final class Utils {
         return nodeTypeStringConverter;
     }
 
+    private static StringConverter<Relation> relationStringConverter = new StringConverter<Relation>() {
+        @Override
+        public String toString(Relation object) {
+            return object.getValue();
+        }
+
+        @Override
+        public Relation fromString(String string) {
+            return null;
+        }
+    };
+
+    public static StringConverter<Relation> getRelationStringConverter() {
+        return relationStringConverter;
+    }
+
     private static String removePlural(String word) {
         if (word.matches(".+s")) {
             word = word.substring(0, word.length() - 1);

@@ -1,5 +1,6 @@
 package searcher.controllers.popups;
 
+import common.domain.Container;
 import common.domain.Node;
 import common.domain.NodeType;
 import common.domain.Relation;
@@ -8,11 +9,13 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.StringConverter;
 import searcher.Utils;
 import searcher.controllers.BaseController;
 import searcher.controllers.GraphController;
@@ -40,6 +43,12 @@ public class NodeViewController extends BaseController {
     @FXML private TableColumn<NodeModelRelated, String> columnEdge;
 
     @FXML private AnchorPane paneAddEdge;
+    @FXML private ChoiceBox<NodeType> choiceType;
+    @FXML private ChoiceBox<Relation> choiceRelation;
+    @FXML private ComboBox<Node> comboNode;
+    @FXML private Button buttonAdd;
+    @FXML private Button buttonBack;
+    private ObservableList<Node> comboFullList;
 
     @FXML private AnchorPane paneToolsEdge;
     @FXML private TextField textFilter;
@@ -49,12 +58,13 @@ public class NodeViewController extends BaseController {
 
     public void setModel(NodeModel model) {
         this.model = model;
-        loadGraph((int) (sliderDist.getValue()));
+        loadGraph();
         nodesWithEdge = this.getAllEdges();
         tableEdges.setItems(nodesWithEdge);
     }
 
-    private void loadGraph(int dist) {
+    private void loadGraph() {
+        int dist = distProperty.get();
         graphController = new GraphController(graph);
         SwingNode newNodeGraph = graphController.getGraph(model, dist);
         anchorGraph.getChildren().remove(nodeGraph);
@@ -73,7 +83,7 @@ public class NodeViewController extends BaseController {
         nodeGraph = null;
         distProperty = new SimpleIntegerProperty((int) sliderDist.getValue());
         sliderDist.valueProperty().addListener((o, ov, nv) -> distProperty.set((int)(nv.doubleValue()+0.5)));
-        distProperty.addListener((o, ov, nv) -> loadGraph(nv.intValue()));
+        distProperty.addListener((o, ov, nv) -> loadGraph());
 
         columnId.setCellValueFactory(cv -> new ReadOnlyStringWrapper(Integer.toString(cv.getValue().getNode().getId())));
         columnName.setCellValueFactory(cv -> new ReadOnlyStringWrapper(cv.getValue().getNode().getValue()));
@@ -86,6 +96,104 @@ public class NodeViewController extends BaseController {
         textFilter.textProperty().addListener((o, ov, nv) -> filterList(nv));
         buttonDelete.setOnAction(event -> deleteSelectedEdge());
         buttonNew.setOnAction(event -> openNewEdgeDialog());
+
+        choiceRelation.setConverter(Utils.getRelationStringConverter());
+        choiceRelation.getSelectionModel().selectedItemProperty().addListener((o, ov, nv) -> updateCombo());
+        choiceType.valueProperty().addListener((o, ov, nv) -> updateRelations());
+        choiceType.setItems(FXCollections.observableArrayList(NodeType.class.getEnumConstants()));
+        choiceType.setConverter(Utils.nodeTypeStringConverter());
+        comboNode.setEditable(false);
+        comboNode.setConverter(new StringConverter<Node>() {
+            @Override
+            public String toString(Node node) {
+                if (node == null) return "";
+                return node.getValue();
+            }
+
+            @Override
+            public Node fromString(String string) {
+                return null;
+            }
+        });
+        //comboNode.getEditor().textProperty().addListener((o, ov, nv) ->  filterCombo());
+        comboNode.valueProperty().addListener((o, ov, nv) -> buttonAdd.setDisable(nv == null));
+        buttonAdd.setOnAction(event ->  addEdge());
+        buttonBack.setOnAction(event -> backFromAddEdge());
+
+    }
+
+    private void backFromAddEdge() {
+        choiceType.setValue(null);
+        choiceRelation.setValue(null);
+        comboNode.setValue(null);
+        comboNode.hide();
+        paneEdges.getChildren().remove(paneAddEdge);
+        paneEdges.getChildren().add(paneToolsEdge);
+    }
+
+    private void addEdge() {
+        int rid = choiceRelation.getValue().getId();
+        Node node = comboNode.getValue();
+        try {
+            graph.addEdge(rid, model.getNode(), node);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        tableEdges.getItems().add(new NodeModelRelated(node, choiceType.getValue(), choiceRelation.getValue()));
+        loadGraph();
+        backFromAddEdge();
+    }
+
+    private void filterCombo() {
+        String filter = comboNode.getEditor().getText();
+        if (filter.isEmpty()) {
+            comboNode.setItems(comboFullList);
+        } else {
+            comboNode.setItems(comboFullList.filtered(
+                    node -> node.getValue().toLowerCase().matches(".*" + filter.toLowerCase() + ".*"))
+            );
+        }
+        comboNode.show();
+    }
+
+    private void updateCombo() {
+        Relation relation = choiceRelation.getValue();
+        if (relation == null) {
+            comboNode.setValue(null);
+            comboNode.setDisable(true);
+        } else {
+            NodeType sourceType = model.getNodeType();
+            NodeType targetType;
+            if (relation.getNodeTypeA() == sourceType) {
+                targetType = relation.getNodeTypeB();
+            } else {
+                targetType = relation.getNodeTypeA();
+            }
+
+            ObservableList<Node> nodes = FXCollections.observableArrayList();
+            Container.ContainerIterator it = graph.getNodeIterator(targetType);
+            while (it.hasNext()) nodes.add((Node) it.next());
+            nodesWithEdge.stream().forEach(nmr -> nodes.remove(nmr.getNode()));
+            comboFullList = nodes;
+            comboNode.setItems(nodes);
+            comboNode.setDisable(false);
+        }
+    }
+
+    private void updateRelations() {
+        NodeType type = choiceType.getValue();
+        if (type == null) {
+            choiceRelation.setValue(null);
+            choiceRelation.setDisable(true);
+        } else {
+            FilteredList<Relation> relations;
+            relations = edgeTypes.filtered(r -> r.getNodeTypeA() == type && r.getNodeTypeB() == model.getNodeType()
+                    || r.getNodeTypeB() == type && r.getNodeTypeA() == model.getNodeType()
+            );
+            choiceRelation.setItems(relations);
+            choiceRelation.setDisable(false);
+        }
     }
 
     private void openNewEdgeDialog() {
@@ -103,8 +211,9 @@ public class NodeViewController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        setModel(model);
-        filterList(textFilter.getText());
+
+        tableEdges.getItems().remove(nmr);
+        loadGraph();
     }
 
     private void enableFilter() {
