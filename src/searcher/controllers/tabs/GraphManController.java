@@ -118,7 +118,8 @@ public class GraphManController extends BaseController {
         String v = addNodeText.getText();
         Node node = graph.createNode(nt, v);
         graph.addNode(node);
-        System.out.println("Added node " + v);
+        Stage stage = (Stage) gridPane.getScene().getWindow();
+        launchAlert(stage, "S'ha afegit el node correctament.", Alert.AlertType.INFORMATION);
         addNodeText.clear();
     }
 

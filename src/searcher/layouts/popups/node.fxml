@@ -26,25 +26,23 @@
              tabClosingPolicy="UNAVAILABLE" tabMinHeight="25.0" AnchorPane.bottomAnchor="0.0"
              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Tab fx:id="tabGraph" text="Graf">
-            <content>
-                <BorderPane>
-                    <center>
-                        <AnchorPane fx:id="anchorGraph" prefHeight="200.0" prefWidth="200.0"/>
-                    </center>
-                    <bottom>
-                        <Slider fx:id="sliderDist" blockIncrement="1.0" majorTickUnit="1.0" max="3.0"
-                                minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true"
-                                value="1.0" BorderPane.alignment="CENTER">
-                            <BorderPane.margin>
-                                <Insets/>
-                            </BorderPane.margin>
-                            <padding>
-                                <Insets left="50.0" right="50.0"/>
-                            </padding>
-                        </Slider>
-                    </bottom>
-                </BorderPane>
-            </content>
+            <BorderPane>
+                <center>
+                    <AnchorPane fx:id="anchorGraph" prefHeight="200.0" prefWidth="200.0"/>
+                </center>
+                <bottom>
+                    <Slider fx:id="sliderDist" blockIncrement="1.0" majorTickUnit="1.0" max="3.0"
+                            minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true"
+                            value="1.0" BorderPane.alignment="CENTER">
+                        <BorderPane.margin>
+                            <Insets/>
+                        </BorderPane.margin>
+                        <padding>
+                            <Insets left="50.0" right="50.0"/>
+                        </padding>
+                    </Slider>
+                </bottom>
+            </BorderPane>
         </Tab>
         <Tab text="Relacions">
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -66,51 +64,49 @@
                         </columnResizePolicy>
                     </TableView>
                     <AnchorPane fx:id="paneAddEdge" prefHeight="150.0" prefWidth="600.0">
-                        <children>
-                            <GridPane layoutX="90.0" layoutY="-7.0" prefHeight="97.0"
-                                      prefWidth="600.0" AnchorPane.bottomAnchor="6.0"
-                                      AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0"
-                                      AnchorPane.topAnchor="0.0">
-                                <columnConstraints>
-                                    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES"
-                                                       maxWidth="143.0" minWidth="10.0"
-                                                       prefWidth="109.0"/>
-                                    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES"
-                                                       maxWidth="236.0" minWidth="10.0"
-                                                       prefWidth="151.0"/>
-                                    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES"
-                                                       maxWidth="219.0" minWidth="10.0"
-                                                       prefWidth="219.0"/>
-                                    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES"
-                                                       minWidth="10.0" prefWidth="100.0"/>
-                                </columnConstraints>
-                                <rowConstraints>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0"
-                                                    valignment="CENTER" vgrow="SOMETIMES"/>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0"
-                                                    vgrow="SOMETIMES"/>
-                                </rowConstraints>
-                                <children>
-                                    <ChoiceBox prefHeight="26.0" prefWidth="148.0"
-                                               GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                                    <ChoiceBox prefHeight="26.0" prefWidth="107.0"
-                                               GridPane.rowIndex="1"/>
-                                    <ComboBox editable="true" prefWidth="200.0"
-                                              GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-                                    <Label text="Tipus Node:"/>
-                                    <Label text="Tipus Aresta:" GridPane.columnIndex="1"/>
-                                    <Label text="Node:" GridPane.columnIndex="2"/>
-                                    <Button mnemonicParsing="false" prefWidth="80.0" text="Afegeix"
-                                            GridPane.columnIndex="3" GridPane.halignment="CENTER"/>
-                                    <Button mnemonicParsing="false" prefWidth="80.0" text="Enrere"
-                                            GridPane.columnIndex="3" GridPane.halignment="CENTER"
-                                            GridPane.rowIndex="1"/>
-                                </children>
-                                <padding>
-                                    <Insets top="6.0"/>
-                                </padding>
-                            </GridPane>
-                        </children>
+                        <GridPane layoutX="90.0" layoutY="-7.0" prefHeight="97.0"
+                                  prefWidth="600.0" AnchorPane.bottomAnchor="6.0"
+                                  AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0"
+                                  AnchorPane.topAnchor="0.0">
+                            <columnConstraints>
+                                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES"
+                                                   maxWidth="143.0" minWidth="10.0"
+                                                   prefWidth="109.0"/>
+                                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES"
+                                                   maxWidth="236.0" minWidth="10.0"
+                                                   prefWidth="151.0"/>
+                                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES"
+                                                   maxWidth="219.0" minWidth="10.0"
+                                                   prefWidth="219.0"/>
+                                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES"
+                                                   minWidth="10.0" prefWidth="100.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                valignment="CENTER" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                vgrow="SOMETIMES"/>
+                            </rowConstraints>
+                            <children>
+                                <ChoiceBox prefHeight="26.0" prefWidth="148.0"
+                                           GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                                <ChoiceBox prefHeight="26.0" prefWidth="107.0"
+                                           GridPane.rowIndex="1"/>
+                                <ComboBox editable="true" prefWidth="200.0"
+                                          GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                                <Label text="Tipus Node:"/>
+                                <Label text="Tipus Aresta:" GridPane.columnIndex="1"/>
+                                <Label text="Node:" GridPane.columnIndex="2"/>
+                                <Button mnemonicParsing="false" prefWidth="80.0" text="Afegeix"
+                                        GridPane.columnIndex="3" GridPane.halignment="CENTER"/>
+                                <Button mnemonicParsing="false" prefWidth="80.0" text="Enrere"
+                                        GridPane.columnIndex="3" GridPane.halignment="CENTER"
+                                        GridPane.rowIndex="1"/>
+                            </children>
+                            <padding>
+                                <Insets top="6.0"/>
+                            </padding>
+                        </GridPane>
                     </AnchorPane>
                     <AnchorPane fx:id="paneToolsEdge" prefHeight="70.0" prefWidth="600.0">
                         <Button fx:id="buttonFilter" layoutX="28.0" layoutY="2.0"

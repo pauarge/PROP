@@ -6,7 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.util.Callback;
 import javafx.util.StringConverter;
 import searcher.controllers.BaseController;
 import searcher.controllers.GraphController;
