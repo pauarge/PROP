@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
@@ -16,22 +17,20 @@ import static searcher.Utils.closeWindow;
 
 public class LandingController {
 
+    private static final String APP_TITLE = "Cercador Relacional";
+
     @FXML
-    private Button closeButton;
-    @FXML
-    private Button importGraph;
-    @FXML
-    private Button createGraph;
+    GridPane gridPane;
 
     @FXML
     private void closeButtonAction() {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
+        Stage stage = (Stage) gridPane.getScene().getWindow();
         closeWindow(stage);
     }
 
     @FXML
     private void openDirSelector() {
-        Stage stage = (Stage) importGraph.getScene().getWindow();
+        Stage stage = (Stage) gridPane.getScene().getWindow();
         DirectoryChooser dc = new DirectoryChooser();
         final File selectedDirectory = dc.showDialog(stage);
         if (selectedDirectory != null) {
@@ -46,8 +45,9 @@ public class LandingController {
             controller.importDir(selectedDirectory.getAbsolutePath());
             stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.setTitle(APP_TITLE);
             stage.show();
-            ((Stage) closeButton.getScene().getWindow()).close();
+            ((Stage) gridPane.getScene().getWindow()).close();
         }
     }
 
@@ -59,8 +59,9 @@ public class LandingController {
             MainController controller = loader.getController();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.setTitle(APP_TITLE);
             stage.show();
-            ((Stage) closeButton.getScene().getWindow()).close();
+            ((Stage) gridPane.getScene().getWindow()).close();
         } catch (Exception e) {
             e.printStackTrace();
         }

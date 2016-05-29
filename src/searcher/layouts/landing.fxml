@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane alignment="CENTER" cacheHint="SCALE" centerShape="false" hgap="11" minHeight="340.0" minWidth="480"
+<GridPane fx:id="gridPane" alignment="CENTER" cacheHint="SCALE" centerShape="false" hgap="11" minHeight="340.0" minWidth="480"
           prefHeight="386.0" prefWidth="565.0" scaleShape="false" vgap="10" xmlns="http://javafx.com/javafx/8"
           xmlns:fx="http://javafx.com/fxml/1" fx:controller="searcher.controllers.LandingController">
     <columnConstraints>
