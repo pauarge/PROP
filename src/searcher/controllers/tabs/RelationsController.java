@@ -1,23 +1,20 @@
 package searcher.controllers.tabs;
 
 import common.domain.NodeType;
-import common.domain.Relation;
 import common.domain.RelationStructure;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import searcher.Utils;
 import searcher.controllers.BaseController;
 import searcher.models.SemanticPath;
-import static searcher.Utils.launchAlert;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import static searcher.Utils.toTypeArray;
 
 public class RelationsController extends BaseController {
 
@@ -28,15 +25,12 @@ public class RelationsController extends BaseController {
     @FXML private Button buttonBotLeft;
     @FXML private Button buttonBotRight;
 
-    @FXML private GridPane pathBuildingButtons;
-    @FXML private Button buttonAuthor;
-    @FXML private Button buttonPaper;
-    @FXML private Button buttonConf;
-    @FXML private Button buttonTerm;
-    @FXML private Button buttonLabel;
-    @FXML private Button buttonClear;
-    @FXML private TextField addNameField;
-    private ObservableList<NodeType> newPath;
+    @FXML private Button buttonPrev;
+    @FXML private Button buttonNext;
+    @FXML private Label labelPrev;
+    @FXML private Label labelEdge;
+    @FXML private Label labelNext;
+    int shownRelation = 0;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -47,49 +41,11 @@ public class RelationsController extends BaseController {
                 ((observable, oldValue, newValue) -> showPathDetails(newValue))
         );
 
-        buttonAuthor.setOnAction(event -> addToPathBuilder(NodeType.AUTHOR));
-        buttonPaper.setOnAction(event -> addToPathBuilder(NodeType.PAPER));
-        buttonConf.setOnAction(event -> addToPathBuilder(NodeType.CONF));
-        buttonTerm.setOnAction(event -> addToPathBuilder(NodeType.TERM));
-        buttonLabel.setOnAction(event -> addToPathBuilder(NodeType.LABEL));
-        buttonClear.setOnAction(event -> clearPathBuilder());
-
         switchToBrowse();
-        newPath = FXCollections.observableArrayList();
-        newPath.addListener((ListChangeListener<? super NodeType>)
-                c -> pathSummary.setText(Utils.convertToText(newPath.toArray(new NodeType[0])))
-        );
+
     }
 
-    private void clearPathBuilder() {
-        setTypeButtonPaperRestriction(true);
-        buttonPaper.setDisable(false);
-        newPath.clear();
-        addNameField.clear();
-    }
 
-    private void setTypeButtonPaperRestriction(boolean paper) {
-        buttonAuthor.setDisable(!paper);
-        buttonConf.setDisable(!paper);
-        buttonPaper.setDisable(paper);
-        buttonTerm.setDisable(!paper);
-        buttonLabel.setDisable(!paper);
-    }
-
-    private void addToPathBuilder(NodeType nt) {
-        switch (nt) {
-            case AUTHOR:
-            case CONF:
-            case TERM:
-            case LABEL:
-                setTypeButtonPaperRestriction(false);
-                break;
-            case PAPER:
-                setTypeButtonPaperRestriction(true);
-                break;
-        }
-        newPath.add(nt);
-    }
 
     private void showPathDetails(SemanticPath semanticPath) {
         if (semanticPath == null) {
@@ -97,14 +53,32 @@ public class RelationsController extends BaseController {
             pathSummary.setText("");
         } else {
             pathName.setText(semanticPath.getName());
-            String path = Utils.convertToText(semanticPath.toTypeArray());
+            String path = Utils.convertToText(Utils.toTypeArray(semanticPath));
             pathSummary.setText(path);
+            updatePathBrowser(semanticPath);
         }
     }
 
+    private void updatePathBrowser(NodeType first, RelationStructure path) {
+        NodeType[] types = new NodeType[path.size() + 1];
+        NodeType prev = types[0] = first;
+        for (int i = 0; i < path.size(); ++i) {
+            if (path.get(i).getNodeTypeA() == prev) {
+                prev = path.get(i).getNodeTypeB();
+            } else {
+                prev = path.get(i).getNodeTypeA();
+            }
+            types[i + 1] = prev;
+        }
+
+
+    }
+
+    private void updatePathBrowser(SemanticPath semanticPath) {
+        updatePathBrowser(semanticPath.getInitialType(), semanticPath.getPath());
+    }
+
     private void switchToBrowse() {
-        pathBuildingButtons.setVisible(false);
-        addNameField.setVisible(false);
         pathList.setDisable(false);
         buttonBotLeft.setText("Esborra");
         buttonBotLeft.setOnAction(event -> handleDeletePath());
@@ -114,8 +88,6 @@ public class RelationsController extends BaseController {
     }
 
     private void switchToAdd() {
-        pathBuildingButtons.setVisible(true);
-        addNameField.setVisible(true);
         pathList.setDisable(true);
         buttonBotLeft.setText("Enrere");
         buttonBotLeft.setOnAction(event -> handleCancelNewPath());
@@ -125,42 +97,16 @@ public class RelationsController extends BaseController {
     }
 
     private void handleDeletePath() {
-        int i = pathList.getSelectionModel().getSelectedIndex();
-        if (i >= 0) semanticPaths.remove(i);
+        SemanticPath semanticPath = pathList.getSelectionModel().getSelectedItem();
+        semanticPaths.remove(semanticPath);
     }
 
     private void handleNewPath() {
         switchToAdd();
-        clearPathBuilder();
     }
 
     private void handleAddNewPath() {
-        if(addNameField.getText().isEmpty()){
-            launchAlert((Stage) pathList.getScene().getWindow(), "Has d'afegir un nom per la relació", Alert.AlertType.WARNING);
-            return;
-        }
-        if(newPath.size() < 2){
-            launchAlert((Stage) pathList.getScene().getWindow(), "Has d'afegir almenys dos tipus de nodes per la relació", Alert.AlertType.WARNING);
-            return;
-        }
-        NodeType prv = newPath.get(0);
-        ArrayList<Relation> alr = new ArrayList<>();
-        for (int i = 1; i < newPath.size(); ++i) {
-            alr.add(Utils.getDefaultRelation(prv, newPath.get(i)));
-            prv = newPath.get(i);
-        }
-        RelationStructure rs = null;
-        try {
-            rs = new RelationStructure(newPath.get(0), alr, newPath.get(newPath.size() - 1));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        SemanticPath sp = new SemanticPath(
-                addNameField.getText(), newPath.get(0), newPath.get(newPath.size() - 1), rs
-        );
-        semanticPaths.add(sp);
-        clearPathBuilder();
-        switchToBrowse();
+
     }
 
     private void handleCancelNewPath() {

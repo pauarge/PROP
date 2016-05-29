@@ -34,13 +34,13 @@ public class SemanticPath {
     }
 
     public String toString() {
-        return getName() + ": " + Utils.convertToText(this.toTypeArray());
+        return getName() + ": " + Utils.convertToText(Utils.toTypeArray(this));
     }
 
     public String convertToExport() {
         String path = getName() + ": ";
-        if (toTypeArray().length == 0) return path;
-        for (NodeType nt : toTypeArray()) {
+        if (Utils.toTypeArray(this).length == 0) return path;
+        for (NodeType nt : Utils.toTypeArray(this)) {
             path = path.concat(nt.toString() + " - ");
         }
         return path.substring(0, path.length() - 3);
@@ -68,19 +68,5 @@ public class SemanticPath {
 
     public RelationStructure getPath() {
         return path;
-    }
-
-    public NodeType[] toTypeArray() {
-        NodeType[] ret = new NodeType[this.path.size() + 1];
-        NodeType prev = ret[0] = this.initialType;
-        for (int i = 0; i < this.path.size(); ++i) {
-            if (this.path.get(i).getNodeTypeA() == prev) {
-                prev = this.path.get(i).getNodeTypeB();
-            } else {
-                prev = this.path.get(i).getNodeTypeA();
-            }
-            ret[i + 1] = prev;
-        }
-        return ret;
     }
 }

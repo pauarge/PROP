@@ -2,10 +2,12 @@ package searcher;
 
 import common.domain.NodeType;
 import common.domain.Relation;
+import common.domain.RelationStructure;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import searcher.models.SemanticPath;
 
 import java.util.Optional;
 
@@ -148,14 +150,14 @@ public final class Utils {
 
         if (a == NodeType.AUTHOR) {
             if (b == NodeType.LABEL) return new Relation(a, b, "Especialitat", 3);
-            if (b == NodeType.PAPER) return new Relation(a, b, "Autor", 0);
+            if (b == NodeType.PAPER) return new Relation(a, b, "Autoria", 0);
         } else if (a == NodeType.CONF) {
             if (b == NodeType.LABEL) return new Relation(a, b, "Tematica", 5);
             if (b == NodeType.PAPER) return new Relation(a, b, "Presentacio", 1);
         } else if (a == NodeType.LABEL) {
             if (b == NodeType.PAPER) return new Relation(b, a, "Ambit", 4);
         } else if (a == NodeType.PAPER) {
-            if (b == NodeType.TERM) return new Relation(b, a, "Apareix", 2);
+            if (b == NodeType.TERM) return new Relation(b, a, "Mencio", 2);
         }
         return null;
     }
@@ -163,11 +165,11 @@ public final class Utils {
     public static Relation[] getDefaultRelations() {
         Relation[] ret = new Relation[6];
         ret[3] = new Relation(NodeType.AUTHOR, NodeType.LABEL, "Especialitat", 3);
-        ret[0] = new Relation(NodeType.AUTHOR, NodeType.PAPER, "Autor", 0);
+        ret[0] = new Relation(NodeType.AUTHOR, NodeType.PAPER, "Autoria", 0);
         ret[5] = new Relation(NodeType.CONF, NodeType.LABEL, "Tematica", 5);
         ret[1] = new Relation(NodeType.CONF, NodeType.PAPER, "Presentacio", 1);
         ret[4] = new Relation(NodeType.PAPER, NodeType.LABEL, "Ambit", 4);
-        ret[2] = new Relation(NodeType.TERM, NodeType.PAPER, "Apareix", 2);
+        ret[2] = new Relation(NodeType.TERM, NodeType.PAPER, "Mencio", 2);
         return ret;
     }
 
@@ -180,4 +182,21 @@ public final class Utils {
         return path.substring(0, path.length() - 3);
     }
 
+    public static NodeType[] toTypeArray(SemanticPath semanticPath) {
+        return toTypeArray(semanticPath.getInitialType(), semanticPath.getPath());
+    }
+
+    public static NodeType[] toTypeArray(NodeType initialType, RelationStructure path) {
+        NodeType[] ret = new NodeType[path.size() + 1];
+        NodeType prev = ret[0] = initialType;
+        for (int i = 0; i < path.size(); ++i) {
+            if (path.get(i).getNodeTypeA() == prev) {
+                prev = path.get(i).getNodeTypeB();
+            } else {
+                prev = path.get(i).getNodeTypeA();
+            }
+            ret[i + 1] = prev;
+        }
+        return ret;
+    }
 }
