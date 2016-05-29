@@ -14,9 +14,8 @@ public final class FileHandler {
             FileReader fr = new FileReader(absolutePath);
             BufferedReader br = new BufferedReader(fr);
             String sCurrentLine;
-            while ((sCurrentLine = br.readLine()) != null) {
+            while ((sCurrentLine = br.readLine()) != null)
                 toReturn.add(sCurrentLine);
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -31,9 +30,8 @@ public final class FileHandler {
             FileWriter fw = new FileWriter(file, append);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter out = new PrintWriter(bw);
-            for (String s : strings) {
+            for (String s : strings)
                 out.println(s);
-            }
             out.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,9 +44,7 @@ public final class FileHandler {
         File folder = new File(absolutePath);
         if (folder.exists()) {
             File flist[] = folder.listFiles();
-            for (int i = 0; i < flist.length; i++) {
-                toReturn.add(flist[i].getName());
-            }
+            for (File aFlist : flist) toReturn.add(aFlist.getName());
         }
         return toReturn;
     }
@@ -60,20 +56,18 @@ public final class FileHandler {
             folder.mkdir();
         }
         File flist[] = folder.listFiles();
-        for (int i = 0; i < flist.length; i++) {
-            String pes = flist[i].getName();
-            if (pes.endsWith(".txt")) {
-                flist[i].delete();
-            }
+        for (File aFlist : flist) {
+            String pes = aFlist.getName();
+            if (pes.endsWith(".txt"))
+                aFlist.delete();
         }
     }
 
     public static String handlePath(String path){
         int last = path.length() - 1;
         if(last > -1){
-            if(!path.substring(last).equals("/")){
+            if(!path.substring(last).equals("/"))
                 return path + "/";
-            }
         } else {
             // TODO: Raise exception
         }

@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.*;
 
 import common.domain.*;
-
 import static common.domain.NodeType.*;
 import static common.persistence.FileHandler.*;
 
@@ -18,11 +17,10 @@ public class PersistenceController {
     public PersistenceController(Graph graph) {
         this.graph = graph;
         try {
-            // Adding implicit Label nodes
             graph.addNode(graph.createNode(LABEL, "Database"), 0);
             graph.addNode(graph.createNode(LABEL, "Data Mining"), 1);
             graph.addNode(graph.createNode(LABEL, "AI"), 2);
-            graph.addNode(graph.createNode(LABEL, "Information Retreival"), 3);
+            graph.addNode(graph.createNode(LABEL, "Information Retrieval"), 3);
         } catch (GraphException e) {
             e.printStackTrace();
         }
@@ -51,9 +49,9 @@ public class PersistenceController {
         Iterator iter = graph.getRelationIterator();
         while (iter.hasNext()) {
             Relation r = (Relation) iter.next();
-            if (r.getName().matches(TXT_REGEX)) {
+            if (r.getName().matches(TXT_REGEX))
                 strings.put(r.getName(), new ArrayList<>());
-            } else {
+            else {
                 String s = r.getNodeTypeA().toString().toLowerCase() + "_" + r.getNodeTypeB().toString().toLowerCase() + "_" + r.getName();
                 strings.put(s, new ArrayList<>());
             }
@@ -70,14 +68,13 @@ public class PersistenceController {
                         for (int i = 0; i < node_list.size(); ++i) {
                             Node node2 = node_list.get(i);
                             EdgeSerializer serializer;
-                            if (rel.containsLabel()) {
+                            if (rel.containsLabel())
                                 serializer = new LabelSerializer(node1, node2);
-                            } else {
+                            else
                                 serializer = new EdgeSerializer(node1, node2);
-                            }
-                            if (rel.getName().matches(TXT_REGEX)) {
+                            if (rel.getName().matches(TXT_REGEX))
                                 strings.get(rel.getName()).add(serializer.getData());
-                            } else {
+                            else {
                                 String s = rel.getNodeTypeA().toString().toLowerCase() + "_" + rel.getNodeTypeB().toString().toLowerCase() + "_" + rel.getName();
                                 strings.get(s).add(serializer.getData());
                             }
@@ -121,36 +118,37 @@ public class PersistenceController {
         path = handlePath(path);
         List<String> files = readDir(path);
         for (String f : files) {
-            String relation_name = null;
-            Relation r = null;
-            NodeType typeA = null;
-            NodeType typeB = null;
-            if (f.matches(DOUBLE_TXT_REGEX)) {
-                String[] parts = f.split("_");
-                typeA = NodeType.valueOf(parts[0].toUpperCase());
-                typeB = NodeType.valueOf(parts[1].toUpperCase());
-                relation_name = parts[2].substring(0, parts[2].length() - 4);
-            } else if (f.matches(TXT_REGEX)) {
-                String[] parts = f.split("_");
-                typeA = NodeType.valueOf(parts[0].toUpperCase());
-                typeB = NodeType.valueOf(parts[1].substring(0, parts[1].length() - 4).toUpperCase());
-                relation_name = f.substring(0, f.length() - 4).toLowerCase();
-            } else {
-                continue;
-            }
-            r = graph.getOrCreateRelation(typeA, typeB, relation_name);
-            List<String> strings = readFile(path + f);
-            for (String s : strings) {
-                EdgeSerializer serializer;
-                if (r.containsLabel()) {
-                    serializer = new LabelSerializer(graph, s, typeA, typeB);
+            if (f.endsWith(".txt")) {
+                String relation_name;
+                Relation r;
+                NodeType typeA;
+                NodeType typeB;
+                if (f.matches(DOUBLE_TXT_REGEX)) {
+                    String[] parts = f.split("_");
+                    typeA = NodeType.valueOf(parts[0].toUpperCase());
+                    typeB = NodeType.valueOf(parts[1].toUpperCase());
+                    relation_name = parts[2].substring(0, parts[2].length() - 4);
+                } else if (f.matches(TXT_REGEX)) {
+                    String[] parts = f.split("_");
+                    typeA = NodeType.valueOf(parts[0].toUpperCase());
+                    typeB = NodeType.valueOf(parts[1].substring(0, parts[1].length() - 4).toUpperCase());
+                    relation_name = f.substring(0, f.length() - 4).toLowerCase();
                 } else {
-                    serializer = new EdgeSerializer(graph, s, typeA, typeB);
+                    continue;
                 }
-                try {
-                    graph.addEdge(r.getId(), serializer.getNode1(), serializer.getNode2());
-                } catch (GraphException e) {
-                    e.printStackTrace();
+                r = graph.getOrCreateRelation(typeA, typeB, relation_name);
+                List<String> strings = readFile(path + f);
+                for (String s : strings) {
+                    EdgeSerializer serializer;
+                    if (r.containsLabel())
+                        serializer = new LabelSerializer(graph, s, typeA, typeB);
+                    else
+                        serializer = new EdgeSerializer(graph, s, typeA, typeB);
+                    try {
+                        graph.addEdge(r.getId(), serializer.getNode1(), serializer.getNode2());
+                    } catch (GraphException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
