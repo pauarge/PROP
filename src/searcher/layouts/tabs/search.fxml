@@ -16,79 +16,82 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 <AnchorPane fx:id="root" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="searcher.controllers.tabs.SearchController">
-   <HBox prefHeight="400.0" prefWidth="562.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <children>
-           <AnchorPane HBox.hgrow="NEVER">
-            <ButtonBar AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0">
-               <buttons>
-                     <Button fx:id="buttonDetails" disable="true" mnemonicParsing="false" text="Detalls" />
-                  <Button fx:id="buttonDelete" disable="true" mnemonicParsing="false" text="Esborra" />
-                  <Button fx:id="buttonAdd" mnemonicParsing="false" text="Nou" />
-               </buttons>
-               <padding>
-                  <Insets right="20.0" />
-               </padding>
-            </ButtonBar>
-               <GridPane fx:id="paneFilter" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
-                   <columnConstraints>
-                       <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-                   </columnConstraints>
-                   <rowConstraints>
-                       <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                       <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                       <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                       <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                       <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                       <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                       <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                       <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                   </rowConstraints>
-                   <TextField fx:id="textSearchField" maxWidth="-Infinity" prefWidth="290.0" GridPane.rowIndex="1" />
-                   <Label text="Filtre:" />
-                   <CheckBox fx:id="checkAuthors" mnemonicParsing="false" text="Autors" GridPane.rowIndex="3" />
-                   <CheckBox fx:id="checkConfs" mnemonicParsing="false" text="Conferencies" GridPane.rowIndex="4" />
-                   <CheckBox fx:id="checkLabels" mnemonicParsing="false" text="Etiquetes" GridPane.rowIndex="5" />
-                   <CheckBox fx:id="checkPapers" mnemonicParsing="false" text="Papers" GridPane.rowIndex="6" />
-                   <CheckBox fx:id="checkTerms" mnemonicParsing="false" text="Termes" GridPane.rowIndex="7" />
-               </GridPane>
-            <GridPane fx:id="paneAddNode" layoutY="349.0" visible="false" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-               <columnConstraints>
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <TextField fx:id="textAddNode" maxWidth="-Infinity" prefWidth="290.0" promptText="Nom" GridPane.rowIndex="1" />
-                  <Label text="Tipus" GridPane.halignment="LEFT">
-                     <GridPane.margin>
-                        <Insets left="20.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <ChoiceBox fx:id="choiceAddNode" prefHeight="26.0" prefWidth="215.0" GridPane.halignment="RIGHT">
-                     <GridPane.margin>
-                        <Insets right="13.0" />
-                     </GridPane.margin>
-                  </ChoiceBox>
-               </children>
+    <HBox prefHeight="400.0" prefWidth="562.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+          AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <AnchorPane HBox.hgrow="NEVER">
+         <ButtonBar AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0">
+             <buttons>
+                 <Button fx:id="buttonDetails" disable="true" mnemonicParsing="false" text="Detalls"/>
+                 <Button fx:id="buttonDelete" disable="true" mnemonicParsing="false" text="Esborra"/>
+                 <Button fx:id="buttonAdd" mnemonicParsing="false" text="Nou"/>
+             </buttons>
+             <padding>
+                 <Insets right="20.0"/>
+             </padding>
+         </ButtonBar>
+            <GridPane fx:id="paneFilter" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"
+                      AnchorPane.topAnchor="5.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0"/>
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0"/>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0"/>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0"/>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0"/>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0"/>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0"/>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0"/>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0"/>
+                </rowConstraints>
+                <TextField fx:id="textSearchField" maxWidth="-Infinity" prefWidth="290.0" GridPane.rowIndex="1"/>
+                <Label text="Filtre:"/>
+                <CheckBox fx:id="checkAuthors" mnemonicParsing="false" text="Autors" GridPane.rowIndex="3"/>
+                <CheckBox fx:id="checkConfs" mnemonicParsing="false" text="Conferencies" GridPane.rowIndex="4"/>
+                <CheckBox fx:id="checkLabels" mnemonicParsing="false" text="Etiquetes" GridPane.rowIndex="5"/>
+                <CheckBox fx:id="checkPapers" mnemonicParsing="false" text="Papers" GridPane.rowIndex="6"/>
+                <CheckBox fx:id="checkTerms" mnemonicParsing="false" text="Termes" GridPane.rowIndex="7"/>
             </GridPane>
-           </AnchorPane>
-           <AnchorPane fx:id="paneTable" HBox.hgrow="ALWAYS">
-               <TableView fx:id="tableResults" prefHeight="400.0" prefWidth="247.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                   <placeholder>
-                       <Label fx:id="placeHolder" text="" />
-                   </placeholder>
-                   <columns>
-                       <TableColumn fx:id="idColumn" text="ID" />
-                       <TableColumn fx:id="typeColumn" text="Tipus" />
-                       <TableColumn fx:id="nameColumn" text="Nom" />
-                   </columns>
-                   <columnResizePolicy>
-                       <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                   </columnResizePolicy>
-               </TableView>
-           </AnchorPane>
-      </children>
-   </HBox>
+         <GridPane fx:id="paneAddNode" layoutY="349.0" visible="false" AnchorPane.bottomAnchor="70.0"
+                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+             <columnConstraints>
+                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0"/>
+             </columnConstraints>
+             <rowConstraints>
+                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+             </rowConstraints>
+             <children>
+                 <TextField fx:id="textAddNode" maxWidth="-Infinity" prefWidth="290.0" promptText="Nom"
+                            GridPane.rowIndex="1"/>
+                 <Label text="Tipus" GridPane.halignment="LEFT">
+                     <GridPane.margin>
+                         <Insets left="20.0"/>
+                     </GridPane.margin>
+                 </Label>
+                 <ChoiceBox fx:id="choiceAddNode" prefHeight="26.0" prefWidth="215.0" GridPane.halignment="RIGHT">
+                     <GridPane.margin>
+                         <Insets right="13.0"/>
+                     </GridPane.margin>
+                 </ChoiceBox>
+             </children>
+         </GridPane>
+        </AnchorPane>
+        <AnchorPane fx:id="paneTable" HBox.hgrow="ALWAYS">
+            <TableView fx:id="tableResults" prefHeight="400.0" prefWidth="247.0" AnchorPane.bottomAnchor="0.0"
+                       AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <placeholder>
+                    <Label fx:id="placeHolder" text=""/>
+                </placeholder>
+                <columns>
+                    <TableColumn fx:id="idColumn" text="ID"/>
+                    <TableColumn fx:id="typeColumn" text="Tipus"/>
+                    <TableColumn fx:id="nameColumn" text="Nom"/>
+                </columns>
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+            </TableView>
+        </AnchorPane>
+    </HBox>
 </AnchorPane>

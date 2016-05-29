@@ -42,7 +42,7 @@ public class RelevanceController extends BaseController {
 
     @FXML
     private void relevanceSearchAction() {
-        SemanticPath rel = (SemanticPath) choicesRelevance.getValue();
+        SemanticPath rel = choicesRelevance.getValue();
         NodeType originType = rel.getInitialType();
         NodeType destinyType = rel.getFinalType();
 
@@ -98,7 +98,7 @@ public class RelevanceController extends BaseController {
             TableRow<RelevanceModel> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    SemanticPath rel = (SemanticPath) choicesRelevance.getValue();
+                    SemanticPath rel = choicesRelevance.getValue();
                     NodeType originType = rel.getInitialType();
                     NodeType destinyType = rel.getFinalType();
                     RelevanceModel model = row.getItem();

@@ -38,11 +38,11 @@ public class LandingController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../layouts/main.fxml"));
             Parent root = null;
             try {
-                root = (Parent) loader.load();
+                root = loader.load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            MainController controller = loader.<MainController>getController();
+            MainController controller = loader.getController();
             controller.importDir(selectedDirectory.getAbsolutePath());
             stage = new Stage();
             stage.setScene(new Scene(root));
@@ -55,8 +55,8 @@ public class LandingController {
     public void openMain() throws Exception {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../layouts/main.fxml"));
-            Parent root = (Parent) loader.load();
-            MainController controller = loader.<MainController>getController();
+            Parent root = loader.load();
+            MainController controller = loader.getController();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();

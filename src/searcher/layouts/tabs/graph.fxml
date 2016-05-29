@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.*?>
 
 
-<?import java.lang.String?>
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="searcher.controllers.tabs.GraphManController">
     <GridPane fx:id="gridPane" alignment="CENTER" cacheHint="SCALE" centerShape="false" hgap="8"
@@ -49,28 +47,6 @@
         <HBox GridPane.columnIndex="5" GridPane.rowIndex="2">
             <Button onAction="#importRelationsAction" prefHeight="27.0" prefWidth="134.0"
                     text="Importar Relacions"/>
-        </HBox>
-        <HBox GridPane.ColumnIndex="1" GridPane.rowIndex="2">
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Afegir Node:"/>
-        </HBox>
-        <HBox GridPane.ColumnIndex="2" GridPane.rowIndex="3">
-            <TextField fx:id="addNodeText" promptText="Valor"/>
-        </HBox>
-        <HBox GridPane.ColumnIndex="2" GridPane.rowIndex="4">
-            <ComboBox fx:id="choicesGraphTab" prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node">
-                <items>
-                    <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="AUTHOR"/>
-                        <String fx:value="CONF"/>
-                        <String fx:value="PAPER"/>
-                        <String fx:value="LABEL"/>
-                        <String fx:value="TERM"/>
-                    </FXCollections>
-                </items>
-            </ComboBox>
-        </HBox>
-        <HBox GridPane.ColumnIndex="4" GridPane.rowIndex="4">
-            <Button onAction="#addNodeAction" text="&gt;&gt;"/>
         </HBox>
         <HBox GridPane.columnIndex="1" GridPane.rowIndex="5">
             <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Arestes"/>

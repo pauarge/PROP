@@ -20,10 +20,10 @@ public abstract class BaseController implements Initializable {
     }
 
     public void setPc(ExtendedPersistenceController pc) {
-        this.pc = pc;
+        BaseController.pc = pc;
     }
 
     public void setSemanticPaths(ObservableList<SemanticPath> semanticPaths) {
-        this.semanticPaths = semanticPaths;
+        BaseController.semanticPaths = semanticPaths;
     }
 }

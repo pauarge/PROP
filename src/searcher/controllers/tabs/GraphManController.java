@@ -1,10 +1,7 @@
 package searcher.controllers.tabs;
 
-import common.domain.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
@@ -20,10 +17,6 @@ import searcher.controllers.BaseController;
 
 public class GraphManController extends BaseController {
 
-    @FXML
-    ComboBox choicesGraphTab;
-    @FXML
-    TextField addNodeText;
     @FXML
     GridPane gridPane;
 
@@ -104,29 +97,7 @@ public class GraphManController extends BaseController {
         }
     }
 
-    @FXML
-    private void addNodeAction() {
-        if (choicesGraphTab.getValue() == null) {
-            launchAlert((Stage) gridPane.getScene().getWindow(), "Per fer l'addició, selecciona un tipus de node", Alert.AlertType.WARNING);
-            return;
-        }
-        if (addNodeText.getText().length() < 1) {
-            launchAlert((Stage) gridPane.getScene().getWindow(), "Per fer l'addició, escriu un valor pel node", Alert.AlertType.WARNING);
-            return;
-        }
-        NodeType nt = NodeType.valueOf((String) choicesGraphTab.getValue());
-        String v = addNodeText.getText();
-        Node node = graph.createNode(nt, v);
-        graph.addNode(node);
-        Stage stage = (Stage) gridPane.getScene().getWindow();
-        launchAlert(stage, "S'ha afegit el node correctament.", Alert.AlertType.INFORMATION);
-        addNodeText.clear();
-    }
-
-
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
+    public void initialize(URL location, ResourceBundle resources) {}
 
 }
