@@ -9,117 +9,84 @@
 <?import java.lang.String?>
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="searcher.controllers.tabs.GraphManController">
-    <children>
-        <GridPane fx:id="gridPane" alignment="CENTER" cacheHint="SCALE" centerShape="false" hgap="8"
-                  maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="542.0" prefWidth="777.0" scaleShape="false"
-                  vgap="6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                  AnchorPane.topAnchor="0.0">
-            <children>
-                <HBox GridPane.columnIndex="1" GridPane.rowIndex="0">
-                    <children>
-                        <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Node"/>
-                    </children>
-                </HBox>
-                <HBox GridPane.columnIndex="5" GridPane.rowIndex="0">
-                    <children>
-                        <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Relacions"/>
-                    </children>
-                </HBox>
-                <HBox GridPane.columnIndex="1" GridPane.rowIndex="1">
-                    <children>
-                        <Button onAction="#importNodesAction" text="Importar Nodes"/>
-                    </children>
-                </HBox>
-                <HBox GridPane.columnIndex="2" GridPane.rowIndex="1">
-                    <children>
-                        <Button onAction="#exportNodesAction" text="Exportar Nodes"/>
-                    </children>
-                </HBox>
-                <HBox GridPane.columnIndex="5" GridPane.rowIndex="1">
-                    <children>
-                        <Button onAction="#exportRelationsAction" prefHeight="27.0" prefWidth="134.0"
-                                text="Exportar Relacions"/>
-                    </children>
-                </HBox>
-                <HBox GridPane.columnIndex="5" GridPane.rowIndex="2">
-                    <children>
-                        <Button onAction="#importRelationsAction" prefHeight="27.0" prefWidth="134.0"
-                                text="Importar Relacions"/>
-                    </children>
-                </HBox>
-                <HBox GridPane.ColumnIndex="1" GridPane.rowIndex="2">
-                    <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Afegir Node:"/>
-                    </children>
-                </HBox>
-                <HBox GridPane.ColumnIndex="2" GridPane.rowIndex="3">
-                    <children>
-                        <TextField fx:id="addNodeText" promptText="Valor"/>
-                    </children>
-                </HBox>
-                <HBox GridPane.ColumnIndex="2" GridPane.rowIndex="4">
-                    <children>
-                        <ComboBox fx:id="choicesGraphTab" prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node">
-                            <items>
-                                <FXCollections fx:factory="observableArrayList">
-                                    <String fx:value="AUTHOR"/>
-                                    <String fx:value="CONF"/>
-                                    <String fx:value="PAPER"/>
-                                    <String fx:value="LABEL"/>
-                                    <String fx:value="TERM"/>
-                                </FXCollections>
-                            </items>
-                        </ComboBox>
-                    </children>
-                </HBox>
-                <HBox GridPane.ColumnIndex="4" GridPane.rowIndex="4">
-                    <children>
-                        <Button onAction="#addNodeAction" text="&gt;&gt;"/>
-                    </children>
-                </HBox>
-                <HBox GridPane.columnIndex="1" GridPane.rowIndex="5">
-                    <children>
-                        <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Arestes"/>
-                    </children>
-                </HBox>
-                <HBox GridPane.ColumnIndex="5" GridPane.rowIndex="5">
-                    <children>
-                        <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Sessió"/>
-                    </children>
-                </HBox>
-                <HBox GridPane.columnIndex="1" GridPane.rowIndex="6">
-                    <children>
-                        <Button onAction="#importEdgesAction" text="Importar Arestes"/>
-                    </children>
-                </HBox>
-                <HBox GridPane.columnIndex="2" GridPane.rowIndex="6">
-                    <children>
-                        <Button onAction="#exportEdgesAction" text="Exportar Arestes"/>
-                    </children>
-                </HBox>
-                <HBox GridPane.columnIndex="5" GridPane.rowIndex="6">
-                    <children>
-                        <Button onAction="#exportSessionAction" text="Exportar Sessió"/>
-                    </children>
-                </HBox>
-            </children>
-            <columnConstraints>
-                <ColumnConstraints/>
-                <ColumnConstraints maxWidth="123.0" minWidth="110.0" prefWidth="122.0"/>
-                <ColumnConstraints maxWidth="187.0" minWidth="167.0" prefWidth="168.0"/>
-                <ColumnConstraints maxWidth="150.0" minWidth="130.0" prefWidth="133.0"/>
-                <ColumnConstraints maxWidth="100.0" minWidth="40.0" prefWidth="82.0"/>
-                <ColumnConstraints maxWidth="170.0" minWidth="91.0" prefWidth="135.0"/>
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints/>
-                <RowConstraints maxHeight="38.0" minHeight="31.0" prefHeight="33.0"/>
-                <RowConstraints maxHeight="29.0" minHeight="16.0" prefHeight="27.0"/>
-                <RowConstraints maxHeight="29.0" minHeight="16.0" prefHeight="27.0"/>
-                <RowConstraints maxHeight="77.0" minHeight="19.0" prefHeight="74.0"/>
-                <RowConstraints maxHeight="53.0" minHeight="0.0" prefHeight="17.0"/>
-                <RowConstraints/>
-            </rowConstraints>
-        </GridPane>
-    </children>
+    <GridPane fx:id="gridPane" alignment="CENTER" cacheHint="SCALE" centerShape="false" hgap="8"
+              maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="542.0" prefWidth="777.0" scaleShape="false"
+              vgap="6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+              AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+            <ColumnConstraints/>
+            <ColumnConstraints maxWidth="123.0" minWidth="110.0" prefWidth="122.0"/>
+            <ColumnConstraints maxWidth="187.0" minWidth="167.0" prefWidth="168.0"/>
+            <ColumnConstraints maxWidth="150.0" minWidth="130.0" prefWidth="133.0"/>
+            <ColumnConstraints maxWidth="100.0" minWidth="40.0" prefWidth="82.0"/>
+            <ColumnConstraints maxWidth="170.0" minWidth="91.0" prefWidth="135.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints/>
+            <RowConstraints maxHeight="38.0" minHeight="31.0" prefHeight="33.0"/>
+            <RowConstraints maxHeight="29.0" minHeight="16.0" prefHeight="27.0"/>
+            <RowConstraints maxHeight="29.0" minHeight="16.0" prefHeight="27.0"/>
+            <RowConstraints maxHeight="77.0" minHeight="19.0" prefHeight="74.0"/>
+            <RowConstraints maxHeight="53.0" minHeight="0.0" prefHeight="17.0"/>
+            <RowConstraints/>
+        </rowConstraints>
+        <HBox GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Node"/>
+        </HBox>
+        <HBox GridPane.columnIndex="5" GridPane.rowIndex="0">
+            <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Relacions"/>
+        </HBox>
+        <HBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button onAction="#importNodesAction" text="Importar Nodes"/>
+        </HBox>
+        <HBox GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Button onAction="#exportNodesAction" text="Exportar Nodes"/>
+        </HBox>
+        <HBox GridPane.columnIndex="5" GridPane.rowIndex="1">
+            <Button onAction="#exportRelationsAction" prefHeight="27.0" prefWidth="134.0"
+                    text="Exportar Relacions"/>
+        </HBox>
+        <HBox GridPane.columnIndex="5" GridPane.rowIndex="2">
+            <Button onAction="#importRelationsAction" prefHeight="27.0" prefWidth="134.0"
+                    text="Importar Relacions"/>
+        </HBox>
+        <HBox GridPane.ColumnIndex="1" GridPane.rowIndex="2">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Afegir Node:"/>
+        </HBox>
+        <HBox GridPane.ColumnIndex="2" GridPane.rowIndex="3">
+            <TextField fx:id="addNodeText" promptText="Valor"/>
+        </HBox>
+        <HBox GridPane.ColumnIndex="2" GridPane.rowIndex="4">
+            <ComboBox fx:id="choicesGraphTab" prefHeight="27.0" prefWidth="133.0" promptText="Tipus Node">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="AUTHOR"/>
+                        <String fx:value="CONF"/>
+                        <String fx:value="PAPER"/>
+                        <String fx:value="LABEL"/>
+                        <String fx:value="TERM"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+        </HBox>
+        <HBox GridPane.ColumnIndex="4" GridPane.rowIndex="4">
+            <Button onAction="#addNodeAction" text="&gt;&gt;"/>
+        </HBox>
+        <HBox GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Arestes"/>
+        </HBox>
+        <HBox GridPane.ColumnIndex="5" GridPane.rowIndex="5">
+            <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Sessió"/>
+        </HBox>
+        <HBox GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <Button onAction="#importEdgesAction" text="Importar Arestes"/>
+
+        </HBox>
+        <HBox GridPane.columnIndex="2" GridPane.rowIndex="6">
+            <Button onAction="#exportEdgesAction" text="Exportar Arestes"/>
+        </HBox>
+        <HBox GridPane.columnIndex="5" GridPane.rowIndex="6">
+            <Button onAction="#exportSessionAction" text="Exportar Sessió"/>
+        </HBox>
+    </GridPane>
 </AnchorPane>

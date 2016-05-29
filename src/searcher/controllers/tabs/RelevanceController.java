@@ -10,7 +10,6 @@ import javafx.util.Callback;
 import javafx.util.StringConverter;
 import searcher.controllers.BaseController;
 import searcher.controllers.GraphController;
-import searcher.models.NodeModel;
 import searcher.models.RelevanceModel;
 import searcher.models.SemanticPath;
 

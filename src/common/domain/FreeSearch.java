@@ -1,6 +1,5 @@
 package common.domain;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 public class FreeSearch extends RelationalSearch {

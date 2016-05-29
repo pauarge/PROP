@@ -13,56 +13,42 @@
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="searcher.controllers.MainController">
     <top>
         <MenuBar>
-            <menus>
-                <Menu text="Fitxer">
-                    <items>
-                        <CheckMenuItem fx:id="terminalToggle" mnemonicParsing="false" onAction="#handleTerminalToggle"
-                                       text="Terminal"/>
-                        <SeparatorMenuItem/>
-                        <MenuItem mnemonicParsing="false" text="Importar sessió"/>
-                        <MenuItem mnemonicParsing="false" text="Guardar sessió"/>
-                        <SeparatorMenuItem/>
-                        <MenuItem mnemonicParsing="false" onAction="#backToLandingAction" text="Tornar a l'inici"/>
-                        <MenuItem mnemonicParsing="false" onAction="#closeWindowAction" text="Tancar"/>
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Ajuda">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#launchHelpWindow" text="Obrir Ajuda"/>
-                    </items>
-                </Menu>
-            </menus>
+            <Menu text="Fitxer">
+                <items>
+                    <CheckMenuItem fx:id="terminalToggle" mnemonicParsing="false" onAction="#handleTerminalToggle"
+                                   text="Terminal"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem mnemonicParsing="false" text="Importar sessió"/>
+                    <MenuItem mnemonicParsing="false" text="Guardar sessió"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem mnemonicParsing="false" onAction="#backToLandingAction" text="Tornar a l'inici"/>
+                    <MenuItem mnemonicParsing="false" onAction="#closeWindowAction" text="Tancar"/>
+                </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Ajuda">
+                <items>
+                    <MenuItem mnemonicParsing="false" onAction="#launchHelpWindow" text="Obrir Ajuda"/>
+                </items>
+            </Menu>
         </MenuBar>
     </top>
     <center>
         <TabPane fx:id="mainTabs" tabClosingPolicy="UNAVAILABLE">
-            <tabs>
-                <Tab text="Cerca">
-                    <content>
-                        <fx:include fx:id="tabSearch" source="tabs/search.fxml"/>
-                    </content>
-                </Tab>
-                <Tab text="Cerca per Rellevància">
-                    <content>
-                        <fx:include fx:id="tabRelevance" source="tabs/relevance.fxml"/>
-                    </content>
-                </Tab>
-                <Tab text="Graf">
-                    <content>
-                        <fx:include fx:id="tabGraphMan" source="tabs/graph.fxml"/>
-                    </content>
-                </Tab>
-                <Tab text="Relacions">
-                    <content>
-                        <fx:include fx:id="tabRelations" source="tabs/relations.fxml"/>
-                    </content>
-                </Tab>
-                <Tab fx:id="terminalSelector" text="Terminal">
-                    <content>
-                        <fx:include fx:id="tabTerminal" source="tabs/terminal.fxml"/>
-                    </content>
-                </Tab>
-            </tabs>
+            <Tab text="Cerca">
+                <fx:include fx:id="tabSearch" source="tabs/search.fxml"/>
+            </Tab>
+            <Tab text="Cerca per Rellevància">
+                <fx:include fx:id="tabRelevance" source="tabs/relevance.fxml"/>
+            </Tab>
+            <Tab text="Graf">
+                <fx:include fx:id="tabGraphMan" source="tabs/graph.fxml"/>
+            </Tab>
+            <Tab text="Relacions">
+                <fx:include fx:id="tabRelations" source="tabs/relations.fxml"/>
+            </Tab>
+            <Tab fx:id="terminalSelector" text="Terminal">
+                <fx:include fx:id="tabTerminal" source="tabs/terminal.fxml"/>
+            </Tab>
         </TabPane>
     </center>
 </BorderPane>

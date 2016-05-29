@@ -1,3 +1,0 @@
-Prova: AUTHOR - PAPER - CONF
-Cami2: TERM - PAPER - LABEL - PAPER
-CamiExportat: PAPER - AUTHOR - PAPER - LABEL
