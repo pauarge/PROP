@@ -2,13 +2,13 @@ package searcher;
 
 import common.domain.NodeType;
 import common.domain.Relation;
-import common.domain.RelationStructure;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import searcher.models.SemanticPath;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 
@@ -186,7 +186,7 @@ public final class Utils {
         return toTypeArray(semanticPath.getInitialType(), semanticPath.getPath());
     }
 
-    public static NodeType[] toTypeArray(NodeType initialType, RelationStructure path) {
+    public static NodeType[] toTypeArray(NodeType initialType, ArrayList<Relation> path) {
         NodeType[] ret = new NodeType[path.size() + 1];
         NodeType prev = ret[0] = initialType;
         for (int i = 0; i < path.size(); ++i) {

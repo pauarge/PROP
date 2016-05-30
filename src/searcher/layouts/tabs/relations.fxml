@@ -43,7 +43,7 @@
                 </rowConstraints>
                 <Label fx:id="pathName" text="dades nom" />
                 <TextField fx:id="addNameField" maxWidth="-Infinity" prefWidth="300.0" promptText="Nom" visible="false" GridPane.hgrow="NEVER" />
-            <GridPane fx:id="pathBuilder" GridPane.rowIndex="2">
+            <GridPane fx:id="pathBrowser" GridPane.rowIndex="2">
               <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

@@ -17,6 +17,7 @@ import searcher.controllers.BaseController;
 import searcher.models.SemanticPath;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class RelationsController extends BaseController {
@@ -28,7 +29,7 @@ public class RelationsController extends BaseController {
     @FXML private Button buttonBotLeft;
     @FXML private Button buttonBotRight;
 
-    @FXML private GridPane pathBuilder;
+    @FXML private GridPane pathBrowser;
     @FXML private Button buttonPrev;
     @FXML private Button buttonNext;
     @FXML private Label labelPrev;
@@ -40,10 +41,12 @@ public class RelationsController extends BaseController {
     @FXML private ChoiceBox<Relation> choiceEdge;
     @FXML private Label labelToHide;
     @FXML private Button buttonAddEdge;
+    @FXML private TextField addNameField;
 
     int shownRelation = 0;
     NodeType builderType;
-    RelationStructure builderPath;
+    ArrayList<Relation> builderPath;
+    boolean builderMode = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -59,8 +62,14 @@ public class RelationsController extends BaseController {
 
         choiceType.setItems(FXCollections.observableArrayList(NodeType.class.getEnumConstants()));
         choiceType.setConverter(Utils.nodeTypeStringConverter());
-        choiceType.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> updateRelations());
+        choiceType.getSelectionModel().selectedItemProperty().addListener((o, ov, nv) -> updateRelations());
         choiceEdge.setConverter(Utils.relationStringConverter());
+        choiceEdge.getSelectionModel().selectedItemProperty().addListener(
+                (o, ov, nv) -> buttonAddEdge.setDisable((nv == null))
+        );
+        builderPath = new ArrayList<Relation>();
+
+        addNameField.textProperty().addListener((o, ov, nv) -> updateAddButtonStatus());
 
         switchToBrowse();
     }
@@ -76,10 +85,9 @@ public class RelationsController extends BaseController {
             lastType = builderType;
         }
         relations = edgeTypes.filtered(r -> r.getNodeTypeA() == lastType && r.getNodeTypeB() == type
-                || r.getNodeTypeB() == type && r.getNodeTypeA() == lastType
+                || r.getNodeTypeA() == type && r.getNodeTypeB() == lastType
         );
         choiceEdge.setItems(relations);
-        System.out.println("setting: " + relations.size());
         choiceEdge.setDisable(false);
         choiceEdge.getSelectionModel().selectFirst();
     }
@@ -103,21 +111,21 @@ public class RelationsController extends BaseController {
         }
     }
 
-    private void showPathDetails(String name, NodeType firstType, RelationStructure path) {
+    private void showPathDetails(String name, NodeType firstType, ArrayList<Relation> path) {
         shownRelation = 0;
         if (name == null) {
             pathName.setText("");
             pathSummary.setVisible(false);
-            pathBuilder.setVisible(false);
+            pathBrowser.setVisible(false);
         } else {
             pathName.setText(name);
             pathSummary.setVisible(true);
-            pathBuilder.setVisible(true);
+            pathBrowser.setVisible(true);
             updatePathBrowser(firstType, path);
         }
     }
 
-    private void updatePathSummary(NodeType firstNode, RelationStructure path) {
+    private void updatePathSummary(NodeType firstNode, ArrayList<Relation> path) {
         NodeType[] types = Utils.toTypeArray(firstNode, path);
         Text prev = new Text("");
         Text current = new Text("\u21c6");
@@ -139,9 +147,10 @@ public class RelationsController extends BaseController {
         prev.setText(prev.getText().substring(3));
         pathSummary.getChildren().clear();
         pathSummary.getChildren().addAll(prev, current, next);
+        pathSummary.getChildren().add(new Text(""));
     }
 
-    private void updatePathBrowser(NodeType first, RelationStructure path) {
+    private void updatePathBrowser(NodeType first, ArrayList<Relation> path) {
         NodeType[] types = Utils.toTypeArray(first, path);
         labelPrev.setText(Utils.getName(types[shownRelation]));
         labelEdge.setText(path.get(shownRelation).getValue());
@@ -156,25 +165,54 @@ public class RelationsController extends BaseController {
     }
 
     private void switchToBrowse() {
+        builderMode = false;
         pathList.setDisable(false);
         buttonBotLeft.setText("Esborra");
         buttonBotLeft.setOnAction(event -> handleDeletePath());
         buttonBotRight.setText("Nou");
-        buttonBotRight.setOnAction(event -> handleNewPath());
+        buttonBotRight.setOnAction(event -> switchToAdd());
         showPathDetails(pathList.getSelectionModel().getSelectedItem());
+        showPathDetails(null);
+        paneEdges.setVisible(false);
+        addNameField.clear();
+        addNameField.setVisible(false);
+
+        buttonPrev.setOnAction(event -> handlePrevRelation());
+        buttonNext.setOnAction(event -> handleNextRelation());
     }
 
     private void switchToAdd() {
+        builderMode = true;
         pathList.setDisable(true);
         buttonBotLeft.setText("Enrere");
-        buttonBotLeft.setOnAction(event -> handleCancelNewPath());
+        buttonBotLeft.setOnAction(event -> switchToBrowse());
+        buttonBotLeft.setDisable(false);
         buttonBotRight.setText("Afegeix");
         buttonBotRight.setOnAction(event -> handleAddNewPath());
+        buttonBotRight.setDisable(true);
         showPathDetails(null);
         paneEdges.setVisible(true);
         labelToHide.setVisible(false);
         choiceEdge.setVisible(false);
         buttonAddEdge.setOnAction(event -> handleFirstEdge());
+        buttonAddEdge.setDisable(false);
+        builderPath.clear();
+        shownRelation = 0;
+        addNameField.setVisible(true);
+
+        buttonPrev.setOnAction(event -> handlePrevRelationBuilder());
+        buttonNext.setOnAction(event -> handleNextRelationBuilder());
+        choiceType.getSelectionModel().selectFirst();
+    }
+
+    private void handleNextRelationBuilder() {
+        ++shownRelation;
+        updatePathBrowser(builderType, builderPath);
+    }
+
+    private void handlePrevRelationBuilder() {
+        --shownRelation;
+        updatePathBrowser(builderType, builderPath);
     }
 
     private void handleFirstEdge() {
@@ -185,10 +223,15 @@ public class RelationsController extends BaseController {
         buttonAddEdge.setOnAction(event -> handleNextEdge());
         labelToHide.setVisible(true);
         choiceEdge.setVisible(true);
+        updateRelations();
+        buttonAddEdge.setDisable(true);
     }
 
     private void handleNextEdge() {
-
+        builderPath.add(choiceEdge.getValue());
+        showPathDetails("", builderType, builderPath);
+        updateRelations();
+        updateAddButtonStatus();
     }
 
     private void handleDeletePath() {
@@ -196,15 +239,23 @@ public class RelationsController extends BaseController {
         semanticPaths.remove(semanticPath);
     }
 
-    private void handleNewPath() {
-        switchToAdd();
-    }
-
     private void handleAddNewPath() {
-
+        NodeType[] types = Utils.toTypeArray(builderType, builderPath);
+        NodeType lastType = types[types.length-1];
+        RelationStructure structure = null;
+        try {
+            structure = new RelationStructure(builderType, builderPath, lastType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        SemanticPath semanticPath = new SemanticPath(addNameField.getText(), builderType, lastType, structure);
+        semanticPaths.add(semanticPath);
+        switchToBrowse();
     }
 
-    private void handleCancelNewPath() {
-        switchToBrowse();
+    private void updateAddButtonStatus() {
+        if (builderMode) {
+            buttonBotRight.setDisable(addNameField.getText().isEmpty() || builderPath.isEmpty());
+        }
     }
 }

@@ -13,25 +13,12 @@ public class SemanticPath {
     private RelationStructure path;
 
     public SemanticPath(String name, NodeType initialType, NodeType finalType, RelationStructure path) {
-        this(name);
+        this.name = new SimpleStringProperty(name);
         this.initialType = initialType;
         this.finalType = finalType;
         this.path = path;
     }
 
-    public SemanticPath(String name) {
-        this.name = new SimpleStringProperty(name);
-        initialType = null;
-        finalType = null;
-        path = null;
-    }
-
-    public SemanticPath(String name, NodeType[] path) {
-        this.name = new SimpleStringProperty(name);
-        this.initialType = path[0];
-        this.finalType = path[path.length-1];
-        this.path = null;
-    }
 
     public String toString() {
         return getName() + ": " + Utils.convertToText(Utils.toTypeArray(this));
