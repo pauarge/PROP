@@ -87,13 +87,24 @@ public class GraphManController extends BaseController {
     }
 
     @FXML
+    private void importSessionAction() {
+        Stage stage = (Stage) gridPane.getScene().getWindow();
+        DirectoryChooser dc = new DirectoryChooser();
+        final File selectedDirectory = dc.showDialog(stage);
+        if (selectedDirectory != null) {
+            pc.importGraph(selectedDirectory.getAbsolutePath());
+            launchAlert(stage, "S'han importat correctament la sessió.", Alert.AlertType.INFORMATION);
+        }
+    }
+
+    @FXML
     private void exportSessionAction() {
         Stage stage = (Stage) gridPane.getScene().getWindow();
         DirectoryChooser dc = new DirectoryChooser();
         final File selectedDirectory = dc.showDialog(stage);
         if (selectedDirectory != null) {
             pc.exportGraph(selectedDirectory.getAbsolutePath());
-            launchAlert(stage, "S'han exportat la sessió.", Alert.AlertType.INFORMATION);
+            launchAlert(stage, "S'han exportat correctament la sessió.", Alert.AlertType.INFORMATION);
         }
     }
 

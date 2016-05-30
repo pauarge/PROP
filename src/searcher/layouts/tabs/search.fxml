@@ -81,7 +81,7 @@
             <TableView fx:id="tableResults" prefHeight="400.0" prefWidth="247.0" AnchorPane.bottomAnchor="0.0"
                        AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <placeholder>
-                    <Label fx:id="placeHolder" text=""/>
+                    <Label fx:id="placeHolder" text="Fes una cerca per tenir resultats"/>
                 </placeholder>
                 <columns>
                     <TableColumn fx:id="idColumn" text="ID"/>

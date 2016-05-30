@@ -28,10 +28,10 @@
                 </ChoiceBox>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID del node d'inici"
                       GridPane.rowIndex="2"/>
-                <TextField fx:id="relevanceOriginId" GridPane.rowIndex="3"/>
+                <TextField fx:id="relevanceOriginId" GridPane.rowIndex="3" promptText="(opcional)"/>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID del node de destí"
                       GridPane.rowIndex="4"/>
-                <TextField fx:id="relevanceDestinyId" GridPane.rowIndex="5"/>
+                <TextField fx:id="relevanceDestinyId" GridPane.rowIndex="5" promptText="(opcional)"/>
                 <Button mnemonicParsing="false" onAction="#relevanceSearchAction" text="Cercar"
                         GridPane.rowIndex="6"/>
             </GridPane>

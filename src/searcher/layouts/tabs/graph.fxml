@@ -59,7 +59,7 @@
             <Button onAction="#exportEdgesAction" text="Exportar Arestes"/>
         </HBox>
         <HBox GridPane.columnIndex="3" GridPane.rowIndex="4">
-            <Button text="Importar Sessió"/>
+            <Button onAction="#importSessionAction" text="Importar Sessió"/>
         </HBox>
         <HBox GridPane.columnIndex="4" GridPane.rowIndex="4">
             <Button onAction="#exportSessionAction" text="Exportar Sessió"/>
