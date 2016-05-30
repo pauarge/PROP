@@ -17,8 +17,7 @@ import searcher.controllers.BaseController;
 import searcher.models.SemanticPath;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class RelationsController extends BaseController {
 
@@ -43,10 +42,10 @@ public class RelationsController extends BaseController {
     @FXML private Button buttonAddEdge;
     @FXML private TextField addNameField;
 
-    int shownRelation = 0;
-    NodeType builderType;
-    ArrayList<Relation> builderPath;
-    boolean builderMode = false;
+    private int shownRelation = 0;
+    private NodeType builderType;
+    private ArrayList<Relation> builderPath;
+    private boolean builderMode = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -225,6 +224,7 @@ public class RelationsController extends BaseController {
         choiceEdge.setVisible(true);
         updateRelations();
         buttonAddEdge.setDisable(true);
+        updateTypes();
     }
 
     private void handleNextEdge() {
@@ -232,6 +232,25 @@ public class RelationsController extends BaseController {
         showPathDetails("", builderType, builderPath);
         updateRelations();
         updateAddButtonStatus();
+        updateTypes();
+    }
+
+    private void updateTypes() {
+        NodeType current;
+        if (builderPath.isEmpty()) {
+            current = builderType;
+        } else {
+            NodeType[] types = Utils.toTypeArray(builderType, builderPath);
+            current = types[types.length-1];
+        }
+
+        HashSet<NodeType> targets = new HashSet<>();
+        for (Relation r : edgeTypes) {
+            if (r.getNodeTypeA() == current) targets.add(r.getNodeTypeB());
+            if (r.getNodeTypeB() == current) targets.add(r.getNodeTypeA());
+        }
+        choiceType.setItems(FXCollections.observableArrayList(targets));
+        choiceType.getSelectionModel().selectFirst();
     }
 
     private void handleDeletePath() {
