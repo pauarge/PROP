@@ -1,6 +1,7 @@
 package searcher.models;
 
 import common.domain.NodeType;
+import common.domain.Relation;
 import common.domain.RelationStructure;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -25,12 +26,11 @@ public class SemanticPath {
     }
 
     public String convertToExport() {
-        String path = getName() + ": ";
-        if (Utils.toTypeArray(this).length == 0) return path;
-        for (NodeType nt : Utils.toTypeArray(this)) {
-            path = path.concat(nt.toString() + " - ");
+        String toExport = getName() + ": " + initialType.toString() + " - " + finalType.toString() + ": ";
+        for(Relation r : path){
+            toExport = toExport.concat(" " + r.getValue() + " - ");
         }
-        return path.substring(0, path.length() - 3);
+        return toExport;
     }
 
     public String getName() {

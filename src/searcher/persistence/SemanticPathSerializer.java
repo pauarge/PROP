@@ -3,6 +3,8 @@ package searcher.persistence;
 import common.domain.NodeType;
 import common.domain.Relation;
 import common.domain.RelationStructure;
+import javafx.beans.property.StringProperty;
+import javafx.scene.Node;
 import searcher.Utils;
 
 import java.io.Serializable;
@@ -13,12 +15,23 @@ public class SemanticPathSerializer implements Serializable {
 
     private String data;
     private String name;
+    private NodeType initialType;
+    private NodeType finalType;
+    private RelationStructure path;
     private ArrayList<NodeType> types;
     private ArrayList<Relation> alr;
-    private RelationStructure rs;
+
 
     private void inflate() {
-        if (name == null || types.isEmpty() || rs == null) {
+        if (name == null || types.isEmpty() || path == null) {
+            String[] parts = data.split(":");
+            name = parts[0];
+            String[] types = parts[1].split("-");
+            initialType = NodeType.valueOf(types[0]);
+            finalType = NodeType.valueOf(types[1]);
+            String[] relations = parts[2].split("-");
+
+            /*
             int m = data.indexOf(":");
             name = data.substring(0, m);
             for (String type : data.substring(m + 1, data.length()).split("-")) {
@@ -28,10 +41,11 @@ public class SemanticPathSerializer implements Serializable {
                 alr.add(Utils.getDefaultRelation(types.get(i), types.get(i + 1)));
             }
             try{
-                rs = new RelationStructure(types.get(0), alr, types.get(types.size() - 1));
+                path = new RelationStructure(types.get(0), alr, types.get(types.size() - 1));
             } catch (Exception e){
                 e.printStackTrace();
             }
+            */
 
         }
     }
@@ -64,7 +78,7 @@ public class SemanticPathSerializer implements Serializable {
 
     public RelationStructure getRelationStructure() {
         this.inflate();
-        return rs;
+        return path;
     }
 
 }
