@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import searcher.controllers.BaseController;
 import searcher.controllers.GraphController;
@@ -14,8 +15,11 @@ import searcher.models.SemanticPath;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
+
+import static searcher.Utils.launchAlert;
 
 
 public class RelevanceController extends BaseController {
@@ -43,39 +47,53 @@ public class RelevanceController extends BaseController {
     @FXML
     private void relevanceSearchAction() {
         SemanticPath rel = choicesRelevance.getValue();
-        NodeType originType = rel.getInitialType();
-        NodeType destinyType = rel.getFinalType();
-
-        if (relevanceOriginId.getText().isEmpty()) {
-            gs = new FreeSearch(graph, rel.getPath());
+        if(rel == null){
+            Stage stage = (Stage) choicesRelevance.getScene().getWindow();
+            launchAlert(stage, "Has de seleccionar un camí semàntic per a fer la cerca", Alert.AlertType.INFORMATION);
         } else {
-            int originId = Integer.parseInt(relevanceOriginId.getText());
-            Node originNode = null;
-            try {
-                originNode = graph.getNode(originType, originId);
-            } catch (GraphException e) {
-                e.printStackTrace();
-            }
-            if (relevanceDestinyId.getText().isEmpty()) {
-                gs = new OriginSearch(graph, rel.getPath(), originNode);
+            NodeType originType = rel.getInitialType();
+            NodeType destinyType = rel.getFinalType();
+
+            if (relevanceOriginId.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Operació costosa");
+                alert.setHeaderText("Estàs segur de fer una cerca lliure?");
+                alert.setContentText("Una cerca lliure, sense origen ni destí, és una tasca molt costosa pot afectar al rendiment de l'ordinador.");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    gs = new FreeSearch(graph, rel.getPath());
+                } else {
+                    return;
+                }
             } else {
-                int destinyId = Integer.parseInt(relevanceDestinyId.getText());
-                Node destintyNode = null;
+                int originId = Integer.parseInt(relevanceOriginId.getText());
+                Node originNode = null;
                 try {
-                    destintyNode = graph.getNode(destinyType, destinyId);
+                    originNode = graph.getNode(originType, originId);
                 } catch (GraphException e) {
                     e.printStackTrace();
                 }
-                new OriginDestinationSearch(graph, rel.getPath(), originNode, destintyNode);
+                if (relevanceDestinyId.getText().isEmpty()) {
+                    gs = new OriginSearch(graph, rel.getPath(), originNode);
+                } else {
+                    int destinyId = Integer.parseInt(relevanceDestinyId.getText());
+                    Node destintyNode = null;
+                    try {
+                        destintyNode = graph.getNode(destinyType, destinyId);
+                    } catch (GraphException e) {
+                        e.printStackTrace();
+                    }
+                    new OriginDestinationSearch(graph, rel.getPath(), originNode, destintyNode);
+                }
+
             }
 
+            gs.search();
+            ArrayList<GraphSearch.Result> results = gs.getResults();
+            ObservableList<RelevanceModel> res = FXCollections.observableArrayList();
+            res.addAll(results.stream().map(r -> new RelevanceModel(r.from, r.to, r.hetesim)).collect(Collectors.toList()));
+            searchTable.setItems(res);
         }
-
-        gs.search();
-        ArrayList<GraphSearch.Result> results = gs.getResults();
-        ObservableList<RelevanceModel> res = FXCollections.observableArrayList();
-        res.addAll(results.stream().map(r -> new RelevanceModel(r.from, r.to, r.hetesim)).collect(Collectors.toList()));
-        searchTable.setItems(res);
 
     }
 
