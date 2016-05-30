@@ -1,9 +1,6 @@
 package searcher.controllers.popups;
 
-import common.domain.Container;
-import common.domain.Node;
-import common.domain.NodeType;
-import common.domain.Relation;
+import common.domain.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -242,10 +239,8 @@ public class NodeViewController extends BaseController {
 
     private ObservableList<NodeModelRelated> getAllEdges() {
         ObservableList<NodeModelRelated> ret = FXCollections.observableArrayList();
-        int originId = model.getNode().getId();
         NodeType originType = model.getNodeType();
         Node originNode = model.getNode();
-
         try {
             for (Relation rel : edgeTypes) {
                 NodeType destType;
@@ -260,7 +255,7 @@ public class NodeViewController extends BaseController {
                     }
                 }
             }
-        } catch (Exception e) {
+        } catch (GraphException e) {
             e.printStackTrace();
         }
         return ret;
