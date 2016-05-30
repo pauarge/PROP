@@ -170,11 +170,13 @@ public class RelationsController extends BaseController {
         buttonBotLeft.setOnAction(event -> handleDeletePath());
         buttonBotRight.setText("Nou");
         buttonBotRight.setOnAction(event -> switchToAdd());
+        buttonBotRight.setDisable(false);
         showPathDetails(pathList.getSelectionModel().getSelectedItem());
         showPathDetails(null);
         paneEdges.setVisible(false);
         addNameField.clear();
         addNameField.setVisible(false);
+        pathList.getSelectionModel().selectFirst();
 
         buttonPrev.setOnAction(event -> handlePrevRelation());
         buttonNext.setOnAction(event -> handleNextRelation());
@@ -199,6 +201,7 @@ public class RelationsController extends BaseController {
         shownRelation = 0;
         addNameField.setVisible(true);
 
+        choiceType.setItems(FXCollections.observableArrayList(NodeType.class.getEnumConstants()));
         buttonPrev.setOnAction(event -> handlePrevRelationBuilder());
         buttonNext.setOnAction(event -> handleNextRelationBuilder());
         choiceType.getSelectionModel().selectFirst();
