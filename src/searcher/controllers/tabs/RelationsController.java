@@ -27,6 +27,7 @@ public class RelationsController extends BaseController {
     @FXML private TextFlow pathSummary;
     @FXML private Button buttonBotLeft;
     @FXML private Button buttonBotRight;
+    @FXML private Button buttonEdges;
 
     @FXML private GridPane pathBrowser;
     @FXML private Button buttonPrev;
@@ -58,6 +59,7 @@ public class RelationsController extends BaseController {
 
         buttonPrev.setOnAction(event -> handlePrevRelation());
         buttonNext.setOnAction(event -> handleNextRelation());
+        buttonEdges.setOnAction(event -> Utils.openEdgeEditor());
 
         choiceType.setItems(FXCollections.observableArrayList(NodeType.class.getEnumConstants()));
         choiceType.setConverter(Utils.nodeTypeStringConverter());

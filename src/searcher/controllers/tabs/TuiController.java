@@ -3,13 +3,8 @@ package searcher.controllers.tabs;
 import common.domain.*;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import searcher.Utils;
 import searcher.controllers.BaseController;
 import searcher.models.SemanticPath;
@@ -63,21 +58,6 @@ public class TuiController extends BaseController {
         String parameters = Utils.getRestOfWords(line);
 
         switch (command) {
-            case "popup":
-                try {
-                    FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(searcher.Main.class.getResource("layouts/popups/edges.fxml"));
-                    AnchorPane pane = loader.load();
-
-                    Stage edges = new Stage();
-                    edges.initModality(Modality.WINDOW_MODAL);
-                    Scene scene = new Scene(pane);
-                    edges.setScene(scene);
-                    edges.show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return "";
             case "add":
                 return executeAdd(parameters);
             case "print":

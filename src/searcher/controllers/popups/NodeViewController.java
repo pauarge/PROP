@@ -45,6 +45,7 @@ public class NodeViewController extends BaseController {
     @FXML private ComboBox<Node> comboNode;
     @FXML private Button buttonAdd;
     @FXML private Button buttonBack;
+    @FXML private Button buttonEdgeEditor;
     private ObservableList<Node> comboFullList;
 
     @FXML private AnchorPane paneToolsEdge;
@@ -117,6 +118,7 @@ public class NodeViewController extends BaseController {
         buttonAdd.setOnAction(event ->  addEdge());
         buttonBack.setOnAction(event -> backFromAddEdge());
 
+        buttonEdgeEditor.setOnAction(event -> Utils.openEdgeEditor());
     }
 
     private void backFromAddEdge() {

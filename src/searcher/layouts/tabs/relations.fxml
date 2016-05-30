@@ -89,27 +89,11 @@
             </GridPane>
             <ButtonBar layoutX="342.0" layoutY="482.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
                 <buttons>
+               <Button fx:id="buttonEdges" mnemonicParsing="false" text="Arestes..." />
                     <Button fx:id="buttonBotLeft" mnemonicParsing="false" text="Esborra" />
                     <Button fx:id="buttonBotRight" mnemonicParsing="false" text="Nou" />
                 </buttons>
             </ButtonBar>
-            <GridPane fx:id="pathBuildingButtons" alignment="CENTER" layoutX="128.0" layoutY="238.0" visible="false">
-                <columnConstraints>
-                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                </columnConstraints>
-                <rowConstraints>
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                </rowConstraints>
-                <Button fx:id="buttonAuthor" mnemonicParsing="false" prefWidth="89.0" text="Autor" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
-                <Button fx:id="buttonPaper" mnemonicParsing="false" prefWidth="89.0" text="Paper" GridPane.columnIndex="1" />
-                <Button fx:id="buttonConf" mnemonicParsing="false" prefWidth="89.0" text="Conf." GridPane.columnIndex="2" />
-                <Button fx:id="buttonTerm" mnemonicParsing="false" prefWidth="89.0" text="Terme" GridPane.rowIndex="1" />
-                <Button fx:id="buttonClear" mnemonicParsing="false" prefWidth="89.0" text="NETEJA" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                <Button fx:id="buttonLabel" mnemonicParsing="false" prefWidth="89.0" text="Etiqueta" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            </GridPane>
         </AnchorPane>
     </SplitPane>
 </AnchorPane>

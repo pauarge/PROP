@@ -2,8 +2,12 @@ package searcher;
 
 import common.domain.NodeType;
 import common.domain.Relation;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import searcher.models.SemanticPath;
@@ -198,5 +202,23 @@ public final class Utils {
             ret[i + 1] = prev;
         }
         return ret;
+    }
+
+    public static void openEdgeEditor() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(searcher.Main.class.getResource("layouts/popups/edges.fxml"));
+            AnchorPane pane = loader.load();
+
+            Stage edges = new Stage();
+            edges.setTitle("Arestes");
+            edges.initModality(Modality.WINDOW_MODAL);
+            Scene scene = new Scene(pane);
+            edges.setScene(scene);
+            edges.show();
+            System.out.println("done!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
