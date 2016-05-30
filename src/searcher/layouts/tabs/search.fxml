@@ -47,9 +47,9 @@
                 <TextField fx:id="textSearchField" maxWidth="-Infinity" prefWidth="290.0" GridPane.rowIndex="1"/>
                 <Label text="Filtre:"/>
                 <CheckBox fx:id="checkAuthors" mnemonicParsing="false" text="Autors" GridPane.rowIndex="3"/>
-                <CheckBox fx:id="checkConfs" mnemonicParsing="false" text="Conferencies" GridPane.rowIndex="4"/>
+                <CheckBox fx:id="checkConfs" mnemonicParsing="false" text="Conferències" GridPane.rowIndex="4"/>
                 <CheckBox fx:id="checkLabels" mnemonicParsing="false" text="Etiquetes" GridPane.rowIndex="5"/>
-                <CheckBox fx:id="checkPapers" mnemonicParsing="false" text="Papers" GridPane.rowIndex="6"/>
+                <CheckBox fx:id="checkPapers" mnemonicParsing="false" text="Articles" GridPane.rowIndex="6"/>
                 <CheckBox fx:id="checkTerms" mnemonicParsing="false" text="Termes" GridPane.rowIndex="7"/>
             </GridPane>
          <GridPane fx:id="paneAddNode" layoutY="349.0" visible="false" AnchorPane.bottomAnchor="70.0"
