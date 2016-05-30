@@ -49,7 +49,7 @@ public class RelevanceController extends BaseController {
         SemanticPath rel = choicesRelevance.getValue();
         if(rel == null){
             Stage stage = (Stage) choicesRelevance.getScene().getWindow();
-            launchAlert(stage, "Has de seleccionar un camí semàntic per a fer la cerca", Alert.AlertType.INFORMATION);
+            launchAlert(stage, "Has de seleccionar un camí semàntic per a fer la cerca");
         } else {
             NodeType originType = rel.getInitialType();
             NodeType destinyType = rel.getFinalType();

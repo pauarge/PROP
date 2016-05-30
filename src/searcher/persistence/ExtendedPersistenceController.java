@@ -16,8 +16,8 @@ import static common.persistence.FileHandler.writeFile;
 
 public class ExtendedPersistenceController extends PersistenceController {
 
-    private String spFileName = "semanticPaths.txt";
-    private ObservableList<SemanticPath> semanticPaths;
+    private final String spFileName = "semanticPaths.txt";
+    private final ObservableList<SemanticPath> semanticPaths;
 
     public ExtendedPersistenceController(Graph graph, ObservableList<SemanticPath> semanticPaths) {
         super(graph);

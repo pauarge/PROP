@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class SemanticPathSerializer implements Serializable {
+class SemanticPathSerializer implements Serializable {
 
     private String data;
     private String name;

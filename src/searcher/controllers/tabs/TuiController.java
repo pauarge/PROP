@@ -58,7 +58,7 @@ public class TuiController extends BaseController {
         return readyToQuit;
     }
 
-    public String executeLine(String line) {
+    private String executeLine(String line) {
         String command = Utils.getFirstWord(line);
         String parameters = Utils.getRestOfWords(line);
 

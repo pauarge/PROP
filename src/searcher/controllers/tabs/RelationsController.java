@@ -66,7 +66,7 @@ public class RelationsController extends BaseController {
         choiceEdge.getSelectionModel().selectedItemProperty().addListener(
                 (o, ov, nv) -> buttonAddEdge.setDisable((nv == null))
         );
-        builderPath = new ArrayList<Relation>();
+        builderPath = new ArrayList<>();
 
         addNameField.textProperty().addListener((o, ov, nv) -> updateAddButtonStatus());
 

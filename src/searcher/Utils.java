@@ -26,8 +26,8 @@ public final class Utils {
         }
     }
 
-    static public void launchAlert(Stage stage, String text, Alert.AlertType type) {
-        Alert alert = new Alert(type);
+    static public void launchAlert(Stage stage, String text) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Alerta");
         alert.setHeaderText(text);
         alert.showAndWait();
