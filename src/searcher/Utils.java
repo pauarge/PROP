@@ -108,7 +108,7 @@ public final class Utils {
         }
     };
 
-    public static StringConverter<Relation> getRelationStringConverter() {
+    public static StringConverter<Relation> relationStringConverter() {
         return relationStringConverter;
     }
 

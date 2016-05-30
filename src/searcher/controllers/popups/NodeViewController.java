@@ -97,7 +97,7 @@ public class NodeViewController extends BaseController {
         buttonDelete.setOnAction(event -> deleteSelectedEdge());
         buttonNew.setOnAction(event -> openNewEdgeDialog());
 
-        choiceRelation.setConverter(Utils.getRelationStringConverter());
+        choiceRelation.setConverter(Utils.relationStringConverter());
         choiceRelation.getSelectionModel().selectedItemProperty().addListener((o, ov, nv) -> updateCombo());
         choiceType.valueProperty().addListener((o, ov, nv) -> updateRelations());
         choiceType.setItems(FXCollections.observableArrayList(NodeType.class.getEnumConstants()));
