@@ -5,6 +5,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import searcher.Utils;
 import searcher.controllers.BaseController;
 import searcher.models.SemanticPath;
@@ -13,14 +14,16 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import static searcher.Utils.closeWindow;
+
 
 public class TuiController extends BaseController {
 
-    private static final String GLOBAL_HELP = "add\nprint\nsearch\nimport\nrelevance\nquit";
-    private static final String ADD_HELP = "add node node_type [node_id] node_name\nadd relation name node_type1 [node_type2 ...] node_typen";
+    private static final String GLOBAL_HELP = "add\nremove\nprint\nsearch\nimport\nrelevance\nquit";
+    private static final String ADD_HELP = "add node node_type node_name\nadd relation name node_type1 [node_type2 ...] node_typen";
     private static final String PRINT_HELP = "print node";
     private static final String PRINT_NODE_HELP = "print node all\nprint node type1 [type2 ...]";
-    private static final String IMPORT_HELP = "import nodes node_type file_path\nimport edges node_type1 node_type2 file_path\nimport all folder_path";
+    private static final String IMPORT_HELP = "import nodes path\nimport edges path\nimport all folder_path";
     private static final String EXPORT_HELP = "export file_path";
     private static final String ADD_RELATION_HELP = "add relation name node_type1 [node_type2 ...] node_typen";
     private static final String RELEVANCE_HELP = "relevance relation_name [free]\nrelevance relation_name node_origin_id [node_dest_id]";
@@ -49,10 +52,6 @@ public class TuiController extends BaseController {
         }
     }
 
-    boolean isReadyToQuit() {
-        return readyToQuit;
-    }
-
     private String executeLine(String line) {
         String command = Utils.getFirstWord(line);
         String parameters = Utils.getRestOfWords(line);
@@ -60,6 +59,8 @@ public class TuiController extends BaseController {
         switch (command) {
             case "add":
                 return executeAdd(parameters);
+            case "remove":
+                return executeRemove(parameters);
             case "print":
                 return executePrint(parameters);
             case "search":
@@ -70,12 +71,11 @@ public class TuiController extends BaseController {
                 return executeExport(parameters);
             case "relevance":
                 return executeRelevance(parameters);
-            case "":
-                return null;
             case "help":
                 return GLOBAL_HELP;
             case "quit":
-                this.close();
+                Stage stage = (Stage) console.getScene().getWindow();
+                closeWindow(stage);
                 return null;
             default:
                 return "Comanda no reconeguda. Escriu 'help' per obtenir un llistat de comandes valides.";
@@ -154,6 +154,35 @@ public class TuiController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
             return "EXCEPTION RAISED!";
+        }
+    }
+
+    private String executeRemove(String line) {
+        String type = Utils.getFirstWord(line);
+        String value = Utils.getRestOfWords(line);
+
+        if(type.isEmpty()){
+            return "remove node_type node_id";
+        }
+
+        NodeType nodeType = Utils.getType(type);
+        if (nodeType == null) {
+            return type + " no es un tipus valid de node!";
+        }
+
+        if (value.isEmpty()) {
+            return "El node ha de tenir un nom!";
+        }
+
+        try {
+            int nodeId = Integer.parseInt(value);
+            graph.removeNode(nodeType, nodeId);
+            return "Node eliminat correctament.";
+        } catch (GraphException e) {
+            e.printStackTrace();
+            return "EXCEPTION RAISED!";
+        } catch (NumberFormatException e){
+            return "node_id ha de ser un enter.";
         }
     }
 
@@ -282,37 +311,21 @@ public class TuiController extends BaseController {
     }
 
     private String importNode(String params) {
-        /*
-        String type = Utils.getFirstWord(params);
-        String path = Utils.getRestOfWords(params);
-
+        String path = Utils.getFirstWord(params);
         if (path.isEmpty()) {
             return IMPORT_HELP;
         }
-
-        pc.importNodes(path, Utils.getType(type));
-        return "Fitxer importat amb exit.";
-        */
-        // TODO: Nova funcio a persistencia
-        return "No implementat";
+        pc.importNodes(path);
+        return "Nodes importats amb èxit.";
     }
 
     private String importEdge(String params) {
-        /*
-        String type1 = Utils.getFirstWord(params);
-        String type2 = Utils.getRestOfWords(params);
-        String path = Utils.getRestOfWords(type2);
-        type2 = Utils.getFirstWord(type2);
-
+        String path = Utils.getFirstWord(params);
         if (path.isEmpty()) {
             return IMPORT_HELP;
         }
-
-        pc.importEdges(path, Utils.getType(type1), Utils.getType(type2));
-        return "Fitxer importat amb exit.";
-        */
-        // TODO: Nova funcio a persistencia
-        return "No implementat";
+        pc.importEdges(path);
+        return "Arestes importades amb èxit.";
     }
 
     private String executeExport(String path) {
@@ -378,10 +391,6 @@ public class TuiController extends BaseController {
         }
 
         return sb.toString();
-    }
-
-    private void close() {
-        readyToQuit = true;
     }
 
 }
