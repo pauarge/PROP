@@ -15,8 +15,6 @@ class SemanticPathSerializer implements Serializable {
 
     private String data;
     private String name;
-    private NodeType initialType;
-    private NodeType finalType;
     private RelationStructure path;
     private ArrayList<NodeType> types;
     private ArrayList<Relation> alr;
@@ -24,14 +22,6 @@ class SemanticPathSerializer implements Serializable {
 
     private void inflate() {
         if (name == null || types.isEmpty() || path == null) {
-            String[] parts = data.split(":");
-            name = parts[0];
-            String[] types = parts[1].split("-");
-            initialType = NodeType.valueOf(types[0]);
-            finalType = NodeType.valueOf(types[1]);
-            String[] relations = parts[2].split("-");
-
-            /*
             int m = data.indexOf(":");
             name = data.substring(0, m);
             for (String type : data.substring(m + 1, data.length()).split("-")) {
@@ -45,7 +35,6 @@ class SemanticPathSerializer implements Serializable {
             } catch (Exception e){
                 e.printStackTrace();
             }
-            */
 
         }
     }

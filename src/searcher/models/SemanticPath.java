@@ -20,17 +20,17 @@ public class SemanticPath {
         this.path = path;
     }
 
-
     public String toString() {
         return getName() + ": " + Utils.convertToText(Utils.toTypeArray(this));
     }
 
     public String convertToExport() {
-        String toExport = getName() + ": " + initialType.toString() + " - " + finalType.toString() + ": ";
-        for(Relation r : path){
-            toExport = toExport.concat(" " + r.getValue() + " - ");
+        String path = getName() + ": ";
+        if (Utils.toTypeArray(this).length == 0) return path;
+        for (NodeType nt : Utils.toTypeArray(this)) {
+            path = path.concat(nt.toString() + " - ");
         }
-        return toExport;
+        return path.substring(0, path.length() - 3);
     }
 
     public String getName() {

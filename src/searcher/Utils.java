@@ -216,7 +216,6 @@ public final class Utils {
             Scene scene = new Scene(pane);
             edges.setScene(scene);
             edges.show();
-            System.out.println("done!");
         } catch (Exception e) {
             e.printStackTrace();
         }

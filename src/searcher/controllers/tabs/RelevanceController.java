@@ -46,9 +46,9 @@ public class RelevanceController extends BaseController {
 
     @FXML
     private void relevanceSearchAction() {
+        Stage stage = (Stage) choicesRelevance.getScene().getWindow();
         SemanticPath rel = choicesRelevance.getValue();
         if (rel == null) {
-            Stage stage = (Stage) choicesRelevance.getScene().getWindow();
             launchAlert(stage, "Has de seleccionar un camí semàntic per a fer la cerca");
         } else {
             NodeType originType = rel.getInitialType();
@@ -70,7 +70,8 @@ public class RelevanceController extends BaseController {
                 try {
                     originNode = graph.getNode(originType, originId);
                 } catch (GraphException e) {
-                    e.printStackTrace();
+                    launchAlert(stage, "No s'ha pogut trobar un node inicial amb el valor introduït.");
+                    return;
                 }
                 if (relevanceDestinyId.getText().isEmpty()) {
                     gs = new OriginSearch(graph, rel.getPath(), originNode);
@@ -80,7 +81,8 @@ public class RelevanceController extends BaseController {
                     try {
                         destintyNode = graph.getNode(destinyType, destinyId);
                     } catch (GraphException e) {
-                        e.printStackTrace();
+                        launchAlert(stage, "No s'ha pogut trobar un node de destí amb el valor introduït.");
+                        return;
                     }
                     gs = new OriginDestinationSearch(graph, rel.getPath(), originNode, destintyNode);
                 }
