@@ -45,7 +45,6 @@ public class RelevanceController extends BaseController {
 
     @FXML
     private void relevanceSearchAction() {
-        Stage stage = (Stage) choicesRelevance.getScene().getWindow();
         SemanticPath rel = choicesRelevance.getValue();
         if (rel == null) {
             launchAlert("Has de seleccionar un camí semàntic per a fer la cerca");
@@ -88,14 +87,12 @@ public class RelevanceController extends BaseController {
                 }
 
             }
-
             gs.search();
             ArrayList<GraphSearch.Result> results = gs.getResults();
             ObservableList<RelevanceModel> res = FXCollections.observableArrayList();
             res.addAll(results.stream().map(r -> new RelevanceModel(r.from, r.to, r.hetesim)).collect(Collectors.toList()));
             searchTable.setItems(res);
         }
-
     }
 
     @Override
