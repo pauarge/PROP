@@ -33,7 +33,7 @@ public class LandingController {
         DirectoryChooser dc = new DirectoryChooser();
         final File selectedDirectory = dc.showDialog(stage);
         if (selectedDirectory != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../layouts/main.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/searcher/layouts/main.fxml"));
             Parent root = null;
             try {
                 root = loader.load();
@@ -53,9 +53,8 @@ public class LandingController {
     @FXML
     public void openMain() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../layouts/main.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/searcher/layouts/main.fxml"));
             Parent root = loader.load();
-            MainController controller = loader.getController();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle(APP_TITLE);

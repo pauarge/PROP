@@ -42,7 +42,7 @@ public class MainController extends BaseController {
         alert.setContentText("Fent això, es descartaran els canvis no exportats.");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            Parent root = FXMLLoader.load(getClass().getResource("../layouts/landing.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/searcher/layouts/landing.fxml"));
             stage.setScene(new Scene(root));
             stage.show();
         }
@@ -69,7 +69,7 @@ public class MainController extends BaseController {
     private void launchHelpWindow() {
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("../layouts/popups/help.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/searcher/layouts/popups/help.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
