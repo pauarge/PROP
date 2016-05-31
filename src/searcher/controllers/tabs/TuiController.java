@@ -161,7 +161,7 @@ public class TuiController extends BaseController {
         String type = Utils.getFirstWord(line);
         String value = Utils.getRestOfWords(line);
 
-        if(type.isEmpty()){
+        if (type.isEmpty()) {
             return "remove node_type node_id";
         }
 
@@ -181,7 +181,7 @@ public class TuiController extends BaseController {
         } catch (GraphException e) {
             e.printStackTrace();
             return "EXCEPTION RAISED!";
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             return "node_id ha de ser un enter.";
         }
     }
