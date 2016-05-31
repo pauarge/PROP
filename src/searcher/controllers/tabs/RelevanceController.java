@@ -111,6 +111,10 @@ public class RelevanceController extends BaseController {
             }
             gs.search();
             ArrayList<GraphSearch.Result> results = gs.getResults();
+            if(results.size() < 1){
+                launchAlert("No s'han trobat resultats");
+                return;
+            }
             ObservableList<RelevanceModel> res = FXCollections.observableArrayList();
             res.addAll(results.stream().map(r -> new RelevanceModel(r.from, r.to, r.hetesim)).collect(Collectors.toList()));
             searchTable.setItems(res);
