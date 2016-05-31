@@ -14,9 +14,7 @@ import searcher.models.RelevanceModel;
 import searcher.models.SemanticPath;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static searcher.Utils.launchAlert;
@@ -24,6 +22,12 @@ import static searcher.Utils.launchAlert;
 
 public class RelevanceController extends BaseController {
 
+    private ArrayList<ObservableList<RelevanceModel>> history;
+    private int itHis;
+    @FXML
+    private Button goBackHistory;
+    @FXML
+    private Button goFowHistory;
     @FXML
     private TextField relevanceOriginId;
     @FXML
@@ -42,6 +46,18 @@ public class RelevanceController extends BaseController {
     private TableColumn<RelevanceModel, String> dNameColumn;
     @FXML
     private TableColumn<RelevanceModel, String> relevanceColumn;
+
+    @FXML
+    private void goBackHistoryAction(){
+        itHis--;
+        searchTable.setItems(history.get(itHis));
+    }
+
+    @FXML
+    private void goFowHistoryAction(){
+        itHis++;
+        searchTable.setItems(history.get(itHis));
+    }
 
     @FXML
     private void relevanceSearchAction() {
@@ -92,6 +108,8 @@ public class RelevanceController extends BaseController {
             ObservableList<RelevanceModel> res = FXCollections.observableArrayList();
             res.addAll(results.stream().map(r -> new RelevanceModel(r.from, r.to, r.hetesim)).collect(Collectors.toList()));
             searchTable.setItems(res);
+            history.add(res);
+            itHis++;
         }
     }
 
@@ -104,7 +122,6 @@ public class RelevanceController extends BaseController {
                 if (path == null) return null;
                 return path.getName();
             }
-
             @Override
             public SemanticPath fromString(String string) {
                 return null;
@@ -133,6 +150,8 @@ public class RelevanceController extends BaseController {
         dIdColumn.setCellValueFactory(cv -> new ReadOnlyStringWrapper(String.valueOf(cv.getValue().getDestiny().getId())));
         dNameColumn.setCellValueFactory(cv -> new ReadOnlyStringWrapper(String.valueOf(cv.getValue().getDestiny().getValue())));
         relevanceColumn.setCellValueFactory(cv -> new ReadOnlyStringWrapper(String.valueOf(cv.getValue().getRelevance())));
+        history = new ArrayList<>();
+        itHis = -1;
     }
 
 }

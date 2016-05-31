@@ -12,9 +12,8 @@
             <children>
                 <ButtonBar AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0">
                     <buttons>
-                        <Button fx:id="buttonDetails" mnemonicParsing="false" text="&lt;&lt;"/>
-
-                        <Button fx:id="buttonAdd" mnemonicParsing="false" text="&gt;&gt;"/>
+                        <Button onAction="#goBackHistoryAction" fx:id="goBackHistory" mnemonicParsing="false" text="&lt;&lt;"/>
+                        <Button onAction="#goFowHistoryAction" fx:id="goFowHistory" mnemonicParsing="false" text="&gt;&gt;"/>
                     </buttons>
                     <padding>
                         <Insets right="20.0"/>
