@@ -80,6 +80,11 @@ public class EdgesViewController extends BaseController {
     private void removeSelectedRelation() {
         Relation relation = choiceRelation.getValue();
         edgeTypes.remove(relation);
+        try {
+            graph.removeRelation(relation.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         choiceRelation.getSelectionModel().selectFirst();
     }
 
