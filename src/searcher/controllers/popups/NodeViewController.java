@@ -24,7 +24,6 @@ import java.util.ResourceBundle;
 
 public class NodeViewController extends BaseController {
     private NodeModel model;
-    private GraphController graphController;
     private IntegerProperty distProperty;
     private ObservableList<NodeModelRelated> nodesWithEdge;
 
@@ -84,7 +83,7 @@ public class NodeViewController extends BaseController {
 
     private void loadGraph() {
         int dist = distProperty.get();
-        graphController = new GraphController(graph);
+        GraphController graphController = new GraphController(graph);
         SwingNode newNodeGraph = graphController.getGraph(model, dist);
         anchorGraph.getChildren().remove(nodeGraph);
         anchorGraph.getChildren().add(newNodeGraph);

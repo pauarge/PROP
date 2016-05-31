@@ -3,11 +3,9 @@ package searcher.persistence;
 import common.domain.*;
 import common.persistence.PersistenceController;
 import javafx.collections.ObservableList;
-import searcher.Utils;
 import searcher.models.SemanticPath;
 
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -24,7 +24,6 @@ import static searcher.Utils.launchAlert;
 
 public class RelevanceController extends BaseController {
 
-    private GraphSearch gs;
     @FXML
     private TextField relevanceOriginId;
     @FXML
@@ -54,6 +53,7 @@ public class RelevanceController extends BaseController {
             NodeType originType = rel.getInitialType();
             NodeType destinyType = rel.getFinalType();
 
+            GraphSearch gs;
             if (relevanceOriginId.getText().isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Operació costosa");

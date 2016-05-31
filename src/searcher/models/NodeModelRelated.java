@@ -5,7 +5,7 @@ import common.domain.NodeType;
 import common.domain.Relation;
 
 public class NodeModelRelated extends NodeModel {
-    private Relation edge;
+    private final Relation edge;
 
     public NodeModelRelated(Node node, NodeType nodeType, Relation edge) {
         super(node, nodeType);

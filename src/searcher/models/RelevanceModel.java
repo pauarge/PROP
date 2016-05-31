@@ -4,9 +4,9 @@ import common.domain.Node;
 
 
 public class RelevanceModel {
-    private Node origin;
-    private Node destiny;
-    private double relevance;
+    private final Node origin;
+    private final Node destiny;
+    private final double relevance;
 
     public RelevanceModel(Node origin, Node destiny, double relevance){
         this.origin = origin;

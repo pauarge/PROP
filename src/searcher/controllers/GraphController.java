@@ -16,9 +16,9 @@ import java.util.*;
 
 public class GraphController {
 
-    private Graph g;
-    private Map<Node, Boolean> vis = new HashMap<>();
-    private Map<Pair<Node, NodeType>, Pair<Node, NodeType>> prev = new HashMap<>();
+    private final Graph g;
+    private final Map<Node, Boolean> vis = new HashMap<>();
+    private final Map<Pair<Node, NodeType>, Pair<Node, NodeType>> prev = new HashMap<>();
 
     private ArrayList<Relation> getRelationsForTypeAux(NodeType type) {
         ArrayList<Relation> toReturn = new ArrayList<>();

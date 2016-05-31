@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 class SemanticPathSerializer implements Serializable {
 
-    private String data;
+    private final String data;
     private String name;
-    private ArrayList<NodeType> types;
+    private final ArrayList<NodeType> types;
 
     private void inflate() {
         if (name == null || types.isEmpty()) {

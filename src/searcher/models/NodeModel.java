@@ -4,8 +4,8 @@ import common.domain.Node;
 import common.domain.NodeType;
 
 public class NodeModel {
-    private Node node;
-    private NodeType nodeType;
+    private final Node node;
+    private final NodeType nodeType;
 
     public NodeModel(Node node, NodeType nodeType) {
         this.node = node;
