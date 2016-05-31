@@ -23,8 +23,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("layouts/landing.fxml"));
         primaryStage.setTitle(APP_TITLE);
-        URL iconURL = Main.class.getResource("img/magnifier.png");
-        primaryStage.getIcons().add(new Image(String.valueOf(iconURL)));
+        primaryStage.getIcons().add(new Image("/searcher/img/magnifier.png"));
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

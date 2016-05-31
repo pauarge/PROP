@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
@@ -42,6 +43,7 @@ public class LandingController {
             }
             stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.getIcons().add(new Image("/searcher/img/magnifier.png"));
             stage.setTitle(APP_TITLE);
             stage.show();
             ((Stage) gridPane.getScene().getWindow()).close();
@@ -57,6 +59,7 @@ public class LandingController {
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.getIcons().add(new Image("/searcher/img/magnifier.png"));
             stage.setTitle(APP_TITLE);
             stage.show();
             ((Stage) gridPane.getScene().getWindow()).close();
