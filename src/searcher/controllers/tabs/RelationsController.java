@@ -21,27 +21,46 @@ import java.util.*;
 
 public class RelationsController extends BaseController {
 
-    @FXML private TableView<SemanticPath> pathList;
-    @FXML private TableColumn<SemanticPath, String> pathNameColumn;
-    @FXML private Label pathName;
-    @FXML private TextFlow pathSummary;
-    @FXML private Button buttonBotLeft;
-    @FXML private Button buttonBotRight;
-    @FXML private Button buttonEdges;
+    @FXML
+    private TableView<SemanticPath> pathList;
+    @FXML
+    private TableColumn<SemanticPath, String> pathNameColumn;
+    @FXML
+    private Label pathName;
+    @FXML
+    private TextFlow pathSummary;
+    @FXML
+    private Button buttonBotLeft;
+    @FXML
+    private Button buttonBotRight;
+    @FXML
+    private Button buttonEdges;
 
-    @FXML private GridPane pathBrowser;
-    @FXML private Button buttonPrev;
-    @FXML private Button buttonNext;
-    @FXML private Label labelPrev;
-    @FXML private Label labelEdge;
-    @FXML private Label labelNext;
+    @FXML
+    private GridPane pathBrowser;
+    @FXML
+    private Button buttonPrev;
+    @FXML
+    private Button buttonNext;
+    @FXML
+    private Label labelPrev;
+    @FXML
+    private Label labelEdge;
+    @FXML
+    private Label labelNext;
 
-    @FXML private GridPane paneEdges;
-    @FXML private ChoiceBox<NodeType> choiceType;
-    @FXML private ChoiceBox<Relation> choiceEdge;
-    @FXML private Label labelToHide;
-    @FXML private Button buttonAddEdge;
-    @FXML private TextField addNameField;
+    @FXML
+    private GridPane paneEdges;
+    @FXML
+    private ChoiceBox<NodeType> choiceType;
+    @FXML
+    private ChoiceBox<Relation> choiceEdge;
+    @FXML
+    private Label labelToHide;
+    @FXML
+    private Button buttonAddEdge;
+    @FXML
+    private TextField addNameField;
 
     private int shownRelation = 0;
     private NodeType builderType;
@@ -155,9 +174,9 @@ public class RelationsController extends BaseController {
         NodeType[] types = Utils.toTypeArray(first, path);
         labelPrev.setText(Utils.getName(types[shownRelation]));
         labelEdge.setText(path.get(shownRelation).getValue());
-        labelNext.setText(Utils.getName(types[shownRelation+1]));
+        labelNext.setText(Utils.getName(types[shownRelation + 1]));
         buttonPrev.setDisable(shownRelation == 0);
-        buttonNext.setDisable(shownRelation == path.size()-1);
+        buttonNext.setDisable(shownRelation == path.size() - 1);
         updatePathSummary(first, path);
     }
 
@@ -246,7 +265,7 @@ public class RelationsController extends BaseController {
             current = builderType;
         } else {
             NodeType[] types = Utils.toTypeArray(builderType, builderPath);
-            current = types[types.length-1];
+            current = types[types.length - 1];
         }
 
         HashSet<NodeType> targets = new HashSet<>();
@@ -265,7 +284,7 @@ public class RelationsController extends BaseController {
 
     private void handleAddNewPath() {
         NodeType[] types = Utils.toTypeArray(builderType, builderPath);
-        NodeType lastType = types[types.length-1];
+        NodeType lastType = types[types.length - 1];
         RelationStructure structure = null;
         try {
             structure = new RelationStructure(builderType, builderPath, lastType);

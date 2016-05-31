@@ -25,12 +25,6 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("layouts/landing.fxml"));
         primaryStage.setTitle(APP_TITLE);
         URL iconURL = Main.class.getResource("img/magnifier.png");
-        try {
-            java.awt.Image image = new ImageIcon(iconURL).getImage();
-            //com.apple.eawt.Application.getApplication().setDockIconImage(image);
-        } catch (Exception e) {
-            // Won't work on Windows or Linux.
-        }
         primaryStage.getIcons().add(new Image(String.valueOf(iconURL)));
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

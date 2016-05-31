@@ -70,7 +70,7 @@ public class RelevanceController extends BaseController {
                 try {
                     originNode = graph.getNode(originType, originId);
                 } catch (GraphException e) {
-                    launchAlert("No s'ha pogut trobar un node inicial amb el valor introduït.");
+                    launchAlert("No s'ha pogut trobar cap node inicial amb el valor introduït.");
                     return;
                 }
                 if (relevanceDestinyId.getText().isEmpty()) {
@@ -81,7 +81,7 @@ public class RelevanceController extends BaseController {
                     try {
                         destintyNode = graph.getNode(destinyType, destinyId);
                     } catch (GraphException e) {
-                        launchAlert("No s'ha pogut trobar un node de destí amb el valor introduït.");
+                        launchAlert("No s'ha pogut trobar cap node de destí amb el valor introduït.");
                         return;
                     }
                     gs = new OriginDestinationSearch(graph, rel.getPath(), originNode, destintyNode);
