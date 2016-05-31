@@ -4,14 +4,13 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+import searcher.controllers.BaseController;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import static searcher.Utils.launchAlert;
-
-import searcher.controllers.BaseController;
 
 
 public class GraphManController extends BaseController {
@@ -92,6 +91,7 @@ public class GraphManController extends BaseController {
         final File selectedDirectory = dc.showDialog(stage);
         if (selectedDirectory != null) {
             pc.importGraph(selectedDirectory.getAbsolutePath());
+            pc.importSemanticPaths(selectedDirectory.getAbsolutePath());
             launchAlert("S'ha importat correctament la sessió.");
         }
     }

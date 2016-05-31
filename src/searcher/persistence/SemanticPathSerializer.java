@@ -2,11 +2,10 @@ package searcher.persistence;
 
 import common.domain.NodeType;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 
-class SemanticPathSerializer implements Serializable {
+class SemanticPathSerializer {
 
     private final String data;
     private String name;

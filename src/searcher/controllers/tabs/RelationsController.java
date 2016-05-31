@@ -95,21 +95,23 @@ public class RelationsController extends BaseController {
     }
 
     private void updateRelations() {
-        NodeType type = choiceType.getValue();
-        FilteredList<Relation> relations;
-        NodeType lastType;
-        if (builderPath != null && !builderPath.isEmpty()) {
-            NodeType[] types = Utils.toTypeArray(builderType, builderPath);
-            lastType = types[types.length - 1];
-        } else {
-            lastType = builderType;
+        if (choiceEdge.isVisible()) {
+            NodeType type = choiceType.getValue();
+            FilteredList<Relation> relations;
+            NodeType lastType;
+            if (builderPath != null && !builderPath.isEmpty()) {
+                NodeType[] types = Utils.toTypeArray(builderType, builderPath);
+                lastType = types[types.length - 1];
+            } else {
+                lastType = builderType;
+            }
+            relations = edgeTypes.filtered(r -> r.getNodeTypeA() == lastType && r.getNodeTypeB() == type
+                    || r.getNodeTypeA() == type && r.getNodeTypeB() == lastType
+            );
+            choiceEdge.setItems(relations);
+            choiceEdge.setDisable(false);
+            choiceEdge.getSelectionModel().selectFirst();
         }
-        relations = edgeTypes.filtered(r -> r.getNodeTypeA() == lastType && r.getNodeTypeB() == type
-                || r.getNodeTypeA() == type && r.getNodeTypeB() == lastType
-        );
-        choiceEdge.setItems(relations);
-        choiceEdge.setDisable(false);
-        choiceEdge.getSelectionModel().selectFirst();
     }
 
     private void handleNextRelation() {
