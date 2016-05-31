@@ -1,11 +1,13 @@
 package searcher.persistence;
 
-import common.domain.Graph;
+import common.domain.*;
 import common.persistence.PersistenceController;
 import javafx.collections.ObservableList;
+import searcher.Utils;
 import searcher.models.SemanticPath;
 
 import java.io.File;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,12 +39,22 @@ public class ExtendedPersistenceController extends PersistenceController {
         path = handlePath(path) + spFileName;
         File f = new File(path);
         if (f.exists() && !f.isDirectory()) {
+            Graph graph = super.getGraph();
             List<String> strings = readFile(path);
             for (String s : strings) {
                 SemanticPathSerializer serializer = new SemanticPathSerializer(s);
-                SemanticPath sp = new SemanticPath(
-                        serializer.getName(), serializer.getInitialType(), serializer.getFinalType(), serializer.getRelationStructure());
-                semanticPaths.add(sp);
+                ArrayList<NodeType> types = serializer.getTypes();
+                ArrayList<Relation> alr = new ArrayList<>();
+                for (int i = 0; i < types.size() - 1; ++i) {
+                    alr.add(graph.getOrCreateRelation(types.get(i), types.get(i+1), serializer.getName()));
+                }
+                try {
+                    semanticPaths.add(new SemanticPath(
+                            serializer.getName(), serializer.getInitialType(), serializer.getFinalType(),
+                            new RelationStructure(types.get(0), alr, types.get(types.size() - 1))));
+                } catch (RelationStructureException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

@@ -28,31 +28,52 @@ public class NodeViewController extends BaseController {
     private IntegerProperty distProperty;
     private ObservableList<NodeModelRelated> nodesWithEdge;
 
-    @FXML private VBox paneEdges;
-    @FXML private AnchorPane anchorGraph;
-    @FXML private Slider sliderDist;
-    @FXML private SwingNode nodeGraph;
+    @FXML
+    private VBox paneEdges;
+    @FXML
+    private AnchorPane anchorGraph;
+    @FXML
+    private Slider sliderDist;
+    @FXML
+    private SwingNode nodeGraph;
 
-    @FXML private TableView<NodeModelRelated> tableEdges;
-    @FXML private TableColumn<NodeModelRelated, String> columnId;
-    @FXML private TableColumn<NodeModelRelated, String> columnName;
-    @FXML private TableColumn<NodeModelRelated, String> columnType;
-    @FXML private TableColumn<NodeModelRelated, String> columnEdge;
+    @FXML
+    private TableView<NodeModelRelated> tableEdges;
+    @FXML
+    private TableColumn<NodeModelRelated, String> columnId;
+    @FXML
+    private TableColumn<NodeModelRelated, String> columnName;
+    @FXML
+    private TableColumn<NodeModelRelated, String> columnType;
+    @FXML
+    private TableColumn<NodeModelRelated, String> columnEdge;
 
-    @FXML private AnchorPane paneAddEdge;
-    @FXML private ChoiceBox<NodeType> choiceType;
-    @FXML private ChoiceBox<Relation> choiceRelation;
-    @FXML private ComboBox<Node> comboNode;
-    @FXML private Button buttonAdd;
-    @FXML private Button buttonBack;
-    @FXML private Button buttonEdgeEditor;
+    @FXML
+    private AnchorPane paneAddEdge;
+    @FXML
+    private ChoiceBox<NodeType> choiceType;
+    @FXML
+    private ChoiceBox<Relation> choiceRelation;
+    @FXML
+    private ComboBox<Node> comboNode;
+    @FXML
+    private Button buttonAdd;
+    @FXML
+    private Button buttonBack;
+    @FXML
+    private Button buttonEdgeEditor;
     private ObservableList<Node> comboFullList;
 
-    @FXML private AnchorPane paneToolsEdge;
-    @FXML private TextField textFilter;
-    @FXML private Button buttonFilter;
-    @FXML private Button buttonDelete;
-    @FXML private Button buttonNew;
+    @FXML
+    private AnchorPane paneToolsEdge;
+    @FXML
+    private TextField textFilter;
+    @FXML
+    private Button buttonFilter;
+    @FXML
+    private Button buttonDelete;
+    @FXML
+    private Button buttonNew;
 
     public void setModel(NodeModel model) {
         this.model = model;
@@ -80,7 +101,7 @@ public class NodeViewController extends BaseController {
     public void initialize(URL location, ResourceBundle resources) {
         nodeGraph = null;
         distProperty = new SimpleIntegerProperty((int) sliderDist.getValue());
-        sliderDist.valueProperty().addListener((o, ov, nv) -> distProperty.set((int)(nv.doubleValue()+0.5)));
+        sliderDist.valueProperty().addListener((o, ov, nv) -> distProperty.set((int) (nv.doubleValue() + 0.5)));
         distProperty.addListener((o, ov, nv) -> loadGraph());
 
         columnId.setCellValueFactory(cv -> new ReadOnlyStringWrapper(Integer.toString(cv.getValue().getNode().getId())));
@@ -115,7 +136,7 @@ public class NodeViewController extends BaseController {
         });
         //comboNode.getEditor().textProperty().addListener((o, ov, nv) ->  filterCombo());
         comboNode.valueProperty().addListener((o, ov, nv) -> buttonAdd.setDisable(nv == null));
-        buttonAdd.setOnAction(event ->  addEdge());
+        buttonAdd.setOnAction(event -> addEdge());
         buttonBack.setOnAction(event -> backFromAddEdge());
 
         buttonEdgeEditor.setOnAction(event -> Utils.openEdgeEditor());

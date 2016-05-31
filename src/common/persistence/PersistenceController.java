@@ -161,4 +161,8 @@ public class PersistenceController {
         exportEdges(path);
     }
 
+    public Graph getGraph(){
+        return graph;
+    }
+
 }
