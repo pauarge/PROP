@@ -26,7 +26,7 @@ public class GraphManController extends BaseController {
         final File selectedDirectory = dc.showDialog(stage);
         if (selectedDirectory != null) {
             pc.importNodes(selectedDirectory.getAbsolutePath());
-            launchAlert(stage, "S'han importat correctament els nodes.");
+            launchAlert("S'han importat correctament els nodes.");
         }
     }
 
@@ -37,7 +37,7 @@ public class GraphManController extends BaseController {
         final File selectedDirectory = dc.showDialog(stage);
         if (selectedDirectory != null) {
             pc.exportNodes(selectedDirectory.getAbsolutePath());
-            launchAlert(stage, "S'han exportat correctament els nodes.");
+            launchAlert("S'han exportat correctament els nodes.");
         }
     }
 
@@ -48,7 +48,7 @@ public class GraphManController extends BaseController {
         final File selectedDirectory = dc.showDialog(stage);
         if (selectedDirectory != null) {
             pc.exportSemanticPaths(selectedDirectory.getAbsolutePath());
-            launchAlert(stage, "S'han exportat correctament les relacions.");
+            launchAlert("S'han exportat correctament les relacions.");
         }
     }
 
@@ -59,7 +59,7 @@ public class GraphManController extends BaseController {
         final File selectedDirectory = dc.showDialog(stage);
         if (selectedDirectory != null) {
             pc.importSemanticPaths(selectedDirectory.getAbsolutePath());
-            launchAlert(stage, "S'han importat correctament les relacions.");
+            launchAlert("S'han importat correctament les relacions.");
         }
     }
 
@@ -70,7 +70,7 @@ public class GraphManController extends BaseController {
         final File selectedDirectory = dc.showDialog(stage);
         if (selectedDirectory != null) {
             pc.importEdges(selectedDirectory.getAbsolutePath());
-            launchAlert(stage, "S'han importat correctament les arestes.");
+            launchAlert("S'han importat correctament les arestes.");
         }
     }
 
@@ -81,7 +81,7 @@ public class GraphManController extends BaseController {
         final File selectedDirectory = dc.showDialog(stage);
         if (selectedDirectory != null) {
             pc.exportEdges(selectedDirectory.getAbsolutePath());
-            launchAlert(stage, "S'han exportat correctament les arestes.");
+            launchAlert("S'han exportat correctament les arestes.");
         }
     }
 
@@ -92,7 +92,7 @@ public class GraphManController extends BaseController {
         final File selectedDirectory = dc.showDialog(stage);
         if (selectedDirectory != null) {
             pc.importGraph(selectedDirectory.getAbsolutePath());
-            launchAlert(stage, "S'ha importat correctament la sessió.");
+            launchAlert("S'ha importat correctament la sessió.");
         }
     }
 
@@ -104,7 +104,7 @@ public class GraphManController extends BaseController {
         if (selectedDirectory != null) {
             pc.exportGraph(selectedDirectory.getAbsolutePath());
             pc.exportSemanticPaths(selectedDirectory.getAbsolutePath());
-            launchAlert(stage, "S'ha exportat correctament la sessió.");
+            launchAlert("S'ha exportat correctament la sessió.");
         }
     }
 

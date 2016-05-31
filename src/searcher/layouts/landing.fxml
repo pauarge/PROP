@@ -42,22 +42,16 @@
     <Text style=" -fx-font-size: 30; -fx-tile-alignment: center" text="CERCADOR RELACIONAL" GridPane.columnIndex="0"
           GridPane.columnSpan="11" GridPane.halignment="CENTER" GridPane.rowIndex="1"/>
     <HBox GridPane.columnIndex="4" GridPane.rowIndex="4">
-        <children>
-            <Button fx:id="createGraph" onAction="#openMain" prefWidth="151" text="Nova Sessió"/>
-        </children>
+        <Button fx:id="createGraph" onAction="#openMain" prefWidth="151" text="Nova Sessió"/>
     </HBox>
 
     <HBox GridPane.columnIndex="5" GridPane.rowIndex="4">
-        <children>
-            <Button fx:id="importGraph" onAction="#openDirSelector" prefHeight="27.0" prefWidth="151.0"
-                    text="Carregar Sessió"/>
-        </children>
+        <Button fx:id="importGraph" onAction="#openDirSelector" prefHeight="27.0" prefWidth="151.0"
+                text="Carregar Sessió"/>
     </HBox>
     <HBox GridPane.columnIndex="6" GridPane.rowIndex="4">
-        <children>
-            <Button fx:id="closeButton" onAction="#closeButtonAction" prefHeight="24.0" prefWidth="151.0"
-                    text="Sortir"/>
-        </children>
+        <Button fx:id="closeButton" onAction="#closeButtonAction" prefHeight="24.0" prefWidth="151.0"
+                text="Sortir"/>
     </HBox>
     <HBox prefHeight="0.0" prefWidth="563.0" GridPane.columnIndex="0" GridPane.columnSpan="11"
           GridPane.rowIndex="0"/>
