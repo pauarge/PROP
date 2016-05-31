@@ -25,72 +25,68 @@
             <RowConstraints maxHeight="53.0" minHeight="0.0" prefHeight="17.0"/>
             <RowConstraints/>
         </rowConstraints>
-        <children>
-            <HBox alignment="BOTTOM_LEFT" prefHeight="78.0" prefWidth="122.0" GridPane.columnIndex="1"
-                  GridPane.rowIndex="0">
-                <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Node"/>
-            </HBox>
-            <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="3" GridPane.rowIndex="0">
-                <children>
-                    <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Relacions"/>
-                </children>
-            </HBox>
-            <HBox GridPane.columnIndex="1" GridPane.rowIndex="1">
-                <children>
-                    <Button onAction="#importNodesAction" text="Importar Nodes"/>
-                </children>
-            </HBox>
-            <HBox GridPane.columnIndex="2" GridPane.rowIndex="1">
-                <children>
-                    <Button onAction="#exportNodesAction" text="Exportar Nodes"/>
-                </children>
-            </HBox>
-            <HBox GridPane.columnIndex="4" GridPane.rowIndex="1">
-                <children>
-                    <Button onAction="#exportRelationsAction" prefHeight="27.0" prefWidth="134.0"
-                            text="Exportar Relacions"/>
-                </children>
-            </HBox>
-            <HBox GridPane.columnIndex="3" GridPane.rowIndex="1">
-                <children>
-                    <Button onAction="#importRelationsAction" prefHeight="27.0" prefWidth="134.0"
-                            text="Importar Relacions"/>
-                </children>
-            </HBox>
-            <HBox GridPane.columnIndex="1" GridPane.rowIndex="3">
-                <children>
-                    <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Arestes"/>
-                </children>
-            </HBox>
-            <HBox GridPane.ColumnIndex="3" GridPane.rowIndex="3">
-                <children>
-                    <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Sessió"/>
-                </children>
-            </HBox>
-            <HBox GridPane.columnIndex="1" GridPane.rowIndex="4">
-                <children>
-                    <Button onAction="#importEdgesAction" text="Importar Arestes"/>
-                </children>
-
-            </HBox>
-            <HBox GridPane.columnIndex="2" GridPane.rowIndex="4">
-                <children>
-                    <Button onAction="#exportEdgesAction" text="Exportar Arestes"/>
-                </children>
-            </HBox>
-            <HBox GridPane.columnIndex="3" GridPane.rowIndex="4">
-                <children>
-                    <Button onAction="#importSessionAction" text="Importar Sessió"/>
-                </children>
-            </HBox>
-            <HBox GridPane.columnIndex="4" GridPane.rowIndex="4">
-                <children>
-                    <Button onAction="#exportSessionAction" text="Exportar Sessió"/>
-                </children>
-            </HBox>
-        </children>
         <opaqueInsets>
-         <Insets/>
+            <Insets/>
         </opaqueInsets>
+        <HBox alignment="BOTTOM_LEFT" prefHeight="78.0" prefWidth="122.0" GridPane.columnIndex="1"
+              GridPane.rowIndex="0">
+            <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Node"/>
+        </HBox>
+        <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="3" GridPane.rowIndex="0">
+            <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Relacions"/>
+        </HBox>
+        <HBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <children>
+                <Button onAction="#importNodesAction" text="Importar Nodes"/>
+            </children>
+        </HBox>
+        <HBox GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <children>
+                <Button onAction="#exportNodesAction" text="Exportar Nodes"/>
+            </children>
+        </HBox>
+        <HBox GridPane.columnIndex="4" GridPane.rowIndex="1">
+            <children>
+                <Button onAction="#exportRelationsAction" prefHeight="27.0" prefWidth="134.0"
+                        text="Exportar Relacions"/>
+            </children>
+        </HBox>
+        <HBox GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <children>
+                <Button onAction="#importRelationsAction" prefHeight="27.0" prefWidth="134.0"
+                        text="Importar Relacions"/>
+            </children>
+        </HBox>
+        <HBox GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <children>
+                <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Arestes"/>
+            </children>
+        </HBox>
+        <HBox GridPane.ColumnIndex="3" GridPane.rowIndex="3">
+            <children>
+                <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Sessió"/>
+            </children>
+        </HBox>
+        <HBox GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <children>
+                <Button onAction="#importEdgesAction" text="Importar Arestes"/>
+            </children>
+
+        </HBox>
+        <HBox GridPane.columnIndex="2" GridPane.rowIndex="4">
+            <children>
+                <Button onAction="#exportEdgesAction" text="Exportar Arestes"/>
+            </children>
+        </HBox>
+        <HBox GridPane.columnIndex="3" GridPane.rowIndex="4">
+            <children>
+                <Button onAction="#importSessionAction" text="Importar Sessió"/>
+            </children>
+        </HBox>
+        <HBox GridPane.columnIndex="4" GridPane.rowIndex="4">
+            <children>
+                <Button onAction="#exportSessionAction" text="Exportar Sessió"/>
+            </children>
+        </HBox>
     </GridPane>
 </AnchorPane>

@@ -39,35 +39,33 @@
     <opaqueInsets>
         <Insets/>
     </opaqueInsets>
-    <children>
-        <Text style=" -fx-font-size: 30; -fx-tile-alignment: center" text="CERCADOR RELACIONAL" GridPane.columnIndex="0"
-              GridPane.columnSpan="11" GridPane.halignment="CENTER" GridPane.rowIndex="1"/>
-        <HBox GridPane.columnIndex="4" GridPane.rowIndex="4">
-            <children>
-                <Button fx:id="createGraph" onAction="#openMain" prefWidth="151" text="Nova Sessió"/>
-            </children>
-        </HBox>
+    <Text style=" -fx-font-size: 30; -fx-tile-alignment: center" text="CERCADOR RELACIONAL" GridPane.columnIndex="0"
+          GridPane.columnSpan="11" GridPane.halignment="CENTER" GridPane.rowIndex="1"/>
+    <HBox GridPane.columnIndex="4" GridPane.rowIndex="4">
+        <children>
+            <Button fx:id="createGraph" onAction="#openMain" prefWidth="151" text="Nova Sessió"/>
+        </children>
+    </HBox>
 
-        <HBox GridPane.columnIndex="5" GridPane.rowIndex="4">
-            <children>
-                <Button fx:id="importGraph" onAction="#openDirSelector" prefHeight="27.0" prefWidth="151.0"
-                        text="Carregar Sessió"/>
-            </children>
-        </HBox>
-        <HBox GridPane.columnIndex="6" GridPane.rowIndex="4">
-            <children>
-                <Button fx:id="closeButton" onAction="#closeButtonAction" prefHeight="24.0" prefWidth="151.0"
-                        text="Sortir"/>
-            </children>
-        </HBox>
-        <HBox prefHeight="0.0" prefWidth="563.0" GridPane.columnIndex="0" GridPane.columnSpan="11"
-              GridPane.rowIndex="0"/>
-        <HBox maxHeight="-Infinity" prefHeight="25.0" prefWidth="563.0" GridPane.columnIndex="0"
-              GridPane.columnSpan="11" GridPane.rowIndex="6"/>
-        <HBox minHeight="-Infinity" prefHeight="66.0" prefWidth="563.0" GridPane.columnIndex="0"
-              GridPane.columnSpan="11" GridPane.rowIndex="3"/>
-        <Label prefHeight="25" style="-fx-text-fill: rgba(0, 0, 0, 0.54); -fx-title-alignment: center;"
-               text="PROP GRUP 18.3" textAlignment="CENTER" GridPane.columnSpan="11" GridPane.halignment="center"
-               GridPane.rowIndex="11"/>
-    </children>
+    <HBox GridPane.columnIndex="5" GridPane.rowIndex="4">
+        <children>
+            <Button fx:id="importGraph" onAction="#openDirSelector" prefHeight="27.0" prefWidth="151.0"
+                    text="Carregar Sessió"/>
+        </children>
+    </HBox>
+    <HBox GridPane.columnIndex="6" GridPane.rowIndex="4">
+        <children>
+            <Button fx:id="closeButton" onAction="#closeButtonAction" prefHeight="24.0" prefWidth="151.0"
+                    text="Sortir"/>
+        </children>
+    </HBox>
+    <HBox prefHeight="0.0" prefWidth="563.0" GridPane.columnIndex="0" GridPane.columnSpan="11"
+          GridPane.rowIndex="0"/>
+    <HBox maxHeight="-Infinity" prefHeight="25.0" prefWidth="563.0" GridPane.columnIndex="0"
+          GridPane.columnSpan="11" GridPane.rowIndex="6"/>
+    <HBox minHeight="-Infinity" prefHeight="66.0" prefWidth="563.0" GridPane.columnIndex="0"
+          GridPane.columnSpan="11" GridPane.rowIndex="3"/>
+    <Label prefHeight="25" style="-fx-text-fill: rgba(0, 0, 0, 0.54); -fx-title-alignment: center;"
+           text="PROP GRUP 18.3" textAlignment="CENTER" GridPane.columnSpan="11" GridPane.halignment="center"
+           GridPane.rowIndex="11"/>
 </GridPane>

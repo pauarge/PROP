@@ -15,83 +15,93 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="searcher.controllers.tabs.RelationsController">
-    <SplitPane dividerPositions="0.3" prefHeight="538.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="searcher.controllers.tabs.RelationsController">
+    <SplitPane dividerPositions="0.3" prefHeight="538.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0"
+               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-            <TableView fx:id="pathList" layoutX="34.0" layoutY="23.0" prefHeight="536.0" prefWidth="234.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView fx:id="pathList" layoutX="34.0" layoutY="23.0" prefHeight="536.0" prefWidth="234.0"
+                       AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                       AnchorPane.topAnchor="0.0">
                 <placeholder>
-                    <Label text="No hi ha relacions" />
+                    <Label text="No hi ha relacions"/>
                 </placeholder>
                 <columns>
-                    <TableColumn fx:id="pathNameColumn" prefWidth="75.0" text="Relacions" />
+                    <TableColumn fx:id="pathNameColumn" prefWidth="75.0" text="Relacions"/>
                 </columns>
                 <columnResizePolicy>
-                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                 </columnResizePolicy>
             </TableView>
         </AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-            <GridPane layoutX="14.0" layoutY="14.0" prefHeight="341.0" prefWidth="527.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <GridPane layoutX="14.0" layoutY="14.0" prefHeight="341.0" prefWidth="527.0" AnchorPane.leftAnchor="14.0"
+                      AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
                 <columnConstraints>
-                    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                 </columnConstraints>
                 <rowConstraints>
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="NEVER" />
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="ALWAYS" />
-               <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="ALWAYS" />
-               <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="ALWAYS" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="NEVER"/>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="ALWAYS"/>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="ALWAYS"/>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="ALWAYS"/>
                 </rowConstraints>
-                <Label fx:id="pathName" text="dades nom" />
-                <TextField fx:id="addNameField" maxWidth="-Infinity" prefWidth="300.0" promptText="Nom" visible="false" GridPane.hgrow="NEVER" />
-            <GridPane fx:id="pathBrowser" GridPane.rowIndex="2">
-              <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="93.0" minWidth="10.0" prefWidth="75.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="178.0" minWidth="10.0" prefWidth="103.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="170.0" minWidth="10.0" prefWidth="168.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="115.0" minWidth="10.0" prefWidth="95.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="94.0" minWidth="10.0" prefWidth="86.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Button fx:id="buttonPrev" mnemonicParsing="false" text="←" />
-                  <Button fx:id="buttonNext" mnemonicParsing="false" text="→" GridPane.columnIndex="4" />
-                  <Label fx:id="labelPrev" text="Label" GridPane.columnIndex="1" />
-                  <Label fx:id="labelEdge" text="Label" underline="true" GridPane.columnIndex="2">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font></Label>
-                  <Label fx:id="labelNext" text="Label" GridPane.columnIndex="3" />
-               </children>
+                <Label fx:id="pathName" text="dades nom"/>
+                <TextField fx:id="addNameField" maxWidth="-Infinity" prefWidth="300.0" promptText="Nom" visible="false"
+                           GridPane.hgrow="NEVER"/>
+                <GridPane fx:id="pathBrowser" GridPane.rowIndex="2">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="93.0" minWidth="10.0"
+                                           prefWidth="75.0"/>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="178.0" minWidth="10.0"
+                                           prefWidth="103.0"/>
+                        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="170.0" minWidth="10.0"
+                                           prefWidth="168.0"/>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="115.0" minWidth="10.0"
+                                           prefWidth="95.0"/>
+                        <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="94.0" minWidth="10.0"
+                                           prefWidth="86.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <Button fx:id="buttonPrev" mnemonicParsing="false" text="←"/>
+                    <Button fx:id="buttonNext" mnemonicParsing="false" text="→" GridPane.columnIndex="4"/>
+                    <Label fx:id="labelPrev" text="Label" GridPane.columnIndex="1"/>
+                    <Label fx:id="labelEdge" text="Label" underline="true" GridPane.columnIndex="2">
+                        <font>
+                            <Font name="System Bold" size="13.0"/>
+                        </font>
+                    </Label>
+                    <Label fx:id="labelNext" text="Label" GridPane.columnIndex="3"/>
+                </GridPane>
+                <GridPane fx:id="paneEdges" visible="false" GridPane.rowIndex="3">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <ChoiceBox fx:id="choiceType" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    <ChoiceBox fx:id="choiceEdge" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                    <Button fx:id="buttonAddEdge" mnemonicParsing="false" text="+" GridPane.columnIndex="3"
+                            GridPane.rowIndex="2"/>
+                    <Label text="Tipus Node" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    <Label fx:id="labelToHide" text="Tipus d'aresta" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                </GridPane>
+                <TextFlow fx:id="pathSummary" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1"/>
             </GridPane>
-            <GridPane fx:id="paneEdges" visible="false" GridPane.rowIndex="3">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <ChoiceBox fx:id="choiceType" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <ChoiceBox fx:id="choiceEdge" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Button fx:id="buttonAddEdge" mnemonicParsing="false" text="+" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                  <Label text="Tipus Node" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label fx:id="labelToHide" text="Tipus d'aresta" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-               </children>
-            </GridPane>
-            <TextFlow fx:id="pathSummary" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
-            </GridPane>
-            <ButtonBar layoutX="342.0" layoutY="482.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+            <ButtonBar layoutX="342.0" layoutY="482.0" prefHeight="40.0" prefWidth="200.0"
+                       AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
                 <buttons>
-               <Button fx:id="buttonEdges" mnemonicParsing="false" text="Arestes..." />
-                    <Button fx:id="buttonBotLeft" mnemonicParsing="false" text="Esborra" />
-                    <Button fx:id="buttonBotRight" mnemonicParsing="false" text="Nou" />
+                    <Button fx:id="buttonEdges" mnemonicParsing="false" text="Arestes..."/>
+                    <Button fx:id="buttonBotLeft" mnemonicParsing="false" text="Esborra"/>
+                    <Button fx:id="buttonBotRight" mnemonicParsing="false" text="Nou"/>
                 </buttons>
             </ButtonBar>
         </AnchorPane>

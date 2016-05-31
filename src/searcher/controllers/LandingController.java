@@ -51,7 +51,7 @@ public class LandingController {
     }
 
     @FXML
-    public void openMain() throws Exception {
+    public void openMain() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../layouts/main.fxml"));
             Parent root = loader.load();
