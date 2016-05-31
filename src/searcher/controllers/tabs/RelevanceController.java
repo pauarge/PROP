@@ -49,13 +49,19 @@ public class RelevanceController extends BaseController {
 
     @FXML
     private void goBackHistoryAction(){
-        itHis--;
+        if(--itHis == 0){
+            goBackHistory.setDisable(true);
+        }
+        goFowHistory.setDisable(false);
         searchTable.setItems(history.get(itHis));
     }
 
     @FXML
     private void goFowHistoryAction(){
-        itHis++;
+        if(++itHis == history.size() -1){
+            goFowHistory.setDisable(true);
+        }
+        goBackHistory.setDisable(false);
         searchTable.setItems(history.get(itHis));
     }
 
@@ -110,6 +116,9 @@ public class RelevanceController extends BaseController {
             searchTable.setItems(res);
             history.add(res);
             itHis++;
+            if(history.size() > 1){
+                goBackHistory.setDisable(false);
+            }
         }
     }
 
