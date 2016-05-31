@@ -47,7 +47,7 @@ public class RelevanceController extends BaseController {
     @FXML
     private void relevanceSearchAction() {
         SemanticPath rel = choicesRelevance.getValue();
-        if(rel == null){
+        if (rel == null) {
             Stage stage = (Stage) choicesRelevance.getScene().getWindow();
             launchAlert(stage, "Has de seleccionar un camí semàntic per a fer la cerca");
         } else {
@@ -60,11 +60,10 @@ public class RelevanceController extends BaseController {
                 alert.setHeaderText("Estàs segur de fer una cerca lliure?");
                 alert.setContentText("Una cerca lliure, sense origen ni destí, és una tasca molt costosa pot afectar al rendiment de l'ordinador.");
                 Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == ButtonType.OK) {
+                if (result.get() == ButtonType.OK)
                     gs = new FreeSearch(graph, rel.getPath());
-                } else {
+                else
                     return;
-                }
             } else {
                 int originId = Integer.parseInt(relevanceOriginId.getText());
                 Node originNode = null;
@@ -83,7 +82,7 @@ public class RelevanceController extends BaseController {
                     } catch (GraphException e) {
                         e.printStackTrace();
                     }
-                    new OriginDestinationSearch(graph, rel.getPath(), originNode, destintyNode);
+                    gs = new OriginDestinationSearch(graph, rel.getPath(), originNode, destintyNode);
                 }
 
             }

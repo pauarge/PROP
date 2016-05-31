@@ -103,6 +103,7 @@ public class GraphManController extends BaseController {
         final File selectedDirectory = dc.showDialog(stage);
         if (selectedDirectory != null) {
             pc.exportGraph(selectedDirectory.getAbsolutePath());
+            pc.exportSemanticPaths(selectedDirectory.getAbsolutePath());
             launchAlert(stage, "S'han exportat correctament la sessió.");
         }
     }

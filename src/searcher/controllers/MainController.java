@@ -50,8 +50,7 @@ public class MainController extends BaseController {
 
     @FXML
     private void handleTerminalToggle() {
-        boolean visible = terminalToggle.isSelected();
-        if (visible) {
+        if (terminalToggle.isSelected()) {
             if (!mainTabs.getTabs().contains(terminalSelector)) {
                 mainTabs.getTabs().add(terminalSelector);
             }
@@ -86,9 +85,8 @@ public class MainController extends BaseController {
         Iterator iter = graph.getRelationIterator();
         while (iter.hasNext()) {
             Relation r = (Relation) iter.next();
-            if(!r.isDefault()){
+            if(!r.isDefault())
                 edgeTypes.add(r);
-            }
         }
     }
 
