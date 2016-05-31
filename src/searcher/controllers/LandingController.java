@@ -40,13 +40,13 @@ public class LandingController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            MainController controller = loader.getController();
-            controller.importDir(selectedDirectory.getAbsolutePath());
             stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle(APP_TITLE);
             stage.show();
             ((Stage) gridPane.getScene().getWindow()).close();
+
+            MainController.getPc().importDir(selectedDirectory.getAbsolutePath());
         }
     }
 

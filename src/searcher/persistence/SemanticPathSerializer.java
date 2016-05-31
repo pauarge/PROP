@@ -1,54 +1,74 @@
 package searcher.persistence;
 
 import common.domain.NodeType;
+import common.domain.Relation;
+import common.domain.RelationStructure;
+import common.domain.RelationStructureException;
+import searcher.Utils;
+import searcher.models.SemanticPath;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.StringTokenizer;
 
 
 class SemanticPathSerializer {
 
-    private final String data;
-    private String name;
-    private final ArrayList<NodeType> types;
+    private SemanticPath semanticPath;
+    private String data;
 
-    private void inflate() {
-        if (name == null || types.isEmpty()) {
-            int m = data.indexOf(":");
-            name = data.substring(0, m);
-            for (String type : data.substring(m + 1, data.length()).split("-")) {
-                types.add(NodeType.valueOf(type.trim()));
-            }
-        }
+    public SemanticPathSerializer(SemanticPath semanticPath) {
+        this.semanticPath = semanticPath;
+        this.deflate();
     }
 
-    public SemanticPathSerializer(String data) {
+    public SemanticPathSerializer(String data, Collection<Relation> relations) {
         this.data = data;
-        this.types = new ArrayList<>();
+        this.inflate(relations);
+    }
+
+    public SemanticPath getSemanticPath() {
+        return semanticPath;
     }
 
     public String getData() {
-        this.inflate();
         return data;
     }
 
-    public String getName() {
-        this.inflate();
-        return name;
+    private void inflate(Collection<Relation> allRelations) {
+        StringTokenizer tokenizer = new StringTokenizer(data, "\t");
+        if (tokenizer.countTokens() < 4) throw new RuntimeException("Serialized SemanticPath has incorrect format");
+
+        String name = tokenizer.nextToken();
+        NodeType first = Utils.getType(tokenizer.nextToken());
+        NodeType last = Utils.getType(tokenizer.nextToken());
+
+        ArrayList<Relation> relationPath = new ArrayList<>();
+        while (tokenizer.hasMoreTokens()) {
+            String nextName = tokenizer.nextToken();
+            Relation nextRel = allRelations.stream().filter(r -> r.getValue().equals(nextName))
+                    .findFirst().orElseThrow(() -> new RuntimeException("EdgeType \"" + nextName + "\" does not exist"));
+            relationPath.add(nextRel);
+        }
+
+        RelationStructure structure = null;
+        try {
+             structure = new RelationStructure(first, relationPath, last);
+        } catch (RelationStructureException e) {
+            throw new RuntimeException("RelationStructure failed and implementation gives no reason");
+        }
+        semanticPath = new SemanticPath(name, first, last, structure);
     }
 
-    public NodeType getInitialType() {
-        this.inflate();
-        return types.get(0);
-    }
-
-    public NodeType getFinalType() {
-        this.inflate();
-        return types.get(types.size() - 1);
-    }
-
-    public ArrayList<NodeType> getTypes(){
-        this.inflate();
-        return types;
+    private void deflate() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(semanticPath.getName()).append('\t');
+        builder.append(Utils.getName(semanticPath.getInitialType())).append('\t');
+        builder.append(Utils.getName(semanticPath.getFinalType())).append('\t');
+        for (Relation r : semanticPath.getPath()) {
+            builder.append(r.getName()).append('\t');
+        }
+        data = builder.toString();
     }
 
 }

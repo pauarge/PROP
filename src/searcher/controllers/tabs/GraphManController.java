@@ -90,8 +90,7 @@ public class GraphManController extends BaseController {
         DirectoryChooser dc = new DirectoryChooser();
         final File selectedDirectory = dc.showDialog(stage);
         if (selectedDirectory != null) {
-            pc.importGraph(selectedDirectory.getAbsolutePath());
-            pc.importSemanticPaths(selectedDirectory.getAbsolutePath());
+            pc.importDir(selectedDirectory.getAbsolutePath());
             launchAlert("S'ha importat correctament la sessió.");
         }
     }

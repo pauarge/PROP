@@ -23,15 +23,6 @@ public class SemanticPath {
         return getName() + ": " + Utils.convertToText(Utils.toTypeArray(this));
     }
 
-    public String convertToExport() {
-        String path = getName() + ": ";
-        if (Utils.toTypeArray(this).length == 0) return path;
-        for (NodeType nt : Utils.toTypeArray(this)) {
-            path = path.concat(nt.toString() + " - ");
-        }
-        return path.substring(0, path.length() - 3);
-    }
-
     public String getName() {
         return name.get();
     }

@@ -15,6 +15,10 @@ public abstract class BaseController implements Initializable {
     protected static ObservableList<SemanticPath> semanticPaths;
     protected static ObservableList<Relation> edgeTypes;
 
+    public static ExtendedPersistenceController getPc() {
+        return pc;
+    }
+
     public void setGraph(Graph g) {
         graph = g;
     }

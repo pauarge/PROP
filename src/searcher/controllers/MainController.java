@@ -1,7 +1,6 @@
 package searcher.controllers;
 
 import common.domain.Graph;
-import common.domain.Relation;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +14,6 @@ import searcher.persistence.ExtendedPersistenceController;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Iterator;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -79,22 +77,11 @@ public class MainController extends BaseController {
         secondStage.show();
     }
 
-    public void importDir(String path) {
-        pc.importGraph(path);
-        pc.importSemanticPaths(path);
-        Iterator iter = graph.getRelationIterator();
-        while (iter.hasNext()) {
-            Relation r = (Relation) iter.next();
-            if(!r.isDefault())
-                edgeTypes.add(r);
-        }
-    }
-
     public MainController() {
         graph = new Graph();
         semanticPaths = FXCollections.observableArrayList();
-        pc = new ExtendedPersistenceController(graph, semanticPaths);
         edgeTypes = FXCollections.observableArrayList(Utils.getDefaultRelations());
+        pc = new ExtendedPersistenceController(graph, semanticPaths, edgeTypes);
     }
 
     @Override
