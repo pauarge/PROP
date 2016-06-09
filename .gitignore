@@ -1,4 +1,2 @@
-*.jar
-!lib/graph-stream/*.jar
 .idea
 out/
